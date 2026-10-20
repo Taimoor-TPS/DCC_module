@@ -822,7 +822,7 @@
       const pack=importPack();
       if(!pack){toast('This screen has no fields to import.');return}
       const labels=pack.fields.filter(f=>!f.system).map(f=>f.label).join(', ');
-      const parentNote=pack.kind==='fx'?'A rate is imported only when its currency is already in Currency. Imported rates are recorded with the source <b>Excel import</b> and added to each currency\'s history.':'A city is imported only when its country is already in Country.';
+      const parentNote=pack.kind==='fx'?'A rate is imported only when its currency is already in Currency. Imported rates are recorded with the source <b>Excel import</b> and added to each currency\'s history.':pack.kind==='bin'?'A BIN is imported only when its currency, and its country when one is given, already exist in their masters. Status is not part of the sheet. Each imported BIN is listed as <b>Pending</b> and sent for checker approval.':'A city is imported only when its country is already in Country.';
       showModal(`<div class="modal-head"><h2>Import ${escHtml(pack.title)}</h2><button class="close" onclick="closeOverlay()">×</button></div><div class="modal-body"><p class="import-note">Upload an Excel workbook (.xlsx) or CSV file. Headers are converted to lowercase and matched to the field names. A row is saved only when each parent value already exists in its master. ${parentNote} Rows that fail this check are listed, and can be exported to Excel.</p><div class="field"><label>File</label><input id="importFile" type="file" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"></div><div class="import-note" style="margin:0">Expected headers: ${escHtml(labels)}</div><div id="importMsg" class="login-error hidden" style="margin-top:12px"></div></div><div class="modal-foot"><button class="secondary" type="button" onclick="closeOverlay()">Close</button><button class="primary" type="button" onclick="runImport()">Import</button></div>`);
     }
     let ruleView='list',ruleIndex=null,ruleDraft=null,ruleDraftSnap='',ruleStep=1,ruleCardsAdvanced=false;
@@ -4860,7 +4860,6 @@ function negativeListForm(list){const country=list==='Country';return `<div clas
         importCol('scheme','Scheme',[],{required:true}),
         importCol('issuer','Issuer',[]),
         importCol('country','Country',[]),
-        importCol('status','Status',[]),
         importCol('by','Created By',['created by'],{system:true}),
         importCol('upd','Updated By',['updated by'],{system:true})
       ]};
@@ -4907,11 +4906,15 @@ function negativeListForm(list){const country=list==='Country';return `<div clas
       return null;
     }
     const IGNORE_HEADERS=new Set(['s no','sno','serial','serial no','sr no','sr no.','#','actions','action','history']);
+    function headerIgnored(h){
+      if(IGNORE_HEADERS.has(h)) return true;
+      return currentScreen==='BIN Management'&&(h==='status'||h==='bin status'||h==='import status');
+    }
     function mapHeaders(headerRow,fields){
       const used=new Set();
       return (headerRow||[]).map(cell=>{
         const h=normHead(cellText(cell));
-        if(!h||IGNORE_HEADERS.has(h)) return null;
+        if(!h||headerIgnored(h)) return null;
         const compact=h.replace(/ /g,'');
         const field=fields.find(f=>!used.has(f.key)&&f.names.some(n=>{const nn=normHead(n);return nn===h||nn.replace(/ /g,'')===compact}));
         if(!field) return null;
@@ -5206,9 +5209,19 @@ function negativeListForm(list){const country=list==='Country';return `<div clas
         records.forEach(rec=>{
           const gate=gateImport(pack,rec,rejected);if(gate==='skip'){skipped++;return}if(gate==='reject')return;
           const idx=binRows.findIndex(r=>String(r.bin).toLowerCase()===String(rec.bin).toLowerCase());
-          const prev=idx>=0?binRows[idx]:null;
-          const row={bin:rec.bin,currency:picked(rec,'currency',prev?prev.currency:''),scheme:picked(rec,'scheme',prev?prev.scheme:'VISA'),issuer:picked(rec,'issuer',prev?prev.issuer:''),country:picked(rec,'country',prev?prev.country:''),status:picked(rec,'status',prev?prev.status:'Pending'),by:picked(rec,'by',prev?prev.by:user),upd:picked(rec,'upd',user)};
-          if(prev){Object.assign(prev,row);updated++}else{binRows.unshift(row);added++}
+          const prev=idx>=0?{...binRows[idx]}:null;
+          const creating=!prev;
+          let row;
+          if(creating){
+            row={bin:rec.bin,currency:picked(rec,'currency',''),scheme:picked(rec,'scheme','VISA'),issuer:picked(rec,'issuer',''),country:picked(rec,'country',''),status:'Pending',by:picked(rec,'by',user),upd:picked(rec,'upd',user)};
+            binRows.unshift(row);
+            added++;
+          }else{
+            row=binRows[idx];
+            Object.assign(row,{bin:rec.bin,currency:picked(rec,'currency',prev.currency),scheme:picked(rec,'scheme',prev.scheme||'VISA'),issuer:picked(rec,'issuer',prev.issuer||''),country:picked(rec,'country',prev.country||''),by:picked(rec,'by',prev.by||user),upd:picked(rec,'upd',user)});
+            updated++;
+          }
+          queueApproval(row,'BIN Management',creating?'CREATE':'UPDATE','BIN import submitted for checker approval: '+row.bin,prev,{bin:row.bin,currency:row.currency,scheme:row.scheme,issuer:row.issuer,country:row.country,status:'Pending'});
         });
       }else if(pack.kind==='fx'){
         const stamp=nowStamp();
@@ -5277,7 +5290,7 @@ function negativeListForm(list){const country=list==='Country';return `<div clas
       const out=[];
       headers.forEach((h,i)=>{
         const n=normHead(h);
-        if(!n||IGNORE_HEADERS.has(n)) return;
+        if(!n||headerIgnored(n)) return;
         if(!mapping[i]) out.push(h);
       });
       return out;
@@ -5489,6 +5502,7 @@ function negativeListForm(list){const country=list==='Country';return `<div clas
         if(rejected.length) parts.push(rejected.length+' not imported');
         const unmatched=unmatchedHeaders(picked.headers,picked.mapping);
         let msg=parts.join(', ')+'.';
+        if(pack.kind==='bin'&&(result.added||result.updated)) msg+=' Listed as Pending and sent for checker approval.';
         if(unmatched.length) msg+=' Unmatched headers: '+unmatched.join(', ')+'.';
         pushAudit('IMPORT',currentScreen,rejected.length&&!result.added&&!result.updated?'Failure':'Success','Excel import on '+pack.title+': '+msg,null,{file:file.name,added:result.added,updated:result.updated,skipped:result.skipped,rejected:rejected.length});
         if(result.added||result.updated) persistStore();

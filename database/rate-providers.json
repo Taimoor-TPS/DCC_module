@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Bank Treasury",
+    "retry": 30,
+    "retries": 3,
+    "fallback": "Bloomberg",
+    "status": "Healthy",
+    "last": "18 sec ago"
+  },
+  {
+    "name": "Bloomberg",
+    "retry": 45,
+    "retries": 3,
+    "fallback": "Reuters",
+    "status": "Standby",
+    "last": "2 min ago"
+  },
+  {
+    "name": "Reuters",
+    "retry": 60,
+    "retries": 2,
+    "fallback": "",
+    "status": "Standby",
+    "last": "4 min ago"
+  },
+  {
+    "name": "Regulatory",
+    "retry": 30,
+    "retries": 3,
+    "fallback": "",
+    "status": "Standby",
+    "last": ""
+  }
+]

@@ -1,0 +1,3064 @@
+[
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-21T15:40:23.671Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "role": "Administrator"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T15:38:56.935Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "role": "Administrator"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001249",
+    "ts": "2026-10-21T15:38:17.965Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001248",
+    "ts": "2026-10-21T15:21:29.765Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Rule Engine",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "currency": "AED",
+      "name": "AED card Offer",
+      "effectiveFrom": "2026-10-21",
+      "effectiveTo": "",
+      "enabled": true,
+      "cards": {
+        "bins": {
+          "mode": "all",
+          "list": [],
+          "ranges": []
+        },
+        "schemes": [],
+        "issuerCountries": []
+      },
+      "segments": [
+        {
+          "id": "SEG-MVI95VAHYA",
+          "name": "Default pricing",
+          "isDefault": true,
+          "priority": 0,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ANY"
+            ],
+            "terminals": {
+              "mode": "all",
+              "groups": [],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": 499,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0001",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            },
+            {
+              "from": 500,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001",
+                  "FEE-0002"
+                ],
+                "vatId": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "SEG-MVI9AFN3JD",
+          "name": "ATM Malls",
+          "isDefault": false,
+          "priority": 10,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ATM"
+            ],
+            "terminals": {
+              "mode": "groups",
+              "groups": [
+                "ATM-GRP-RYD-02"
+              ],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": 499,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0001",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            },
+            {
+              "from": 500,
+              "to": 999,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001",
+                  "FEE-0002"
+                ],
+                "vatId": ""
+              }
+            },
+            {
+              "from": 1000,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001",
+                  "FEE-0002"
+                ],
+                "vatId": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "summary": "Offer submitted for checker approval: AED · AED card Offer",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-21T14:38:25.341Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Rate Source",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "name": "Regulatory",
+      "connector": "Regulatory",
+      "callType": "Excel",
+      "url": "",
+      "path": "D:\\TPS\\Vibe Coding\\IRIS DCC\\DCC Prototype",
+      "fxRate": "FX Rate",
+      "currency": "Currency",
+      "refresh": "100",
+      "ttl": "100",
+      "retry": "100",
+      "tolerance": "100"
+    },
+    "summary": "Rate Source submitted for checker approval: Regulatory",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T14:35:19.805Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001248",
+    "ts": "2026-10-21T14:35:17.028Z",
+    "actorId": "USR-00126",
+    "actorName": "DCC Checker",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.checker",
+      "role": "Checker"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-21T14:35:07.840Z",
+    "actorId": "USR-00126",
+    "actorName": "DCC Checker",
+    "actorType": "Human",
+    "action": "APPROVE",
+    "module": "ATM Groups",
+    "source": "Web UI",
+    "before": {
+      "code": "ATM-GRP-RYD-02",
+      "name": "Riyadh Mall",
+      "region": "Central",
+      "dcc": true,
+      "status": "Pending",
+      "atms": [
+        "ATM-0001",
+        "ATM-0002",
+        "ATM-0003",
+        "ATM-0004",
+        "ATM-0005",
+        "ATM-0007"
+      ],
+      "ts": "21 Oct 2026, 19:27",
+      "by": "dcc.maker",
+      "upd": "dcc.maker",
+      "entityId": "ATM-GRP-RYD-02",
+      "_liveStatus": "Effective",
+      "wf": "Pending",
+      "apr": "APR-00133"
+    },
+    "after": {
+      "code": "ATM-GRP-RYD-02",
+      "name": "Riyadh Mall",
+      "region": "Central",
+      "dcc": true,
+      "status": "Effective",
+      "atms": [
+        "ATM-0001",
+        "ATM-0002",
+        "ATM-0003",
+        "ATM-0004",
+        "ATM-0005",
+        "ATM-0007"
+      ],
+      "ts": "21 Oct 2026, 19:27",
+      "by": "dcc.maker",
+      "upd": "dcc.maker",
+      "entityId": "ATM-GRP-RYD-02",
+      "_liveStatus": "Effective",
+      "wf": "Live",
+      "apr": "APR-00133"
+    },
+    "summary": "Riyadh Mall approved",
+    "outcome": "SUCCESS",
+    "reason": "ok",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T14:34:12.920Z",
+    "actorId": "USR-00126",
+    "actorName": "DCC Checker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.checker",
+      "role": "Checker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001248",
+    "ts": "2026-10-21T14:33:57.390Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-21T14:27:26.635Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM Groups",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "code": "ATM-GRP-RYD-02",
+      "name": "Riyadh Mall",
+      "region": "Central",
+      "dcc": true,
+      "status": "Effective",
+      "atms": [
+        "ATM-0001",
+        "ATM-0002",
+        "ATM-0003",
+        "ATM-0004",
+        "ATM-0005",
+        "ATM-0007"
+      ],
+      "ts": "21 Oct 2026, 19:27",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "ATM Group submitted for checker approval: Riyadh Mall (ATM-GRP-RYD-02)",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T14:06:25.007Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T14:02:14.201Z",
+    "actorId": "USR-00126",
+    "actorName": "DCC Checker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.checker",
+      "role": "Checker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001250",
+    "ts": "2026-10-21T14:01:29.463Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "IMPORT",
+    "module": "FX Rates",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "file": "17 - FX Rates.csv",
+      "added": 81,
+      "updated": 6,
+      "skipped": 0,
+      "rejected": 0
+    },
+    "summary": "Excel import on FX Rates: 81 added, 6 updated.",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001249",
+    "ts": "2026-10-21T14:01:15.546Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "IMPORT",
+    "module": "ATM",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "file": "05 - ATM.csv",
+      "added": 118,
+      "updated": 2,
+      "skipped": 0,
+      "rejected": 0
+    },
+    "summary": "Excel import on ATM: 118 added, 2 updated.",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001248",
+    "ts": "2026-10-21T14:01:08.620Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "IMPORT",
+    "module": "Branch",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "file": "04 - Branch.csv",
+      "added": 52,
+      "updated": 3,
+      "skipped": 0,
+      "rejected": 0
+    },
+    "summary": "Excel import on Branch: 52 added, 3 updated.",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-21T14:01:00.024Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "IMPORT",
+    "module": "Currency",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "file": "03 - Currency.csv",
+      "added": 84,
+      "updated": 4,
+      "skipped": 0,
+      "rejected": 0
+    },
+    "summary": "Excel import on Currency: 84 added, 4 updated.",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T14:00:52.416Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "IMPORT",
+    "module": "City",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "file": "02 - City.csv",
+      "added": 215,
+      "updated": 3,
+      "skipped": 0,
+      "rejected": 0
+    },
+    "summary": "Excel import on City: 215 added, 3 updated.",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T11:55:00.533Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-21T11:50:38.795Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "role": "Administrator"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T11:50:11.340Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "role": "Administrator"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T11:50:07.754Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T11:44:13.720Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-21T11:44:09.398Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "role": "Administrator"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T11:42:24.773Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "role": "Administrator"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-21T11:42:08.759Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-21T11:24:42.927Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-20T15:10:12.415Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "role": "Administrator"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-20T15:08:28.417Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "role": "Administrator"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-20T15:08:08.496Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGOUT",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Signed out",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001248",
+    "ts": "2026-10-20T14:47:51.946Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "MCC Grouping",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "name": "Ecommerce",
+      "description": "Ecommerce",
+      "channel": "Ecommerce",
+      "mccs": [
+        "0001-1499",
+        "1500-2999",
+        "4000-4799",
+        "4800-4999",
+        "5000-5599",
+        "5600-5699",
+        "5700-7299",
+        "7300-7999",
+        "8000-8999",
+        "9000-9999"
+      ],
+      "ts": "20 Oct 2026, 19:47",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "MCC Group created: Ecommerce",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-10-20T14:47:31.844Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "MCC Grouping",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "name": "POS",
+      "description": "POS",
+      "channel": "POS",
+      "mccs": [
+        "4800-4999",
+        "5000-5599",
+        "5600-5699"
+      ],
+      "ts": "20 Oct 2026, 19:47",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "MCC Group created: POS",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-20T14:47:11.156Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "IMPORT",
+    "module": "MCC Code Configuration",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "file": "06 - MCC Configuration.xlsx",
+      "added": 10,
+      "updated": 0,
+      "skipped": 0,
+      "rejected": 0
+    },
+    "summary": "Excel import on MCC Code Configuration: 10 added, 0 updated. Unmatched headers: No Expiry (Y or N).",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-20T14:18:49.016Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-10-20T13:57:48.087Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001300",
+    "ts": "2026-10-20T12:46:07.787Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "IMPORT",
+    "module": "Country",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "file": "01 - Country.csv",
+      "added": 112,
+      "updated": 1,
+      "skipped": 0,
+      "rejected": 0
+    },
+    "summary": "Excel import on Country: 112 added, 1 updated.",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001299",
+    "ts": "2026-10-20T12:45:20.576Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "LOGIN",
+    "module": "Authentication",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "role": "Maker"
+    },
+    "summary": "Successful login",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001298",
+    "ts": "2026-10-13T06:12:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Rule Engine",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "id": "POL-EUR-01",
+      "entityId": "POL-EUR-01",
+      "currency": "EUR",
+      "name": "EUR card Offer",
+      "effectiveFrom": "2026-09-01",
+      "effectiveTo": "",
+      "enabled": true,
+      "cards": {
+        "bins": {
+          "mode": "all",
+          "list": [],
+          "ranges": []
+        },
+        "schemes": [],
+        "issuerCountries": []
+      },
+      "segments": [
+        {
+          "id": "SEG-EUR-DEF",
+          "name": "Default pricing",
+          "isDefault": true,
+          "priority": 0,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ANY"
+            ],
+            "terminals": {
+              "mode": "all",
+              "groups": [],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": 99,
+              "offerDcc": false,
+              "dcc": {
+                "markupId": "",
+                "feeIds": [],
+                "vatId": "",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            },
+            {
+              "from": 100,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0001",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            }
+          ]
+        },
+        {
+          "id": "SEG-EUR-JED",
+          "name": "Jeddah Airport ATM",
+          "isDefault": false,
+          "priority": 10,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ATM"
+            ],
+            "terminals": {
+              "mode": "atms",
+              "groups": [],
+              "atms": [
+                "ATM-0188"
+              ]
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            }
+          ]
+        }
+      ],
+      "version": 1,
+      "status": "Effective",
+      "pendingAction": null,
+      "ts": "13 Oct 2026, 11:12",
+      "by": "dcc.maker",
+      "upd": "dcc.checker",
+      "live": {
+        "currency": "EUR",
+        "name": "EUR card Offer",
+        "effectiveFrom": "2026-09-01",
+        "effectiveTo": "",
+        "enabled": true,
+        "cards": {
+          "bins": {
+            "mode": "all",
+            "list": [],
+            "ranges": []
+          },
+          "schemes": [],
+          "issuerCountries": []
+        },
+        "segments": [
+          {
+            "id": "SEG-EUR-DEF",
+            "name": "Default pricing",
+            "isDefault": true,
+            "priority": 0,
+            "effectiveFrom": "",
+            "effectiveTo": "",
+            "scope": {
+              "bins": {
+                "mode": "all",
+                "list": [],
+                "ranges": []
+              },
+              "schemes": [],
+              "issuerCountries": [],
+              "channels": [
+                "ANY"
+              ],
+              "terminals": {
+                "mode": "all",
+                "groups": [],
+                "atms": []
+              },
+              "mccGroups": []
+            },
+            "tiers": [
+              {
+                "from": 0,
+                "to": 99,
+                "offerDcc": false,
+                "dcc": {
+                  "markupId": "",
+                  "feeIds": [],
+                  "vatId": "",
+                  "vatOn": "markup+fee",
+                  "zeroOk": false
+                },
+                "local": {
+                  "feeIds": [
+                    "FEE-0001"
+                  ],
+                  "vatId": "VAT-0001"
+                }
+              },
+              {
+                "from": 100,
+                "to": null,
+                "offerDcc": true,
+                "dcc": {
+                  "markupId": "MKP-0001",
+                  "feeIds": [],
+                  "vatId": "VAT-0001",
+                  "vatOn": "markup+fee",
+                  "zeroOk": false
+                },
+                "local": {
+                  "feeIds": [
+                    "FEE-0001"
+                  ],
+                  "vatId": "VAT-0001"
+                }
+              }
+            ]
+          },
+          {
+            "id": "SEG-EUR-JED",
+            "name": "Jeddah Airport ATM",
+            "isDefault": false,
+            "priority": 10,
+            "effectiveFrom": "",
+            "effectiveTo": "",
+            "scope": {
+              "bins": {
+                "mode": "all",
+                "list": [],
+                "ranges": []
+              },
+              "schemes": [],
+              "issuerCountries": [],
+              "channels": [
+                "ATM"
+              ],
+              "terminals": {
+                "mode": "atms",
+                "groups": [],
+                "atms": [
+                  "ATM-0188"
+                ]
+              },
+              "mccGroups": []
+            },
+            "tiers": [
+              {
+                "from": 0,
+                "to": null,
+                "offerDcc": true,
+                "dcc": {
+                  "markupId": "MKP-0002",
+                  "feeIds": [],
+                  "vatId": "VAT-0001",
+                  "vatOn": "markup+fee",
+                  "zeroOk": false
+                },
+                "local": {
+                  "feeIds": [
+                    "FEE-0001"
+                  ],
+                  "vatId": "VAT-0001"
+                }
+              }
+            ]
+          }
+        ],
+        "version": 1
+      },
+      "history": [
+        {
+          "version": 1,
+          "action": "CREATE",
+          "outcome": "Approved",
+          "at": "13 Oct 2026, 11:12",
+          "maker": "dcc.maker",
+          "checker": "dcc.checker",
+          "snap": {
+            "currency": "EUR",
+            "name": "EUR card Offer",
+            "effectiveFrom": "2026-09-01",
+            "effectiveTo": "",
+            "enabled": true,
+            "cards": {
+              "bins": {
+                "mode": "all",
+                "list": [],
+                "ranges": []
+              },
+              "schemes": [],
+              "issuerCountries": []
+            },
+            "segments": [
+              {
+                "id": "SEG-EUR-DEF",
+                "name": "Default pricing",
+                "isDefault": true,
+                "priority": 0,
+                "effectiveFrom": "",
+                "effectiveTo": "",
+                "scope": {
+                  "bins": {
+                    "mode": "all",
+                    "list": [],
+                    "ranges": []
+                  },
+                  "schemes": [],
+                  "issuerCountries": [],
+                  "channels": [
+                    "ANY"
+                  ],
+                  "terminals": {
+                    "mode": "all",
+                    "groups": [],
+                    "atms": []
+                  },
+                  "mccGroups": []
+                },
+                "tiers": [
+                  {
+                    "from": 0,
+                    "to": 99,
+                    "offerDcc": false,
+                    "dcc": {
+                      "markupId": "",
+                      "feeIds": [],
+                      "vatId": "",
+                      "vatOn": "markup+fee",
+                      "zeroOk": false
+                    },
+                    "local": {
+                      "feeIds": [
+                        "FEE-0001"
+                      ],
+                      "vatId": "VAT-0001"
+                    }
+                  },
+                  {
+                    "from": 100,
+                    "to": null,
+                    "offerDcc": true,
+                    "dcc": {
+                      "markupId": "MKP-0001",
+                      "feeIds": [],
+                      "vatId": "VAT-0001",
+                      "vatOn": "markup+fee",
+                      "zeroOk": false
+                    },
+                    "local": {
+                      "feeIds": [
+                        "FEE-0001"
+                      ],
+                      "vatId": "VAT-0001"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "SEG-EUR-JED",
+                "name": "Jeddah Airport ATM",
+                "isDefault": false,
+                "priority": 10,
+                "effectiveFrom": "",
+                "effectiveTo": "",
+                "scope": {
+                  "bins": {
+                    "mode": "all",
+                    "list": [],
+                    "ranges": []
+                  },
+                  "schemes": [],
+                  "issuerCountries": [],
+                  "channels": [
+                    "ATM"
+                  ],
+                  "terminals": {
+                    "mode": "atms",
+                    "groups": [],
+                    "atms": [
+                      "ATM-0188"
+                    ]
+                  },
+                  "mccGroups": []
+                },
+                "tiers": [
+                  {
+                    "from": 0,
+                    "to": null,
+                    "offerDcc": true,
+                    "dcc": {
+                      "markupId": "MKP-0002",
+                      "feeIds": [],
+                      "vatId": "VAT-0001",
+                      "vatOn": "markup+fee",
+                      "zeroOk": false
+                    },
+                    "local": {
+                      "feeIds": [
+                        "FEE-0001"
+                      ],
+                      "vatId": "VAT-0001"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "summary": "EUR · EUR card Offer is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001297",
+    "ts": "2026-10-13T06:05:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Rule Engine",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "id": "POL-USD-01",
+      "entityId": "POL-USD-01",
+      "currency": "USD",
+      "name": "USD card Offer",
+      "effectiveFrom": "2026-09-01",
+      "effectiveTo": "",
+      "enabled": true,
+      "cards": {
+        "bins": {
+          "mode": "all",
+          "list": [],
+          "ranges": []
+        },
+        "schemes": [],
+        "issuerCountries": []
+      },
+      "segments": [
+        {
+          "id": "SEG-USD-DEF",
+          "name": "Default pricing",
+          "isDefault": true,
+          "priority": 0,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ANY"
+            ],
+            "terminals": {
+              "mode": "all",
+              "groups": [],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": 999,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            },
+            {
+              "from": 1000,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0001",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            }
+          ]
+        },
+        {
+          "id": "SEG-USD-RYD",
+          "name": "Riyadh Pilot ATMs",
+          "isDefault": false,
+          "priority": 10,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ATM"
+            ],
+            "terminals": {
+              "mode": "groups",
+              "groups": [
+                "ATM-GRP-RYD-01"
+              ],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0003",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            }
+          ]
+        }
+      ],
+      "version": 1,
+      "status": "Effective",
+      "pendingAction": null,
+      "ts": "13 Oct 2026, 11:05",
+      "by": "iris.admin",
+      "upd": "dcc.checker",
+      "live": {
+        "currency": "USD",
+        "name": "USD card Offer",
+        "effectiveFrom": "2026-09-01",
+        "effectiveTo": "",
+        "enabled": true,
+        "cards": {
+          "bins": {
+            "mode": "all",
+            "list": [],
+            "ranges": []
+          },
+          "schemes": [],
+          "issuerCountries": []
+        },
+        "segments": [
+          {
+            "id": "SEG-USD-DEF",
+            "name": "Default pricing",
+            "isDefault": true,
+            "priority": 0,
+            "effectiveFrom": "",
+            "effectiveTo": "",
+            "scope": {
+              "bins": {
+                "mode": "all",
+                "list": [],
+                "ranges": []
+              },
+              "schemes": [],
+              "issuerCountries": [],
+              "channels": [
+                "ANY"
+              ],
+              "terminals": {
+                "mode": "all",
+                "groups": [],
+                "atms": []
+              },
+              "mccGroups": []
+            },
+            "tiers": [
+              {
+                "from": 0,
+                "to": 999,
+                "offerDcc": true,
+                "dcc": {
+                  "markupId": "MKP-0002",
+                  "feeIds": [],
+                  "vatId": "VAT-0001",
+                  "vatOn": "markup+fee",
+                  "zeroOk": false
+                },
+                "local": {
+                  "feeIds": [
+                    "FEE-0001"
+                  ],
+                  "vatId": "VAT-0001"
+                }
+              },
+              {
+                "from": 1000,
+                "to": null,
+                "offerDcc": true,
+                "dcc": {
+                  "markupId": "MKP-0001",
+                  "feeIds": [],
+                  "vatId": "VAT-0001",
+                  "vatOn": "markup+fee",
+                  "zeroOk": false
+                },
+                "local": {
+                  "feeIds": [
+                    "FEE-0001"
+                  ],
+                  "vatId": "VAT-0001"
+                }
+              }
+            ]
+          },
+          {
+            "id": "SEG-USD-RYD",
+            "name": "Riyadh Pilot ATMs",
+            "isDefault": false,
+            "priority": 10,
+            "effectiveFrom": "",
+            "effectiveTo": "",
+            "scope": {
+              "bins": {
+                "mode": "all",
+                "list": [],
+                "ranges": []
+              },
+              "schemes": [],
+              "issuerCountries": [],
+              "channels": [
+                "ATM"
+              ],
+              "terminals": {
+                "mode": "groups",
+                "groups": [
+                  "ATM-GRP-RYD-01"
+                ],
+                "atms": []
+              },
+              "mccGroups": []
+            },
+            "tiers": [
+              {
+                "from": 0,
+                "to": null,
+                "offerDcc": true,
+                "dcc": {
+                  "markupId": "MKP-0003",
+                  "feeIds": [],
+                  "vatId": "VAT-0001",
+                  "vatOn": "markup+fee",
+                  "zeroOk": false
+                },
+                "local": {
+                  "feeIds": [
+                    "FEE-0001"
+                  ],
+                  "vatId": "VAT-0001"
+                }
+              }
+            ]
+          }
+        ],
+        "version": 1
+      },
+      "history": [
+        {
+          "version": 1,
+          "action": "CREATE",
+          "outcome": "Approved",
+          "at": "13 Oct 2026, 11:05",
+          "maker": "iris.admin",
+          "checker": "dcc.checker",
+          "snap": {
+            "currency": "USD",
+            "name": "USD card Offer",
+            "effectiveFrom": "2026-09-01",
+            "effectiveTo": "",
+            "enabled": true,
+            "cards": {
+              "bins": {
+                "mode": "all",
+                "list": [],
+                "ranges": []
+              },
+              "schemes": [],
+              "issuerCountries": []
+            },
+            "segments": [
+              {
+                "id": "SEG-USD-DEF",
+                "name": "Default pricing",
+                "isDefault": true,
+                "priority": 0,
+                "effectiveFrom": "",
+                "effectiveTo": "",
+                "scope": {
+                  "bins": {
+                    "mode": "all",
+                    "list": [],
+                    "ranges": []
+                  },
+                  "schemes": [],
+                  "issuerCountries": [],
+                  "channels": [
+                    "ANY"
+                  ],
+                  "terminals": {
+                    "mode": "all",
+                    "groups": [],
+                    "atms": []
+                  },
+                  "mccGroups": []
+                },
+                "tiers": [
+                  {
+                    "from": 0,
+                    "to": 999,
+                    "offerDcc": true,
+                    "dcc": {
+                      "markupId": "MKP-0002",
+                      "feeIds": [],
+                      "vatId": "VAT-0001",
+                      "vatOn": "markup+fee",
+                      "zeroOk": false
+                    },
+                    "local": {
+                      "feeIds": [
+                        "FEE-0001"
+                      ],
+                      "vatId": "VAT-0001"
+                    }
+                  },
+                  {
+                    "from": 1000,
+                    "to": null,
+                    "offerDcc": true,
+                    "dcc": {
+                      "markupId": "MKP-0001",
+                      "feeIds": [],
+                      "vatId": "VAT-0001",
+                      "vatOn": "markup+fee",
+                      "zeroOk": false
+                    },
+                    "local": {
+                      "feeIds": [
+                        "FEE-0001"
+                      ],
+                      "vatId": "VAT-0001"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "SEG-USD-RYD",
+                "name": "Riyadh Pilot ATMs",
+                "isDefault": false,
+                "priority": 10,
+                "effectiveFrom": "",
+                "effectiveTo": "",
+                "scope": {
+                  "bins": {
+                    "mode": "all",
+                    "list": [],
+                    "ranges": []
+                  },
+                  "schemes": [],
+                  "issuerCountries": [],
+                  "channels": [
+                    "ATM"
+                  ],
+                  "terminals": {
+                    "mode": "groups",
+                    "groups": [
+                      "ATM-GRP-RYD-01"
+                    ],
+                    "atms": []
+                  },
+                  "mccGroups": []
+                },
+                "tiers": [
+                  {
+                    "from": 0,
+                    "to": null,
+                    "offerDcc": true,
+                    "dcc": {
+                      "markupId": "MKP-0003",
+                      "feeIds": [],
+                      "vatId": "VAT-0001",
+                      "vatOn": "markup+fee",
+                      "zeroOk": false
+                    },
+                    "local": {
+                      "feeIds": [
+                        "FEE-0001"
+                      ],
+                      "vatId": "VAT-0001"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "summary": "USD · USD card Offer is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001296",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Negative Lists",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "Bahrain",
+      "Bank Offer",
+      "dcc.maker",
+      "No expiry",
+      "Pending",
+      "NEG-31036342"
+    ],
+    "summary": "Bahrain · Bank Offer is pending",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001295",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00126",
+    "actorName": "DCC Checker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Negative Lists",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "United Kingdom",
+      "Regulatory restriction",
+      "dcc.checker",
+      "No expiry",
+      "Effective"
+    ],
+    "summary": "United Kingdom · Regulatory restriction is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001294",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Negative Lists",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "444222",
+      "VISA",
+      "Restricted issuer",
+      "Regulatory restriction",
+      "No expiry",
+      "Pending",
+      "NEG-31036347"
+    ],
+    "summary": "444222 · VISA is pending",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001293",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Negative Lists",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "521234",
+      "MASTERCARD",
+      "Partner issuer",
+      "Commercial agreement",
+      "31 Dec 2026",
+      "Effective"
+    ],
+    "summary": "521234 · MASTERCARD is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001292",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Negative Lists",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "400000",
+      "VISA",
+      "Domestic issuers",
+      "Scheme mandate",
+      "No expiry",
+      "Effective"
+    ],
+    "summary": "400000 · VISA is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001291",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "BIN Management",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "bin": "621234",
+      "currency": "EUR · Euro",
+      "scheme": "MASTERCARD",
+      "issuer": "Local issuer",
+      "country": "Pakistan",
+      "status": "Pending",
+      "by": "dcc.maker",
+      "upd": "dcc.maker",
+      "entityId": "621234"
+    },
+    "summary": "621234 is pending",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001290",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "BIN Management",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "bin": "400000",
+      "currency": "SAR · Saudi Riyal",
+      "scheme": "VISA",
+      "issuer": "Al Rajhi",
+      "country": "Saudi Arabia",
+      "status": "Effective",
+      "by": "dcc.maker",
+      "upd": "dcc.checker"
+    },
+    "summary": "400000 is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001289",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "BIN Management",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "bin": "516742",
+      "currency": "GBP · Pound Sterling",
+      "scheme": "MASTERCARD",
+      "issuer": "Barclays",
+      "country": "United Kingdom",
+      "status": "Effective",
+      "by": "dcc.maker",
+      "upd": "dcc.checker"
+    },
+    "summary": "516742 is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001288",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "BIN Management",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "bin": "453211",
+      "currency": "USD · US Dollar",
+      "scheme": "VISA",
+      "issuer": "Chase",
+      "country": "United States",
+      "status": "Effective",
+      "by": "iris.admin",
+      "upd": "dcc.checker"
+    },
+    "summary": "453211 is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001287",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "VAT",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "VAT",
+      "10%",
+      "Disabled",
+      "VAT-0003"
+    ],
+    "summary": "VAT · 10% is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001286",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "VAT",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "VAT",
+      "5%",
+      "Pending",
+      "VAT-0002"
+    ],
+    "summary": "VAT · 5% is pending",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001285",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "VAT",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "VAT",
+      "15%",
+      "Effective",
+      "VAT-0001"
+    ],
+    "summary": "VAT · 15% is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001284",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Fees",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "Corridor fee",
+      "Hybrid",
+      "0.25% + SAR 2.00",
+      "Pending",
+      "FEE-0003"
+    ],
+    "summary": "Corridor fee · Hybrid is pending",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001283",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Fees",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "DCC commission",
+      "Percentage",
+      "0.40%",
+      "Effective",
+      "FEE-0002"
+    ],
+    "summary": "DCC commission · Percentage is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001282",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Fees",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "ATM access fee",
+      "Flat fee",
+      "SAR 23.00",
+      "Effective",
+      "FEE-0001"
+    ],
+    "summary": "ATM access fee · Flat fee is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001281",
+    "ts": "2026-10-20T12:45:10.364Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Markup",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "Percentage",
+      "3.10%",
+      "Proposed year-end markup",
+      "Pending",
+      "MKP-0005"
+    ],
+    "summary": "Percentage · 3.10% is pending",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001280",
+    "ts": "2026-10-20T12:45:10.363Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Markup",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "Fixed spread",
+      "0.0150",
+      "Fixed spread for selected pairs",
+      "Effective",
+      "MKP-0004"
+    ],
+    "summary": "Fixed spread · 0.0150 is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001279",
+    "ts": "2026-10-20T12:45:10.363Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Markup",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "Percentage",
+      "3.25%",
+      "Corridor markup",
+      "Effective",
+      "MKP-0003"
+    ],
+    "summary": "Percentage · 3.25% is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001278",
+    "ts": "2026-10-20T12:45:10.363Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Markup",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "Percentage",
+      "3.50%",
+      "Promotional ATM band",
+      "Effective",
+      "MKP-0002"
+    ],
+    "summary": "Percentage · 3.50% is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001277",
+    "ts": "2026-10-20T12:45:10.363Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Markup",
+    "source": "Web UI",
+    "before": null,
+    "after": [
+      "Percentage",
+      "4.00%",
+      "Standard DCC markup",
+      "Effective",
+      "MKP-0001"
+    ],
+    "summary": "Percentage · 4.00% is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001276",
+    "ts": "2026-10-13T05:26:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM Groups",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "code": "ATM-GRP-TEST-01",
+      "name": "Certification Lab",
+      "region": "Central",
+      "atms": [
+        "ATM-0142"
+      ],
+      "dcc": true,
+      "status": "Pending",
+      "ts": "13 Oct 2026, 10:26",
+      "by": "dcc.maker",
+      "upd": "dcc.maker",
+      "entityId": "ATM-GRP-TEST-01"
+    },
+    "summary": "Certification Lab is pending",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001275",
+    "ts": "2026-10-13T05:24:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM Groups",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "code": "ATM-GRP-DMM-01",
+      "name": "Dammam Pilot",
+      "region": "East",
+      "atms": [
+        "ATM-0097"
+      ],
+      "dcc": false,
+      "status": "Effective",
+      "ts": "13 Oct 2026, 10:24",
+      "by": "dcc.maker",
+      "upd": "dcc.checker"
+    },
+    "summary": "Dammam Pilot is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001274",
+    "ts": "2026-10-13T05:22:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM Groups",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "code": "ATM-GRP-JED-01",
+      "name": "Jeddah Fleet",
+      "region": "West",
+      "atms": [
+        "ATM-0188",
+        "ATM-0192"
+      ],
+      "dcc": true,
+      "status": "Effective",
+      "ts": "13 Oct 2026, 10:22",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "Jeddah Fleet is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001273",
+    "ts": "2026-10-13T05:20:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM Groups",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "code": "ATM-GRP-RYD-01",
+      "name": "Riyadh Pilot Group",
+      "region": "Central",
+      "atms": [
+        "ATM-0142",
+        "ATM-0155"
+      ],
+      "dcc": true,
+      "status": "Effective",
+      "ts": "13 Oct 2026, 10:20",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Riyadh Pilot Group is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001272",
+    "ts": "2026-10-13T05:13:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "id": "ATM-0104",
+      "name": "Dammam Port",
+      "branch": "BR-DMM-01",
+      "offsite": false,
+      "city": "",
+      "address": "",
+      "lat": "26.4340",
+      "long": "50.1040",
+      "model": "NCR SelfServ 32",
+      "status": "Active",
+      "ts": "13 Oct 2026, 10:13",
+      "by": "dcc.maker",
+      "upd": "dcc.checker"
+    },
+    "summary": "Dammam Port is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001271",
+    "ts": "2026-10-13T05:12:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "id": "ATM-0097",
+      "name": "Dammam Corniche",
+      "branch": "BR-DMM-01",
+      "offsite": true,
+      "city": "Dammam",
+      "address": "Corniche Plaza",
+      "lat": "26.4360",
+      "long": "50.1030",
+      "model": "NCR SelfServ 32",
+      "status": "Inactive",
+      "ts": "13 Oct 2026, 10:12",
+      "by": "dcc.maker",
+      "upd": "dcc.checker"
+    },
+    "summary": "Dammam Corniche is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001270",
+    "ts": "2026-10-13T05:09:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "id": "ATM-0192",
+      "name": "Jeddah Corniche",
+      "branch": "BR-JED-01",
+      "offsite": false,
+      "city": "",
+      "address": "",
+      "lat": "21.5433",
+      "long": "39.1728",
+      "model": "Diebold DN Series",
+      "status": "Active",
+      "ts": "13 Oct 2026, 10:09",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "Jeddah Corniche is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001269",
+    "ts": "2026-10-13T05:08:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "id": "ATM-0188",
+      "name": "Jeddah Airport",
+      "branch": "BR-JED-01",
+      "offsite": true,
+      "city": "Jeddah",
+      "address": "Terminal 1 Arrivals",
+      "lat": "21.6796",
+      "long": "39.1565",
+      "model": "Diebold DN Series",
+      "status": "Active",
+      "ts": "13 Oct 2026, 10:08",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "Jeddah Airport is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001268",
+    "ts": "2026-10-13T05:06:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "id": "ATM-0155",
+      "name": "Riyadh Main Lobby",
+      "branch": "BR-RYD-01",
+      "offsite": false,
+      "city": "",
+      "address": "",
+      "lat": "24.7136",
+      "long": "46.6753",
+      "model": "NCR SelfServ 84",
+      "status": "Active",
+      "ts": "13 Oct 2026, 10:06",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Riyadh Main Lobby is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001267",
+    "ts": "2026-10-13T05:05:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "ATM",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "id": "ATM-0142",
+      "name": "Riyadh Mall 01",
+      "branch": "BR-RYD-01",
+      "offsite": true,
+      "city": "Riyadh",
+      "address": "Olaya Mall, Gate 2",
+      "lat": "24.7110",
+      "long": "46.6750",
+      "model": "NCR SelfServ 84",
+      "status": "Active",
+      "ts": "13 Oct 2026, 10:05",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Riyadh Mall 01 is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001266",
+    "ts": "2026-10-13T04:45:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Branch",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "code": "BR-DMM-01",
+      "name": "Dammam Port",
+      "country": "Saudi Arabia",
+      "city": "Dammam",
+      "region": "East",
+      "address": "King Saud Street",
+      "phone": "+966 13 000 3003",
+      "status": "Inactive",
+      "ts": "13 Oct 2026, 09:45",
+      "by": "dcc.maker",
+      "upd": "dcc.checker"
+    },
+    "summary": "Dammam Port is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001265",
+    "ts": "2026-10-13T04:42:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Branch",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "code": "BR-JED-01",
+      "name": "Jeddah Corniche",
+      "country": "Saudi Arabia",
+      "city": "Jeddah",
+      "region": "West",
+      "address": "Corniche Road",
+      "phone": "+966 12 000 2002",
+      "status": "Active",
+      "ts": "13 Oct 2026, 09:42",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "Jeddah Corniche is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001264",
+    "ts": "2026-10-13T04:40:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Branch",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "code": "BR-RYD-01",
+      "name": "Riyadh Main",
+      "country": "Saudi Arabia",
+      "city": "Riyadh",
+      "region": "Central",
+      "address": "King Fahd Road",
+      "phone": "+966 11 000 1001",
+      "status": "Active",
+      "ts": "13 Oct 2026, 09:40",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Riyadh Main is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001263",
+    "ts": "2026-10-13T04:32:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Rate Source",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "name": "Bank Treasury",
+      "disabled": false,
+      "ts": "13 Oct 2026, 09:32",
+      "by": "dcc.maker",
+      "upd": "dcc.checker"
+    },
+    "summary": "Bank Treasury is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001262",
+    "ts": "2026-10-13T04:31:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Rate Source",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "name": "Bloomberg",
+      "disabled": true,
+      "ts": "13 Oct 2026, 09:31",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Bloomberg is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001261",
+    "ts": "2026-10-13T04:30:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Rate Source",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "name": "Reuters",
+      "disabled": true,
+      "ts": "13 Oct 2026, 09:30",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Reuters is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001260",
+    "ts": "2026-10-13T04:24:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Currency",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "iso": "826",
+      "alpha": "GBP",
+      "name": "Pound Sterling",
+      "decimals": "2",
+      "enabled": false,
+      "base": false,
+      "ts": "13 Oct 2026, 09:24",
+      "by": "dcc.maker",
+      "upd": "dcc.checker"
+    },
+    "summary": "GBP · Pound Sterling is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001259",
+    "ts": "2026-10-13T04:22:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Currency",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "iso": "978",
+      "alpha": "EUR",
+      "name": "Euro",
+      "decimals": "2",
+      "enabled": true,
+      "base": false,
+      "ts": "13 Oct 2026, 09:22",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "EUR · Euro is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001258",
+    "ts": "2026-10-13T04:21:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Currency",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "iso": "840",
+      "alpha": "USD",
+      "name": "US Dollar",
+      "decimals": "2",
+      "enabled": true,
+      "base": false,
+      "ts": "13 Oct 2026, 09:21",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "USD · US Dollar is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001257",
+    "ts": "2026-10-13T04:20:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Currency",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "iso": "682",
+      "alpha": "SAR",
+      "name": "Saudi Riyal",
+      "decimals": "2",
+      "enabled": true,
+      "base": true,
+      "ts": "13 Oct 2026, 09:20",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "SAR · Saudi Riyal is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001256",
+    "ts": "2026-10-13T04:19:00.000Z",
+    "actorId": "USR-00125",
+    "actorName": "DCC Maker",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "City",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "country": "Saudi Arabia",
+      "name": "Dammam",
+      "ts": "13 Oct 2026, 09:19",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "summary": "Dammam is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001255",
+    "ts": "2026-10-13T04:19:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "City",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "country": "Saudi Arabia",
+      "name": "Jeddah",
+      "ts": "13 Oct 2026, 09:19",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Jeddah is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001254",
+    "ts": "2026-10-13T04:19:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "City",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "country": "Saudi Arabia",
+      "name": "Riyadh",
+      "ts": "13 Oct 2026, 09:19",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Riyadh is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001253",
+    "ts": "2026-10-13T04:10:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Country",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "name": "Saudi Arabia",
+      "ts": "13 Oct 2026, 09:10",
+      "by": "iris.admin",
+      "upd": "iris.admin"
+    },
+    "summary": "Saudi Arabia is live",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001252",
+    "ts": "2026-08-31T03:02:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Users & Roles",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.finance",
+      "fullName": "DCC Finance",
+      "role": "Finance",
+      "status": "Active"
+    },
+    "summary": "DCC Finance (dcc.finance) is Active as Finance",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001251",
+    "ts": "2026-08-29T11:50:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Users & Roles",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.audit",
+      "fullName": "DCC Audit",
+      "role": "Auditor",
+      "status": "Active"
+    },
+    "summary": "DCC Audit (dcc.audit) is Active as Auditor",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001250",
+    "ts": "2026-08-31T05:11:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Users & Roles",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "atm.ops",
+      "fullName": "ATM Operations",
+      "role": "Viewer",
+      "status": "Active"
+    },
+    "summary": "ATM Operations (atm.ops) is Active as Viewer",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001249",
+    "ts": "2026-08-31T05:32:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Users & Roles",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.checker",
+      "fullName": "DCC Checker",
+      "role": "Checker",
+      "status": "Active"
+    },
+    "summary": "DCC Checker (dcc.checker) is Active as Checker",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001248",
+    "ts": "2026-08-31T05:44:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Users & Roles",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.maker",
+      "fullName": "DCC Maker",
+      "role": "Maker",
+      "status": "Active"
+    },
+    "summary": "DCC Maker (dcc.maker) is Active as Maker",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001247",
+    "ts": "2026-08-31T06:05:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Users & Roles",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "dcc.admin",
+      "fullName": "DCC Admin",
+      "role": "Admin",
+      "status": "Active"
+    },
+    "summary": "DCC Admin (dcc.admin) is Active as Admin",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  },
+  {
+    "id": "AUD-00001246",
+    "ts": "2026-08-31T05:28:00.000Z",
+    "actorId": "USR-00101",
+    "actorName": "Iris Admin",
+    "actorType": "Human",
+    "action": "CREATE",
+    "module": "Users & Roles",
+    "source": "Web UI",
+    "before": null,
+    "after": {
+      "username": "iris.admin",
+      "fullName": "Iris Admin",
+      "role": "Admin",
+      "status": "Active"
+    },
+    "summary": "Iris Admin (iris.admin) is Active as Admin",
+    "outcome": "SUCCESS",
+    "reason": "",
+    "ip": "10.20.1.15"
+  }
+]

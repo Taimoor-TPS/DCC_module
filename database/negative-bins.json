@@ -1,0 +1,27 @@
+[
+  [
+    "400000",
+    "VISA",
+    "Domestic issuers",
+    "Scheme mandate",
+    "No expiry",
+    "Effective"
+  ],
+  [
+    "521234",
+    "MASTERCARD",
+    "Partner issuer",
+    "Commercial agreement",
+    "31 Dec 2026",
+    "Effective"
+  ],
+  [
+    "444222",
+    "VISA",
+    "Restricted issuer",
+    "Regulatory restriction",
+    "No expiry",
+    "Pending",
+    "NEG-31036347"
+  ]
+]

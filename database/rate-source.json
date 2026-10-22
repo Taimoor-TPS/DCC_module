@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Reuters",
+    "disabled": true,
+    "ts": "13 Oct 2026, 09:30",
+    "by": "iris.admin",
+    "upd": "iris.admin"
+  },
+  {
+    "name": "Bloomberg",
+    "disabled": true,
+    "ts": "13 Oct 2026, 09:31",
+    "by": "iris.admin",
+    "upd": "iris.admin"
+  },
+  {
+    "name": "Bank Treasury",
+    "disabled": false,
+    "ts": "13 Oct 2026, 09:32",
+    "by": "dcc.maker",
+    "upd": "dcc.checker"
+  },
+  {
+    "name": "Regulatory",
+    "connector": "Regulatory",
+    "callType": "Excel",
+    "url": "",
+    "auth": "API Key",
+    "authValues": {
+      "API Key": "",
+      "JWT": "",
+      "OAuth 2.0 Client Credentials": ""
+    },
+    "headers": "",
+    "payload": "",
+    "path": "D:\\TPS\\Vibe Coding\\IRIS DCC\\DCC Prototype",
+    "sourceFields": [],
+    "mapping": {
+      "fxRate": {
+        "id": "src-2",
+        "name": "FX Rate"
+      },
+      "currency": {
+        "id": "src-1",
+        "name": "Currency"
+      }
+    },
+    "refresh": "100",
+    "ttl": "100",
+    "retry": "100",
+    "tolerance": "100",
+    "requestBody": "",
+    "excelFile": "17 - FX Rates.csv",
+    "fieldSeq": 3,
+    "disabled": true,
+    "ts": "21 Oct 2026, 19:38",
+    "by": "dcc.maker",
+    "upd": "dcc.maker",
+    "entityId": "ENT-50534181",
+    "wf": "Pending",
+    "apr": "APR-00133"
+  }
+]

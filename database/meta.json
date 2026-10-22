@@ -1,0 +1,32 @@
+{
+  "revision": 136,
+  "updatedAt": "2026-10-21T15:40:23.807Z",
+  "files": {
+    "country.json": 28,
+    "city.json": 96,
+    "currency.json": 98,
+    "rate-source.json": 126,
+    "branch.json": 100,
+    "atm.json": 102,
+    "atm-groups.json": 120,
+    "mcc-codes.json": 49,
+    "mcc-groups.json": 53,
+    "department.json": 10,
+    "division.json": 11,
+    "designation.json": 12,
+    "employment-type.json": 13,
+    "markup.json": 14,
+    "fees.json": 15,
+    "vat.json": 16,
+    "bins.json": 110,
+    "negative-bins.json": 18,
+    "negative-currencies.json": 19,
+    "rules.json": 130,
+    "fx-rates.json": 104,
+    "rate-providers.json": 127,
+    "approvals.json": 131,
+    "audits.json": 136,
+    "users.json": 135,
+    "quotes.json": 95
+  }
+}

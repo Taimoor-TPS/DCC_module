@@ -1,0 +1,79 @@
+[
+  {
+    "code": "ATM-GRP-RYD-01",
+    "name": "Riyadh Pilot Group",
+    "region": "Central",
+    "atms": [
+      "ATM-0142",
+      "ATM-0155"
+    ],
+    "dcc": true,
+    "status": "Effective",
+    "ts": "13 Oct 2026, 10:20",
+    "by": "iris.admin",
+    "upd": "iris.admin"
+  },
+  {
+    "code": "ATM-GRP-JED-01",
+    "name": "Jeddah Fleet",
+    "region": "West",
+    "atms": [
+      "ATM-0188",
+      "ATM-0192"
+    ],
+    "dcc": true,
+    "status": "Effective",
+    "ts": "13 Oct 2026, 10:22",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "code": "ATM-GRP-DMM-01",
+    "name": "Dammam Pilot",
+    "region": "East",
+    "atms": [
+      "ATM-0097"
+    ],
+    "dcc": false,
+    "status": "Effective",
+    "ts": "13 Oct 2026, 10:24",
+    "by": "dcc.maker",
+    "upd": "dcc.checker"
+  },
+  {
+    "code": "ATM-GRP-TEST-01",
+    "name": "Certification Lab",
+    "region": "Central",
+    "atms": [
+      "ATM-0142"
+    ],
+    "dcc": true,
+    "status": "Pending",
+    "ts": "13 Oct 2026, 10:26",
+    "by": "dcc.maker",
+    "upd": "dcc.maker",
+    "entityId": "ATM-GRP-TEST-01"
+  },
+  {
+    "code": "ATM-GRP-RYD-02",
+    "name": "Riyadh Mall",
+    "region": "Central",
+    "dcc": true,
+    "status": "Effective",
+    "atms": [
+      "ATM-0001",
+      "ATM-0002",
+      "ATM-0003",
+      "ATM-0004",
+      "ATM-0005",
+      "ATM-0007"
+    ],
+    "ts": "21 Oct 2026, 19:27",
+    "by": "dcc.maker",
+    "upd": "dcc.maker",
+    "entityId": "ATM-GRP-RYD-02",
+    "_liveStatus": "Effective",
+    "wf": "Live",
+    "apr": "APR-00133"
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "name": "POS",
+    "description": "POS",
+    "channel": "POS",
+    "mccs": [
+      "4800-4999",
+      "5000-5599",
+      "5600-5699"
+    ],
+    "ts": "20 Oct 2026, 19:47",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Ecommerce",
+    "description": "Ecommerce",
+    "channel": "Ecommerce",
+    "mccs": [
+      "0001-1499",
+      "1500-2999",
+      "4000-4799",
+      "4800-4999",
+      "5000-5599",
+      "5600-5699",
+      "5700-7299",
+      "7300-7999",
+      "8000-8999",
+      "9000-9999"
+    ],
+    "ts": "20 Oct 2026, 19:47",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  }
+]

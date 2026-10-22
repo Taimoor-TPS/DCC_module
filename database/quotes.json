@@ -1,0 +1,2732 @@
+[
+  {
+    "id": "DCC-261021-614873",
+    "atm": "ANB-POS-118204",
+    "time": "21 Oct 2026, 18:53:02",
+    "option": "OPT1",
+    "amount": "USD 42.76",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610212598278",
+    "rate": "RATE-USD-0.283600",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "21 Oct 2026, 18:52:51"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "21 Oct 2026, 18:53:02"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 0.00 to 999.00"
+    },
+    "message": "",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "POS",
+    "entryMode": "CONTACTLESS",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 150.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for POS in MCC group POS"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 to 999.00 applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 42.76"
+      }
+    ],
+    "sar": 150,
+    "dccAmount": 42.76,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.2836,
+    "markupPct": 3.5,
+    "localAmount": 176.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-21T13:54:51Z",
+    "scenario": "",
+    "commission": 0.6
+  },
+  {
+    "id": "DCC-261021-683051",
+    "atm": "ANB-POS-118204",
+    "time": "21 Oct 2026, 18:52:19",
+    "option": "NONE",
+    "amount": "SAR 150.00",
+    "status": "NOT_OFFERED",
+    "reason": "DCC15",
+    "rrn": "",
+    "rate": "",
+    "bin": "621234",
+    "card": "621234******4242",
+    "cycle": [
+      {
+        "status": "NOT_OFFERED",
+        "time": "21 Oct 2026, 18:52:19"
+      }
+    ],
+    "trace": {
+      "Offer": "",
+      "segment": "",
+      "tier": ""
+    },
+    "message": "The card BIN is not live in BIN Management.",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "",
+    "entryMode": "CONTACTLESS",
+    "scheme": "Mastercard",
+    "issuer": "Local issuer",
+    "country": "Pakistan",
+    "currency": "EUR",
+    "binClass": "BIN not configured",
+    "decision": "DCC not offered",
+    "decisionReason": "UNKNOWN_BIN",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 150.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": false,
+        "text": "BIN 621234 is not a live BIN in BIN Management"
+      }
+    ],
+    "sar": 150,
+    "dccAmount": null,
+    "dccCurrency": "",
+    "fx": null,
+    "fxSource": "",
+    "exchangeRate": null,
+    "markupPct": null,
+    "localAmount": 150,
+    "localFee": 0,
+    "expiresAt": "",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261021-132548",
+    "atm": "ATM-0142",
+    "time": "21 Oct 2026, 18:51:52",
+    "option": "NONE",
+    "amount": "SAR 1,000.00",
+    "status": "NOT_OFFERED",
+    "reason": "DCC15",
+    "rrn": "",
+    "rate": "",
+    "bin": "621234",
+    "card": "621234******4242",
+    "cycle": [
+      {
+        "status": "NOT_OFFERED",
+        "time": "21 Oct 2026, 18:51:52"
+      }
+    ],
+    "trace": {
+      "Offer": "",
+      "segment": "",
+      "tier": ""
+    },
+    "message": "The card BIN is not live in BIN Management.",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Mastercard",
+    "issuer": "Local issuer",
+    "country": "Pakistan",
+    "currency": "EUR",
+    "binClass": "BIN not configured",
+    "decision": "DCC not offered",
+    "decisionReason": "UNKNOWN_BIN",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 1,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": false,
+        "text": "BIN 621234 is not a live BIN in BIN Management"
+      }
+    ],
+    "sar": 1000,
+    "dccAmount": null,
+    "dccCurrency": "",
+    "fx": null,
+    "fxSource": "",
+    "exchangeRate": null,
+    "markupPct": null,
+    "localAmount": 1000,
+    "localFee": 0,
+    "expiresAt": "",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261021-341908",
+    "atm": "ATM-0142",
+    "time": "21 Oct 2026, 18:51:29",
+    "option": "OPT1",
+    "amount": "USD 28.42",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610217334052",
+    "rate": "RATE-USD-0.282900",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "21 Oct 2026, 18:51:16"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "21 Oct 2026, 18:51:29"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Riyadh Pilot ATMs",
+      "tier": "SAR 0.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 100.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Riyadh Pilot ATMs\" matched for ATM at ATM-0142"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 28.42"
+      }
+    ],
+    "sar": 100,
+    "dccAmount": 28.42,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.2829,
+    "markupPct": 3.25,
+    "localAmount": 126.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-21T13:53:16Z",
+    "scenario": "",
+    "commission": 0.4
+  },
+  {
+    "id": "DCC-261021-803108",
+    "atm": "ATM-0142",
+    "time": "21 Oct 2026, 18:51:01",
+    "option": "OPT1",
+    "amount": "USD 284.24",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610219325804",
+    "rate": "RATE-USD-0.282900",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "21 Oct 2026, 18:50:37"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "21 Oct 2026, 18:51:01"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Riyadh Pilot ATMs",
+      "tier": "SAR 0.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 1,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Riyadh Pilot ATMs\" matched for ATM at ATM-0142"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 284.24"
+      }
+    ],
+    "sar": 1000,
+    "dccAmount": 284.24,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.2829,
+    "markupPct": 3.25,
+    "localAmount": 1026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-21T13:52:37Z",
+    "scenario": "",
+    "commission": 4
+  },
+  {
+    "id": "DCC-261021-054630",
+    "atm": "ATM-0142",
+    "time": "21 Oct 2026, 17:01:02",
+    "option": "OPT2",
+    "amount": "SAR 3,026.45",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610214709486",
+    "rate": "RATE-USD-0.282907",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "21 Oct 2026, 17:00:38"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "21 Oct 2026, 17:01:02"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Riyadh Pilot ATMs",
+      "tier": "SAR 0.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Riyadh Pilot ATMs\" matched for ATM at ATM-0142"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 852.73"
+      }
+    ],
+    "sar": 3000,
+    "dccAmount": 852.73,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.282907,
+    "markupPct": 3.25,
+    "localAmount": 3026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-21T12:02:38Z",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261021-336228",
+    "atm": "ATM-0142",
+    "time": "21 Oct 2026, 16:57:30",
+    "option": "NONE",
+    "amount": "SAR 3,000.00",
+    "status": "OFFERED",
+    "reason": "",
+    "rrn": "",
+    "rate": "RATE-USD-0.282907",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "21 Oct 2026, 16:57:30"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Riyadh Pilot ATMs",
+      "tier": "SAR 0.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Riyadh Pilot ATMs\" matched for ATM at ATM-0142"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 852.73"
+      }
+    ],
+    "sar": 3000,
+    "dccAmount": 852.73,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.282907,
+    "markupPct": 3.25,
+    "localAmount": 3026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-21T11:59:30Z",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261021-215295",
+    "atm": "ANB-POS-118204",
+    "time": "21 Oct 2026, 16:56:50",
+    "option": "OPT1",
+    "amount": "USD 687.85",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610215403556",
+    "rate": "RATE-USD-0.284958",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "21 Oct 2026, 16:55:49"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "21 Oct 2026, 16:56:50"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 1,000.00 and above"
+    },
+    "message": "",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "POS",
+    "entryMode": "CONTACTLESS",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 2,400.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for POS in MCC group POS"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 1,000.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 687.85"
+      }
+    ],
+    "sar": 2400,
+    "dccAmount": 687.85,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.284958,
+    "markupPct": 4,
+    "localAmount": 2426.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-21T11:57:49Z",
+    "scenario": "",
+    "commission": 9.6
+  },
+  {
+    "id": "DCC-261021-721146",
+    "atm": "ATM-0142",
+    "time": "21 Oct 2026, 16:27:05",
+    "option": "OPT2",
+    "amount": "SAR 1,026.45",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610219776754",
+    "rate": "RATE-USD-0.282900",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "21 Oct 2026, 16:26:38"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "21 Oct 2026, 16:27:05"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Riyadh Pilot ATMs",
+      "tier": "SAR 0.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 1,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Riyadh Pilot ATMs\" matched for ATM at ATM-0142"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 284.24"
+      }
+    ],
+    "sar": 1000,
+    "dccAmount": 284.24,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.2829,
+    "markupPct": 3.25,
+    "localAmount": 1026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-21T11:28:38Z",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-255644",
+    "atm": "ANB-POS-118204",
+    "time": "20 Oct 2026, 20:06:29",
+    "option": "OPT1",
+    "amount": "USD 42.76",
+    "status": "DECLINED",
+    "reason": "HOST_DECLINE",
+    "rrn": "610208946403",
+    "rate": "RATE-USD-0.283600",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 20:06:07"
+      },
+      {
+        "status": "DECLINED",
+        "time": "20 Oct 2026, 20:06:29"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 0.00 to 999.00"
+    },
+    "message": "",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 150.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for POS with no MCC group"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 to 999.00 applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 42.76"
+      }
+    ],
+    "sar": 150,
+    "dccAmount": 42.76,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.2836,
+    "markupPct": 3.5,
+    "localAmount": 176.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T15:08:07Z",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-002625",
+    "atm": "ATM-0142",
+    "time": "20 Oct 2026, 20:04:07",
+    "option": "OPT2",
+    "amount": "SAR 3,026.45",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610208014604",
+    "rate": "RATE-USD-0.282907",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 20:03:27"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "20 Oct 2026, 20:04:07"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Riyadh Pilot ATMs",
+      "tier": "SAR 0.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Riyadh Pilot ATMs\" matched for ATM at ATM-0142"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 852.73"
+      }
+    ],
+    "sar": 3000,
+    "dccAmount": 852.73,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.282907,
+    "markupPct": 3.25,
+    "localAmount": 3026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T15:05:27Z",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-726075",
+    "atm": "ANB-POS-118204",
+    "time": "20 Oct 2026, 19:49:49",
+    "option": "NONE",
+    "amount": "SAR 360,000.00",
+    "status": "OFFERED",
+    "reason": "",
+    "rrn": "",
+    "rate": "RATE-USD-0.284960",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 19:49:49"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 1,000.00 and above"
+    },
+    "message": "",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 360,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for POS with no MCC group"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 1,000.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 103,177.44"
+      }
+    ],
+    "sar": 360000,
+    "dccAmount": 103177.44,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.28496,
+    "markupPct": 4,
+    "localAmount": 360026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T14:51:49Z",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-018242",
+    "atm": "ANB-POS-118204",
+    "time": "20 Oct 2026, 19:48:42",
+    "option": "OPT1",
+    "amount": "USD 104.51",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610205574692",
+    "rate": "RATE-USD-0.283587",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 19:48:11"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "20 Oct 2026, 19:48:42"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 0.00 to 999.00"
+    },
+    "message": "",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "POS",
+    "entryMode": "CONTACTLESS",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 366.66"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for POS in MCC group POS"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 to 999.00 applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 104.51"
+      }
+    ],
+    "sar": 366.66,
+    "dccAmount": 104.51,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.283587,
+    "markupPct": 3.5,
+    "localAmount": 393.11,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T14:50:11Z",
+    "scenario": "",
+    "commission": 1.47
+  },
+  {
+    "id": "DCC-261020-983856",
+    "atm": "ANB-POS-118204",
+    "time": "20 Oct 2026, 19:46:02",
+    "option": "OPT1",
+    "amount": "USD 687.85",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610201874699",
+    "rate": "RATE-USD-0.284958",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 19:45:45"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "20 Oct 2026, 19:46:02"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 1,000.00 and above"
+    },
+    "message": "",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "",
+    "entryMode": "CONTACTLESS",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 2,400.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for POS with no MCC group"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 1,000.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 687.85"
+      }
+    ],
+    "sar": 2400,
+    "dccAmount": 687.85,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.284958,
+    "markupPct": 4,
+    "localAmount": 2426.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T14:47:45Z",
+    "scenario": "",
+    "commission": 9.6
+  },
+  {
+    "id": "DCC-261020-821438",
+    "atm": "ANB-POS-118204",
+    "time": "20 Oct 2026, 19:44:50",
+    "option": "NONE",
+    "amount": "SAR 150.00",
+    "status": "NOT_OFFERED",
+    "reason": "DCC15",
+    "rrn": "",
+    "rate": "",
+    "bin": "621234",
+    "card": "621234******4242",
+    "cycle": [
+      {
+        "status": "NOT_OFFERED",
+        "time": "20 Oct 2026, 19:44:50"
+      }
+    ],
+    "trace": {
+      "Offer": "",
+      "segment": "",
+      "tier": ""
+    },
+    "message": "The card BIN is not live in BIN Management.",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Mastercard",
+    "issuer": "Local issuer",
+    "country": "Pakistan",
+    "currency": "EUR",
+    "binClass": "BIN not configured",
+    "decision": "DCC not offered",
+    "decisionReason": "UNKNOWN_BIN",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 150.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": false,
+        "text": "BIN 621234 is not a live BIN in BIN Management"
+      }
+    ],
+    "sar": 150,
+    "dccAmount": null,
+    "dccCurrency": "",
+    "fx": null,
+    "fxSource": "",
+    "exchangeRate": null,
+    "markupPct": null,
+    "localAmount": 150,
+    "localFee": 0,
+    "expiresAt": "",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-196192",
+    "atm": "ATM-0142",
+    "time": "20 Oct 2026, 19:30:54",
+    "option": "OPT1",
+    "amount": "USD 852.73",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610209305592",
+    "rate": "RATE-USD-0.282907",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 19:30:36"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "20 Oct 2026, 19:30:54"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Riyadh Pilot ATMs",
+      "tier": "SAR 0.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Riyadh Pilot ATMs\" matched for ATM at ATM-0142"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 852.73"
+      }
+    ],
+    "sar": 3000,
+    "dccAmount": 852.73,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.282907,
+    "markupPct": 3.25,
+    "localAmount": 3026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T14:32:36Z",
+    "scenario": "",
+    "commission": 12
+  },
+  {
+    "id": "DCC-261020-713763",
+    "atm": "ATM-0188",
+    "time": "20 Oct 2026, 19:28:54",
+    "option": "NONE",
+    "amount": "SAR 3,000.00",
+    "status": "OFFERED",
+    "reason": "",
+    "rrn": "",
+    "rate": "RATE-USD-0.284960",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 19:28:54"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 1,000.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0188",
+    "terminalName": "Jeddah Airport, Jeddah",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for ATM at ATM-0188"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 1,000.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 859.81"
+      }
+    ],
+    "sar": 3000,
+    "dccAmount": 859.81,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.28496,
+    "markupPct": 4,
+    "localAmount": 3026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T14:30:54Z",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-050291",
+    "atm": "GW000001",
+    "time": "20 Oct 2026, 19:19:12",
+    "option": "NONE",
+    "amount": "SAR 3,200.00",
+    "status": "NOT_OFFERED",
+    "reason": "DCC15",
+    "rrn": "",
+    "rate": "",
+    "bin": "516742",
+    "card": "516742******4242",
+    "cycle": [
+      {
+        "status": "NOT_OFFERED",
+        "time": "20 Oct 2026, 19:19:12"
+      }
+    ],
+    "trace": {
+      "Offer": "",
+      "segment": "",
+      "tier": ""
+    },
+    "message": "The card's issuer country is on the country negative list.",
+    "channel": "E-commerce",
+    "terminal": "GW000001",
+    "terminalName": "Najd Home Store (online)",
+    "merchant": "000000555000111",
+    "mccGroup": "",
+    "entryMode": "ECOM",
+    "scheme": "Mastercard",
+    "issuer": "Barclays",
+    "country": "United Kingdom",
+    "currency": "GBP",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC not offered",
+    "decisionReason": "NEG_COUNTRY",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,200.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel e-commerce is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 516742 is live (MASTERCARD, Barclays, United Kingdom)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": false,
+        "text": "United Kingdom is on the country negative list (Regulatory restriction)"
+      }
+    ],
+    "sar": 3200,
+    "dccAmount": null,
+    "dccCurrency": "",
+    "fx": null,
+    "fxSource": "",
+    "exchangeRate": null,
+    "markupPct": null,
+    "localAmount": 3200,
+    "localFee": 0,
+    "expiresAt": "",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-834469",
+    "atm": "ATM-0142",
+    "time": "20 Oct 2026, 19:11:20",
+    "option": "NONE",
+    "amount": "SAR 3,000.00",
+    "status": "NOT_OFFERED",
+    "reason": "DCC15",
+    "rrn": "",
+    "rate": "",
+    "bin": "400000",
+    "card": "400000******0001",
+    "cycle": [
+      {
+        "status": "NOT_OFFERED",
+        "time": "20 Oct 2026, 19:11:20"
+      }
+    ],
+    "trace": {
+      "Offer": "",
+      "segment": "",
+      "tier": ""
+    },
+    "message": "The BIN is on the BIN negative list.",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Al Rajhi",
+    "country": "Saudi Arabia",
+    "currency": "SAR",
+    "binClass": "BIN in negative list",
+    "decision": "DCC not offered",
+    "decisionReason": "NEG_BIN",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 400000 is live (VISA, Al Rajhi, Saudi Arabia)"
+      },
+      {
+        "ok": false,
+        "text": "BIN 400000 is on the BIN negative list (Scheme mandate)"
+      }
+    ],
+    "sar": 3000,
+    "dccAmount": null,
+    "dccCurrency": "",
+    "fx": null,
+    "fxSource": "",
+    "exchangeRate": null,
+    "markupPct": null,
+    "localAmount": 3000,
+    "localFee": 0,
+    "expiresAt": "",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-358920",
+    "atm": "ANB-POS-118204",
+    "time": "20 Oct 2026, 19:03:04",
+    "option": "OPT1",
+    "amount": "USD 242.27",
+    "status": "DECLINED",
+    "reason": "HOST_DECLINE",
+    "rrn": "610206017071",
+    "rate": "RATE-USD-0.283588",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 19:02:35"
+      },
+      {
+        "status": "DECLINED",
+        "time": "20 Oct 2026, 19:03:04"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 0.00 to 999.00"
+    },
+    "message": "",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "",
+    "entryMode": "CONTACTLESS",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 850.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for POS with no MCC group"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 to 999.00 applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 242.27"
+      }
+    ],
+    "sar": 850,
+    "dccAmount": 242.27,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.283588,
+    "markupPct": 3.5,
+    "localAmount": 876.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T14:04:35Z",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-261020-862325",
+    "atm": "ANB-POS-118204",
+    "time": "20 Oct 2026, 19:02:14",
+    "option": "OPT1",
+    "amount": "USD 687.85",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610202827891",
+    "rate": "RATE-USD-0.284958",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 19:01:01"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "20 Oct 2026, 19:02:14"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Default pricing",
+      "tier": "SAR 1,000.00 and above"
+    },
+    "message": "",
+    "channel": "POS",
+    "terminal": "ANB-POS-118204",
+    "terminalName": "Al Noor Electronics, Riyadh",
+    "merchant": "000000123456789",
+    "mccGroup": "",
+    "entryMode": "CONTACTLESS",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 2,400.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel POS is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Default pricing\" (default) for POS with no MCC group"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 1,000.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 687.85"
+      }
+    ],
+    "sar": 2400,
+    "dccAmount": 687.85,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.284958,
+    "markupPct": 4,
+    "localAmount": 2426.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T14:03:01Z",
+    "scenario": "",
+    "commission": 9.6
+  },
+  {
+    "id": "DCC-261020-653364",
+    "atm": "ATM-0142",
+    "time": "20 Oct 2026, 19:00:13",
+    "option": "OPT1",
+    "amount": "USD 852.73",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "610203361035",
+    "rate": "RATE-USD-0.282907",
+    "bin": "453211",
+    "card": "453211******4242",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "20 Oct 2026, 18:59:16"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "20 Oct 2026, 19:00:13"
+      }
+    ],
+    "trace": {
+      "Offer": "USD card Offer",
+      "segment": "Riyadh Pilot ATMs",
+      "tier": "SAR 0.00 and above"
+    },
+    "message": "",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Visa",
+    "issuer": "Chase",
+    "country": "United States",
+    "currency": "USD",
+    "binClass": "BIN configured in back office",
+    "decision": "DCC offered",
+    "decisionReason": "OFFERED",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": true,
+        "text": "BIN 453211 is live (VISA, Chase, United States)"
+      },
+      {
+        "ok": true,
+        "text": "BIN is not on the BIN negative list"
+      },
+      {
+        "ok": true,
+        "text": "Issuer country United States is not on the negative list"
+      },
+      {
+        "ok": true,
+        "text": "Card currency USD differs from SAR"
+      },
+      {
+        "ok": true,
+        "text": "USD is enabled in the Currency master"
+      },
+      {
+        "ok": true,
+        "text": "Effective offer \"USD card Offer\" v1 applies"
+      },
+      {
+        "ok": true,
+        "text": "Card is inside the offer card scope"
+      },
+      {
+        "ok": true,
+        "text": "Segment \"Riyadh Pilot ATMs\" matched for ATM at ATM-0142"
+      },
+      {
+        "ok": true,
+        "text": "Tier SAR 0.00 and above applies"
+      },
+      {
+        "ok": true,
+        "text": "This tier offers DCC"
+      },
+      {
+        "ok": true,
+        "text": "All charges on the tier are effective"
+      },
+      {
+        "ok": true,
+        "text": "FX rate is not stale"
+      },
+      {
+        "ok": true,
+        "text": "FX rate 1 SAR = 0.274 USD (Bank Treasury)"
+      },
+      {
+        "ok": true,
+        "text": "DCC quote USD 852.73"
+      }
+    ],
+    "sar": 3000,
+    "dccAmount": 852.73,
+    "dccCurrency": "USD",
+    "fx": 0.274,
+    "fxSource": "Bank Treasury",
+    "exchangeRate": 0.282907,
+    "markupPct": 3.25,
+    "localAmount": 3026.45,
+    "localFee": 23,
+    "expiresAt": "2026-10-20T14:01:16Z",
+    "scenario": "",
+    "commission": 12
+  },
+  {
+    "id": "DCC-261020-056268",
+    "atm": "ATM-0142",
+    "time": "20 Oct 2026, 18:58:34",
+    "option": "NONE",
+    "amount": "SAR 3,000.00",
+    "status": "NOT_OFFERED",
+    "reason": "DCC15",
+    "rrn": "",
+    "rate": "",
+    "bin": "621234",
+    "card": "621234******4242",
+    "cycle": [
+      {
+        "status": "NOT_OFFERED",
+        "time": "20 Oct 2026, 18:58:34"
+      }
+    ],
+    "trace": {
+      "Offer": "",
+      "segment": "",
+      "tier": ""
+    },
+    "message": "The card BIN is not live in BIN Management.",
+    "channel": "ATM",
+    "terminal": "ATM-0142",
+    "terminalName": "Riyadh Mall 01, Riyadh",
+    "merchant": "",
+    "mccGroup": "",
+    "entryMode": "CHIP",
+    "scheme": "Mastercard",
+    "issuer": "Local issuer",
+    "country": "Pakistan",
+    "currency": "EUR",
+    "binClass": "BIN not configured",
+    "decision": "DCC not offered",
+    "decisionReason": "UNKNOWN_BIN",
+    "checks": [
+      {
+        "ok": true,
+        "text": "Amount SAR 3,000.00"
+      },
+      {
+        "ok": true,
+        "text": "Channel ATM is covered by an Effective offer"
+      },
+      {
+        "ok": false,
+        "text": "BIN 621234 is not a live BIN in BIN Management"
+      }
+    ],
+    "sar": 3000,
+    "dccAmount": null,
+    "dccCurrency": "",
+    "fx": null,
+    "fxSource": "",
+    "exchangeRate": null,
+    "markupPct": null,
+    "localAmount": 3000,
+    "localFee": 0,
+    "expiresAt": "",
+    "scenario": ""
+  },
+  {
+    "id": "DCC-260831-ATM0142-000388",
+    "atm": "ATM-0142",
+    "time": "31 Aug 2026, 10:48:02",
+    "option": "OPT1",
+    "amount": "USD 120.00",
+    "status": "OFFERED",
+    "reason": "",
+    "rrn": "",
+    "rate": "RATE-260831-SARUSD-000123",
+    "bin": "453211",
+    "card": "453211*********9879",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:48:02"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0097-000387",
+    "atm": "ATM-0097",
+    "time": "31 Aug 2026, 10:47:11",
+    "option": "NONE",
+    "amount": "SAR 500.00",
+    "status": "NOT_OFFERED",
+    "reason": "BIN_NEGATIVE_LIST",
+    "rrn": "",
+    "rate": "",
+    "bin": "400000",
+    "card": "400000*********4412",
+    "cycle": [
+      {
+        "status": "NOT_OFFERED",
+        "time": "31 Aug 2026, 10:47:11"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0142-000381",
+    "atm": "ATM-0142",
+    "time": "31 Aug 2026, 10:42:18",
+    "option": "OPT1",
+    "amount": "USD 283.59",
+    "status": "COMPLETED",
+    "reason": "",
+    "rrn": "624315091842",
+    "rate": "RATE-260831-SARUSD-000123",
+    "bin": "414720",
+    "card": "414720*********2268",
+    "commission": 4.14,
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:42:05"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "31 Aug 2026, 10:42:18"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0188-000380",
+    "atm": "ATM-0188",
+    "time": "31 Aug 2026, 10:41:52",
+    "option": "OPT2",
+    "amount": "SAR 1,023.00",
+    "status": "DECLINED",
+    "reason": "CUSTOMER_DECLINED",
+    "rrn": "624315091841",
+    "rate": "RATE-260831-SARUSD-000122",
+    "bin": "516742",
+    "card": "516742*********7731",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:41:40"
+      },
+      {
+        "status": "DECLINED",
+        "time": "31 Aug 2026, 10:41:52"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0142-000378",
+    "atm": "ATM-0142",
+    "time": "31 Aug 2026, 10:39:44",
+    "option": "OPT1",
+    "amount": "USD 141.80",
+    "status": "TIMED_OUT",
+    "reason": "DISPENSE_TIMEOUT",
+    "rrn": "624315091839",
+    "rate": "RATE-260831-SARUSD-000121",
+    "bin": "426684",
+    "card": "426684*********5904",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:39:20"
+      },
+      {
+        "status": "TIMED_OUT",
+        "time": "31 Aug 2026, 10:39:44"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0104-000375",
+    "atm": "ATM-0104",
+    "time": "31 Aug 2026, 10:36:08",
+    "option": "OPT1",
+    "amount": "USD 55.20",
+    "status": "FAILED",
+    "reason": "HOST_DECLINE",
+    "rrn": "624315091830",
+    "rate": "RATE-260831-SARUSD-000123",
+    "bin": "448928",
+    "card": "448928*********3186",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:35:58"
+      },
+      {
+        "status": "FAILED",
+        "time": "31 Aug 2026, 10:36:08"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0192-000374",
+    "atm": "ATM-0192",
+    "time": "31 Aug 2026, 10:34:41",
+    "option": "OPT1",
+    "amount": "USD 40.00",
+    "status": "CANCELLED",
+    "reason": "CUSTOMER_CANCELLED",
+    "rrn": "",
+    "rate": "RATE-260831-SARUSD-000123",
+    "bin": "434256",
+    "card": "434256*********8045",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:34:22"
+      },
+      {
+        "status": "CANCELLED",
+        "time": "31 Aug 2026, 10:34:41"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0210-000377",
+    "atm": "ATM-0210",
+    "time": "31 Aug 2026, 10:38:17",
+    "option": "NONE",
+    "amount": "EUR 92.40",
+    "status": "NO_SELECTION",
+    "reason": "NO_SELECTION",
+    "rrn": "",
+    "rate": "RATE-260831-SAREUR-000044",
+    "bin": "497010",
+    "card": "497010*********1527",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:37:55"
+      },
+      {
+        "status": "NO_SELECTION",
+        "time": "31 Aug 2026, 10:38:17"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0097-000379",
+    "atm": "ATM-0097",
+    "time": "31 Aug 2026, 10:40:09",
+    "option": "NONE",
+    "amount": "SAR 1,000.00",
+    "status": "EXPIRED",
+    "reason": "QUOTE_EXPIRED",
+    "rrn": "",
+    "rate": "",
+    "bin": "410685",
+    "card": "410685*********6693",
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:39:24"
+      },
+      {
+        "status": "EXPIRED",
+        "time": "31 Aug 2026, 10:40:09"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0155-000373",
+    "atm": "ATM-0155",
+    "time": "31 Aug 2026, 11:05:16",
+    "option": "OPT1",
+    "amount": "USD 210.40",
+    "status": "PARTIALLY_REVERSED",
+    "reason": "PARTIAL_REVERSAL",
+    "rrn": "624315091860",
+    "rate": "RATE-260831-SARUSD-000123",
+    "bin": "511234",
+    "card": "511234*********2470",
+    "commission": 3.07,
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:18:02"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "31 Aug 2026, 10:18:19"
+      },
+      {
+        "status": "PARTIALLY_REVERSED",
+        "time": "31 Aug 2026, 11:05:16"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0188-000372",
+    "atm": "ATM-0188",
+    "time": "31 Aug 2026, 11:22:40",
+    "option": "OPT1",
+    "amount": "USD 88.15",
+    "status": "REVERSED",
+    "reason": "FULL_REVERSAL",
+    "rrn": "624315091861",
+    "rate": "RATE-260831-SARUSD-000122",
+    "bin": "542418",
+    "card": "542418*********9358",
+    "commission": 1.29,
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 10:11:04"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "31 Aug 2026, 10:11:20"
+      },
+      {
+        "status": "PARTIALLY_REVERSED",
+        "time": "31 Aug 2026, 11:20:02"
+      },
+      {
+        "status": "REVERSED",
+        "time": "31 Aug 2026, 11:22:40"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0114-000371",
+    "atm": "ATM-0114",
+    "time": "31 Aug 2026, 12:04:33",
+    "option": "OPT1",
+    "amount": "USD 70.90",
+    "status": "PARTIALLY_REFUNDED",
+    "reason": "PARTIAL_REFUND",
+    "rrn": "624315091870",
+    "rate": "RATE-260831-SARUSD-000123",
+    "bin": "552433",
+    "card": "552433*********4816",
+    "commission": 1.04,
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 09:46:10"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "31 Aug 2026, 09:46:28"
+      },
+      {
+        "status": "PARTIALLY_REFUNDED",
+        "time": "31 Aug 2026, 12:04:33"
+      }
+    ]
+  },
+  {
+    "id": "DCC-260831-ATM0155-000370",
+    "atm": "ATM-0155",
+    "time": "31 Aug 2026, 12:18:55",
+    "option": "OPT1",
+    "amount": "USD 64.25",
+    "status": "REFUNDED",
+    "reason": "FULL_REFUND",
+    "rrn": "624315091871",
+    "rate": "RATE-260831-SARUSD-000123",
+    "bin": "453211",
+    "card": "453211*********6204",
+    "commission": 0.94,
+    "cycle": [
+      {
+        "status": "OFFERED",
+        "time": "31 Aug 2026, 09:20:08"
+      },
+      {
+        "status": "COMPLETED",
+        "time": "31 Aug 2026, 09:20:24"
+      },
+      {
+        "status": "PARTIALLY_REFUNDED",
+        "time": "31 Aug 2026, 12:16:11"
+      },
+      {
+        "status": "REFUNDED",
+        "time": "31 Aug 2026, 12:18:55"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: controls on top, device (ATM / POS / checkout) left with its receipt, message lanes right; API calls, auth fields and scheme checks below. */
+:root{
+  --paper:#EEF1F4;--surface:#FFFFFF;--surface-2:#F5F7F9;--ink:#14202B;--muted:#5A6672;--line:#D3D9DF;
+  --dev:#6B7684;--acq:#0F7C78;--dcc:#5B4BC4;--sch:#4A5568;--iss:#A8641B;
+  --ok:#2F7D3A;--warn:#9A6200;--bad:#B3261E;--jkey:#5B4BC4;--jstr:#0F7C78;
+  /* physical objects: same in both themes */
+  --fascia:#2B3440;--fascia-2:#3A4552;--fdk:#C3CBD4;--screen:#0D3550;--screen-ink:#E8F3FB;--screen-dim:#9CC3DD;--screen-line:#2C5C7E;
+  --pos-body:#23272E;--pos-screen:#F2F5F7;--pos-ink:#141A21;--pos-dim:#5E6A75;--pos-line:#C9D1D8;--pos-acc:#0F5E8C;
+  --web-bg:#FFFFFF;--web-ink:#1C2430;--web-dim:#66717D;--web-line:#DDE2E7;--web-acc:#2F6B4F;--web-chrome:#E6E9EC;
+  --rcpt:#FBFBF7;--rcpt-ink:#202020;--key:#C9D1D9;--key-ink:#1B242D;--red:#A3423A;--amber:#B08A2E;--green:#3E7A4C;--note:#6FA287;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0F151B;--surface:#17202A;--surface-2:#1D2732;--ink:#E6ECF1;--muted:#9AA7B3;--line:#2C3742;
+  --dev:#9AA7B3;--acq:#3DB7B0;--dcc:#A79BF5;--sch:#A9B6C4;--iss:#E3A35A;
+  --ok:#6CC17A;--warn:#E2B04A;--bad:#F08A80;--jkey:#B9AEFA;--jstr:#5FCFC8;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F151B;--surface:#17202A;--surface-2:#1D2732;--ink:#E6ECF1;--muted:#9AA7B3;--line:#2C3742;
+  --dev:#9AA7B3;--acq:#3DB7B0;--dcc:#A79BF5;--sch:#A9B6C4;--iss:#E3A35A;
+  --ok:#6CC17A;--warn:#E2B04A;--bad:#F08A80;--jkey:#B9AEFA;--jstr:#5FCFC8;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.4;overflow:auto}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--dcc);outline-offset:2px}
+.wrap{max-width:none;margin:0;padding:8px 10px 12px;padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px))}
+#viewSim{display:flex;flex-direction:column;gap:8px}
+.simbar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:flex-end}
+.ctlrow{display:contents}
+.chtabs{display:flex;flex-wrap:nowrap;gap:6px;margin:0}
+.chtab{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px;cursor:pointer;min-width:0;text-align:left;height:32px}
+.chtab b{font-weight:600;font-size:13px}
+.chtab span{display:none}
+.chtab[aria-pressed="true"]{border-color:var(--dcc);box-shadow:inset 0 0 0 1px var(--dcc)}
+.chtab[aria-pressed="true"] b{color:var(--dcc)}
+.ctl{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ctl-l{font-size:11px;color:var(--muted);line-height:1.2}
+.seg{display:inline-flex;flex-wrap:nowrap;border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:2px}
+.seg button{border:0;background:transparent;padding:5px 9px;border-radius:6px;cursor:pointer;color:var(--muted);font-weight:500;font-size:13px;height:28px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.cardpick{width:min(340px,100%);min-width:220px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:12.5px;height:32px}
+.ctxpick{width:min(240px,100%);min-width:160px}
+.chk{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);cursor:pointer}
+.chk input{accent-color:var(--dcc)}
+.chk.off{opacity:.45;pointer-events:none}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 10px;cursor:pointer;font-weight:500;font-size:13px;height:32px}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--dcc);border-color:var(--dcc);color:var(--surface)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.block{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.block h2{font-size:15px;margin:0 0 2px;font-weight:600}
+.block > p.lead{margin:0 0 8px;color:var(--muted);font-size:12.5px}
+details.cfg > summary{cursor:pointer;font-size:17px;font-weight:600;list-style-position:outside}
+details.cfg > summary span{font-size:13px;font-weight:400;color:var(--muted);margin-left:8px}
+.cfgbody{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:16px;margin-top:12px}
+@media (max-width:980px){.cfgbody{grid-template-columns:1fr}}
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;font-size:12.5px;color:var(--muted)}
+td.num{font-family:var(--mono);font-size:12.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cfg input[type=number]{font-family:var(--mono);font-size:12.5px;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2);color:var(--ink);width:92px}
+.fees{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-content:start}
+.fees label{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--muted)}
+.fees .chk{flex-direction:row;font-size:13px;grid-column:1/-1}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;border-radius:4px;padding:1px 6px;border:1px solid;white-space:nowrap}
+.tag.pass{color:var(--ok);border-color:var(--ok)}
+.tag.idle{color:var(--muted);border-color:var(--line)}
+.tag.review{color:var(--warn);border-color:var(--warn)}
+.tag.bad{color:var(--bad);border-color:var(--bad)}
+
+.stage{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);gap:12px;align-items:stretch;margin:0}
+@media (max-width:1020px){.stage{grid-template-columns:minmax(0,1fr)}}
+.devcol{min-width:0;display:flex;flex-direction:column;gap:8px}
+.devtools{display:flex;flex-wrap:wrap;gap:6px}
+
+/* ---- ATM ---- */
+.atm{background:linear-gradient(180deg,var(--fascia-2),var(--fascia) 45%);border-radius:14px 14px 8px 8px;padding:8px 8px 10px;color:var(--screen-ink)}
+.brandrow{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:var(--screen-dim);margin:0 4px 6px}
+.brandrow b{color:var(--screen-ink);font-weight:600;letter-spacing:.04em}
+.bezel{display:grid;grid-template-columns:24px minmax(0,1fr) 24px;gap:6px;background:#1A2129;border-radius:8px;padding:7px 5px}
+.fdks{display:grid;grid-template-rows:102px repeat(4,40px)}
+.fdks button{width:22px;height:22px;align-self:center;border-radius:4px;border:0;background:var(--fdk);cursor:pointer;box-shadow:inset 0 -3px 0 rgba(0,0,0,.28)}
+.fdks button:active{transform:translateY(1px);box-shadow:inset 0 -1px 0 rgba(0,0,0,.28)}
+.fdks button:nth-child(1){grid-row:2}.fdks button:nth-child(2){grid-row:3}.fdks button:nth-child(3){grid-row:4}.fdks button:nth-child(4){grid-row:5}
+.scr{height:284px;border:3px solid #0B1116;border-radius:6px;overflow:hidden;display:grid;grid-template-rows:24px minmax(0,1fr) 20px;background:linear-gradient(160deg,#0F4467,#0A2B44 70%);color:var(--screen-ink);min-width:0}
+.shd{display:flex;justify-content:space-between;align-items:center;padding:0 10px;background:rgba(0,0,0,.28);font-size:11px;color:var(--screen-dim)}
+.shd b{color:#fff;font-size:13px;letter-spacing:.06em}
+.sft{display:flex;justify-content:space-between;align-items:center;padding:0 10px;background:rgba(0,0,0,.22);font-size:10.5px;color:var(--screen-dim)}
+.sbody{display:grid;grid-template-rows:80px repeat(4,40px);min-height:0}
+.sbody.choice{grid-template-rows:minmax(0,1fr) 40px;overflow:hidden}
+.stext{padding:8px 12px 2px;overflow:hidden;min-width:0}
+.stext h3{margin:0 0 4px;font-size:16px;font-weight:600;line-height:1.25}
+.stext p{margin:0 0 3px;font-size:13px}
+.stext .dim,.dccbox .dim{color:var(--screen-dim);font-size:12.5px}
+.ar{direction:rtl;font-size:15px;color:var(--screen-dim)}
+.logos{display:flex;gap:6px;margin-top:8px}
+.logos span{border:1px solid rgba(255,255,255,.45);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:600;letter-spacing:.03em}
+.orow{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-width:0}
+.opt{height:32px;display:flex;align-items:center;gap:8px;padding:0 8px;font-size:12.5px;font-weight:500;cursor:pointer;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.22);color:#fff;min-width:0;overflow:hidden}
+.opt.l{border-left:0;border-radius:0 8px 8px 0;margin-right:14px}
+.opt.r{border-right:0;border-radius:8px 0 0 8px;margin-left:14px;justify-content:flex-end;text-align:right}
+.opt.l::before{content:"\25C0";font-size:9px;color:var(--screen-dim);flex:0 0 auto;width:auto}
+.opt.r::after{content:"\25B6";font-size:9px;color:var(--screen-dim);flex:0 0 auto;width:auto}
+.opt:hover{background:rgba(255,255,255,.18)}
+.opt.off{opacity:.38;cursor:default}
+.opt.off:hover{background:rgba(255,255,255,.11)}
+.opt.opt2{height:36px;padding:0 8px;justify-content:center;text-align:center}
+.opt.opt2::before,.opt.opt2::after{display:none}
+.opt.opt2 span{display:flex;flex-direction:column;line-height:1.25;min-width:0;flex:1 1 auto}
+.opt.opt2 span{align-items:center;flex:1 1 0;width:100%}
+.opt.opt2 b{font-family:var(--mono);font-size:13.5px;font-weight:600;white-space:nowrap}
+.opt.opt2 small{font-size:11px;color:var(--screen-dim);font-weight:400;white-space:nowrap}
+.pinbox{display:flex;gap:6px;margin:6px 0 4px}
+.pinbox i{width:24px;height:28px;border:1px solid rgba(255,255,255,.45);border-radius:5px;display:grid;place-items:center;font-style:normal;font-size:15px;background:rgba(0,0,0,.15)}
+.amtin{font-family:var(--mono);font-size:20px;margin:4px 0}
+.serr{color:#FFC9C2;font-size:12.5px}
+.spin{width:30px;height:30px;border:3px solid var(--screen-line);border-top-color:var(--screen-ink);border-radius:50%;margin-top:12px;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.dccbox{padding:4px 8px 0;display:flex;flex-direction:column;gap:2px;min-height:0;overflow:hidden}
+.dccbox h3{margin:0;font-size:13px;font-weight:600;line-height:1.2}
+.dccbox p{margin:0;font-size:10.5px;line-height:1.2}
+.dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;font-size:12px;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);padding:5px 0}
+.dl span:nth-child(odd){color:var(--screen-dim)}
+.dl span:nth-child(even){font-family:var(--mono);text-align:right;white-space:nowrap}
+.cmp{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) minmax(0,1fr);font-size:10px;line-height:1.2}
+.cmp>span{padding:1px 4px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp .k{color:var(--screen-dim);padding-left:0}
+.cmp .c1,.cmp .c2{font-family:var(--mono);text-align:right;background:rgba(255,255,255,.07);border-left:1px solid rgba(255,255,255,.22);border-right:1px solid rgba(255,255,255,.22)}
+.cmp .c2{margin-left:3px}
+.cmp .c1{margin-left:2px}
+.cmp .hd{font-family:var(--sans);text-align:center;font-weight:600;font-size:10px;padding:3px 3px 2px;border-top:1px solid rgba(255,255,255,.22);border-radius:6px 6px 0 0;display:flex;flex-direction:column;align-items:center}
+.cmp .hd em{font-style:normal;font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.16);border-radius:3px;padding:0 4px;margin-bottom:1px;font-weight:600}
+.cmp .sm{font-size:9px;opacity:.85}
+.cmp .k.sm{padding-left:6px}
+.cmp i{font-style:normal;opacity:.5}
+.cmp .tt{font-weight:600;padding-top:2px;padding-bottom:3px;margin-top:1px;border-top:1px solid rgba(255,255,255,.22)}
+.cmp .c1.tt,.cmp .c2.tt{font-size:11.5px;border-bottom:1px solid rgba(255,255,255,.22);border-radius:0 0 6px 6px}
+.scr .cmp .u{display:none}
+.cmp .k.tt{color:#fff}
+.cmp .tx{font-family:var(--sans);font-weight:400}
+@media (max-width:520px){.cmp{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);font-size:9.5px}.cmp>span{padding-left:3px;padding-right:3px}.cmp .u{display:none}.cmp .hd{font-size:10px}.cmp .c1.tt,.cmp .c2.tt{font-size:11px}.cmp .c1{margin-left:2px}.cmp .c2{margin-left:3px}.dccbox .sub{display:none}}
+.cmp.pcmp .k{color:var(--pos-dim)}
+.cmp.pcmp .c1,.cmp.pcmp .c2{background:#fff;border-color:#8C9AA8}
+.cmp.pcmp .hd{border-color:#8C9AA8}
+.cmp.pcmp .hd em{background:var(--pos-acc);color:#fff}
+.cmp.pcmp .tt{border-top-color:var(--pos-line)}
+.cmp.pcmp .c1.tt,.cmp.pcmp .c2.tt{border-bottom-color:#8C9AA8}
+.cmp.pcmp .k.tt{color:var(--pos-ink)}
+.disc{font-size:10.5px;color:var(--screen-dim);border-left:2px solid var(--screen-line);padding-left:7px;line-height:1.35}
+.hw{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 4px 0}
+.slot{background:var(--fascia-2);border-radius:8px;padding:5px;display:flex;flex-direction:column;gap:4px;align-items:center;font-size:11px;color:var(--screen-dim)}
+.slot .mouth{width:100%;height:7px;border-radius:4px;background:#0E1419}
+.slot button{border:1px solid #5B6876;background:#334050;color:var(--screen-ink);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:12px;width:100%}
+.slot button:disabled{opacity:.45;cursor:not-allowed}
+.slot.live button:not(:disabled){border-color:var(--screen-dim);background:#29506E}
+.cash{display:flex;gap:3px;height:22px;align-items:flex-end;opacity:0;transition:opacity .3s}
+.cash.show{opacity:1}
+.cash i{width:30px;height:16px;background:var(--note);border-radius:2px;border:1px solid #3F6C55}
+.epp{display:grid;grid-template-columns:repeat(3,1fr) 1.3fr;gap:4px;margin:6px 18px 0}
+.epp button{height:24px;border:0;border-radius:5px;background:var(--key);color:var(--key-ink);font-weight:600;cursor:pointer;box-shadow:inset 0 -3px 0 rgba(0,0,0,.22)}
+.epp .f{font-size:12px;color:#fff}
+.epp .cancel{background:var(--red)}.epp .clear{background:var(--amber)}.epp .enter{background:var(--green)}
+
+/* ---- POS ---- */
+.pos{width:min(300px,100%);margin:0 auto;background:linear-gradient(180deg,#2C323A,var(--pos-body));border-radius:22px 22px 28px 28px;padding:8px 10px 12px;color:#DCE3EA}
+.pctl{display:flex;justify-content:center;color:#93A3B3;margin-bottom:4px}
+.pscr{background:var(--pos-screen);color:var(--pos-ink);border-radius:10px;height:280px;display:grid;grid-template-rows:18px 24px minmax(0,1fr);overflow:hidden;border:4px solid #0D0F12}
+.psb{display:flex;justify-content:space-between;align-items:center;padding:0 10px;font-size:10.5px;background:#E1E6EA;color:#3C4752;font-family:var(--mono)}
+.pah{display:flex;justify-content:space-between;align-items:center;padding:0 10px;background:var(--pos-acc);color:#fff;font-size:12px;font-weight:500}
+.pbody{padding:8px 10px;display:flex;flex-direction:column;gap:4px;min-height:0;overflow:auto}
+.pbody h3{margin:0;font-size:15px;font-weight:600}
+.pbody p{margin:0;font-size:13px}
+.pbody .dim{color:var(--pos-dim);font-size:11.5px}
+.pbody .c{text-align:center}
+.pbody .grow{flex:1}
+.pamt{font-family:var(--mono);font-size:26px;font-weight:600;text-align:center;margin:4px 0}
+.pchips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.pchip{border:1px solid var(--pos-line);background:#fff;color:var(--pos-ink);border-radius:999px;padding:4px 10px;font-family:var(--mono);font-size:12.5px;cursor:pointer}
+.pchip:hover{border-color:var(--pos-acc)}
+.pctlbig{display:flex;justify-content:center;color:var(--pos-acc);margin:6px 0}
+.pbtn{border:1px solid var(--pos-acc);background:var(--pos-acc);color:#fff;border-radius:8px;padding:9px;cursor:pointer;font-weight:600;font-size:14px}
+.pdl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 10px;font-size:11.5px;border-top:1px solid var(--pos-line);border-bottom:1px solid var(--pos-line);padding:4px 0}
+.pdl span:nth-child(odd){color:var(--pos-dim)}
+.pdl span:nth-child(even){font-family:var(--mono);text-align:right;white-space:nowrap}
+.ptiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ptile{border:1.5px solid #8C9AA8;background:#fff;border-radius:8px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;color:var(--pos-ink);min-height:44px;justify-content:center}
+.ptile:hover{border-color:var(--pos-acc)}
+.ptile .amt{font-family:var(--mono);font-size:15px;font-weight:600}
+.ptile .lab{font-size:11px;color:var(--pos-dim)}
+.pbody .pdisc{font-size:9.5px;color:var(--pos-dim);line-height:1.3}
+.ppin{display:flex;gap:8px;justify-content:center;margin:6px 0}
+.ppin i{width:24px;height:30px;border-bottom:2px solid var(--pos-ink);display:grid;place-items:center;font-style:normal;font-size:16px}
+.pok{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;margin:0 auto;font-size:24px;color:#fff;background:#2F7D3A}
+.pok.no{background:#9A3B33}
+.pspin{width:28px;height:28px;border:3px solid var(--pos-line);border-top-color:var(--pos-acc);border-radius:50%;animation:sp 1s linear infinite;margin:0 auto}
+.ppad{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px}
+.ppad button{height:28px;border:0;border-radius:8px;background:#D5DBE1;color:#1B232C;font-weight:600;cursor:pointer;box-shadow:inset 0 -3px 0 rgba(0,0,0,.22);font-size:14px}
+.ppad .cancel{background:var(--red);color:#fff}.ppad .clear{background:var(--amber);color:#fff}.ppad .enter{background:var(--green);color:#fff}
+.pslot{height:7px;margin:8px 36px 0;border-radius:4px;background:#0D0F12}
+.pcard{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:min(300px,100%);margin:6px auto 0}
+.pcard button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:7px;cursor:pointer;font-size:13px;font-weight:500}
+.pcard button:disabled{opacity:.45;cursor:not-allowed}
+.pcard button.live:not(:disabled){border-color:var(--dcc);color:var(--dcc)}
+
+/* ---- Browser ---- */
+.browser{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--web-bg);color:var(--web-ink);display:flex;flex-direction:column;min-height:420px}
+.bchrome{background:var(--web-chrome);padding:6px 8px;display:flex;gap:8px;align-items:center}
+.bdots{display:flex;gap:5px}.bdots i{width:9px;height:9px;border-radius:50%;background:#B9C0C7}
+.burl{flex:1;background:#fff;border-radius:6px;padding:3px 10px;font-family:var(--mono);font-size:12px;color:#48525C;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.bpage{padding:12px;min-height:0;flex:1;display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+.bpage h3{margin:0;font-size:17px;font-weight:600}
+.shop{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--web-line);padding-bottom:8px}
+.shop b{color:var(--web-acc);font-size:15px}
+.shop span{font-size:12px;color:var(--web-dim)}
+.cart{display:grid;gap:4px;font-size:13.5px}
+.cart .row{display:flex;justify-content:space-between;gap:8px}
+.cart .row.t{font-weight:600;border-top:1px solid var(--web-line);padding-top:5px}
+.wform{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wform label{display:flex;flex-direction:column;font-size:12px;color:var(--web-dim);gap:2px}
+.wform label.full{grid-column:1/-1}
+.wform .inp{border:1px solid var(--web-line);border-radius:6px;padding:6px 8px;font-family:var(--mono);font-size:13px;color:var(--web-ink);background:#FAFBFC}
+.wbtn{border:0;background:var(--web-acc);color:#fff;border-radius:8px;padding:10px 14px;font-weight:600;cursor:pointer}
+.wbtn:disabled{opacity:.4;cursor:not-allowed}
+.wlink{background:none;border:0;color:var(--web-dim);text-decoration:underline;cursor:pointer;font-size:13px;padding:0;align-self:flex-start}
+.amtpick{display:flex;flex-wrap:wrap;gap:6px}
+.amtpick button{border:1px solid var(--web-line);background:#fff;color:var(--web-ink);border-radius:999px;padding:4px 10px;font-size:12.5px;cursor:pointer}
+.amtpick button[aria-pressed="true"]{border-color:var(--web-acc);color:var(--web-acc);font-weight:600}
+.wchoice{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.wchoice{grid-template-columns:1fr}}
+.wopt{border:1px solid var(--web-line);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:2px;cursor:pointer;font-size:12.5px;background:#fff;color:var(--web-ink);text-align:left}
+.wopt input{accent-color:var(--web-acc);margin:0 6px 0 0}
+.wopt .cur{font-weight:600;font-size:14px;display:flex;align-items:center}
+.wopt .k{color:var(--web-dim);font-size:11.5px}
+.wopt .v{font-family:var(--mono)}
+.wopt .tot{border-top:1px solid var(--web-line);margin-top:4px;padding-top:4px;font-family:var(--mono);font-size:15px;font-weight:500}
+.wopt.sel{border-color:var(--web-acc);box-shadow:inset 0 0 0 1px var(--web-acc)}
+.wdisc{font-size:12px;color:var(--web-dim);background:#F4F6F8;border-radius:6px;padding:8px 10px}
+.acs{border:1px solid var(--web-line);border-radius:10px;padding:14px;display:grid;gap:8px;max-width:340px;align-self:center;width:100%}
+.acs .bank{font-weight:600}
+.wdone{display:grid;gap:8px}
+.wdone .okmark{color:var(--web-acc);font-weight:600;font-size:16px}
+
+/* ---- Receipts ---- */
+.receipts{display:flex;flex-direction:column;gap:10px;align-items:center}
+.receipt{width:min(280px,100%);background:var(--rcpt);color:var(--rcpt-ink);font-family:var(--mono);font-size:11.5px;line-height:1.45;padding:12px 14px 16px;border-radius:2px;box-shadow:0 1px 0 rgba(0,0,0,.08);animation:print .9s ease-out;
+  mask:linear-gradient(#000 0 0) top/100% calc(100% - 6px) no-repeat,radial-gradient(4px at 50% 100%,#0000 98%,#000) bottom/10px 7px repeat-x}
+.receipt.email{width:100%;mask:none;border-radius:8px;border:1px solid var(--web-line);background:var(--web-bg);color:var(--web-ink);font-size:12px}
+@keyframes print{from{transform:translateY(-12px);opacity:0}to{transform:none;opacity:1}}
+.receipt .c{text-align:center}
+.receipt .r2{display:flex;justify-content:space-between;gap:8px}
+.receipt .r2 span:last-child{text-align:right}
+.receipt hr{border:0;border-top:1px dashed #999;margin:6px 0}
+.receipt .stmt{font-size:10.5px;line-height:1.4}
+.receipt .ttl{text-align:center;font-weight:700;margin:4px 0}
+
+/* ---- Flow ---- */
+.flowcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-width:0;min-height:100%}
+.lanes{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--line);padding:6px 0 4px;background:var(--surface);border-radius:12px 12px 0 0}
+.grp{grid-row:1;font-size:12px;text-align:center;border-bottom:2px solid;margin:0 6px 6px;padding-bottom:3px}
+.grp.a{grid-column:1/span 3;border-color:var(--acq);color:var(--acq)}
+.grp.s{grid-column:4;border-color:var(--sch);color:var(--sch)}
+.grp.i{grid-column:5;border-color:var(--iss);color:var(--iss)}
+.lane{grid-row:2;text-align:center;font-weight:600;font-size:13px;padding:0 2px;min-width:0;overflow-wrap:anywhere}
+.lane small{display:block;font-weight:400;color:var(--muted);font-size:11px}
+.lane.off{opacity:.35}
+#flow{flex:1;overflow:auto;padding:6px 0 18px;position:relative;
+  background-image:
+   linear-gradient(to right,transparent calc(10% - .5px),var(--line) calc(10% - .5px),var(--line) calc(10% + .5px),transparent calc(10% + .5px)),
+   linear-gradient(to right,transparent calc(30% - .5px),var(--line) calc(30% - .5px),var(--line) calc(30% + .5px),transparent calc(30% + .5px)),
+   linear-gradient(to right,transparent calc(50% - .5px),var(--line) calc(50% - .5px),var(--line) calc(50% + .5px),transparent calc(50% + .5px)),
+   linear-gradient(to right,transparent calc(70% - .5px),var(--line) calc(70% - .5px),var(--line) calc(70% + .5px),transparent calc(70% + .5px)),
+   linear-gradient(to right,transparent calc(90% - .5px),var(--line) calc(90% - .5px),var(--line) calc(90% + .5px),transparent calc(90% + .5px));
+  background-attachment:local}
+.empty{margin:16px 16px 0;max-width:none;text-align:left;color:var(--muted);background:transparent;padding:0;border-radius:0}
+.sep{display:flex;align-items:center;gap:10px;margin:14px 12px 4px;font-size:12.5px;font-weight:600;color:var(--muted)}
+.sep::before,.sep::after{content:"";flex:1;height:1px;background:var(--line)}
+.msg{position:relative;min-height:56px;cursor:pointer}
+.msg .lbl{position:absolute;top:4px;transform:translateX(-50%);max-width:40%;text-align:center;font-size:12.5px;line-height:1.3;background:var(--surface);padding:1px 6px;border-radius:4px}
+.msg.api .lbl{font-family:var(--mono);font-size:11.5px;color:var(--dcc)}
+.msg:hover .lbl{text-decoration:underline;text-decoration-color:var(--line)}
+.msg .arr{position:absolute;top:42px;height:0;border-top:2px solid var(--c)}
+.msg .arr::after{content:"";position:absolute;top:-6px;border:5px solid transparent}
+.msg .arr.r::after{right:-2px;border-left:8px solid var(--c);border-right:0}
+.msg .arr.l::after{left:-2px;border-right:8px solid var(--c);border-left:0}
+.msg .pkt{position:absolute;top:-5px;width:8px;height:8px;border-radius:50%;background:var(--c);animation:go .6s ease-out forwards}
+.msg .arr.l .pkt{animation-name:gol}
+@keyframes go{from{left:0;opacity:1}to{left:calc(100% - 8px);opacity:0}}
+@keyframes gol{from{left:calc(100% - 8px);opacity:1}to{left:0;opacity:0}}
+.det{display:none;margin:0 16px 8px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-family:var(--mono);font-size:12px}
+.det.open{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:2px 14px}
+.det dt{color:var(--muted)}.det dd{margin:0;overflow-wrap:anywhere}
+.nrow{display:grid;grid-template-columns:repeat(5,1fr);padding:3px 0}
+.nbox{margin:0 6px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--c);border-radius:4px;padding:6px 8px;font-size:12.5px;line-height:1.4;min-width:0}
+.nbox b{color:var(--c);font-weight:600;margin-right:4px}
+.flowfoot{border-top:1px solid var(--line);padding:6px 10px;font-size:12.5px;color:var(--muted)}
+
+/* ---- Lower panels ---- */
+.lower{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:8px}
+@media (max-width:1020px){.lower{grid-template-columns:minmax(0,1fr)}}
+.ph{color:var(--muted);font-size:13.5px;padding:8px 0}
+.apitabs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px}
+.atab{border:1px solid var(--line);background:var(--surface-2);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:12.5px;font-family:var(--mono)}
+.atab[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.apibody{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:900px){.apibody{grid-template-columns:minmax(0,1fr)}}
+.apibox h3{font-size:13px;margin:0 0 6px;font-weight:600;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.apibox .hdr{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:6px;overflow-wrap:anywhere}
+pre.json{margin:0;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:10px;font-family:var(--mono);font-size:12px;line-height:1.5;overflow-x:auto;color:var(--ink)}
+.jk{color:var(--jkey)}.js{color:var(--jstr)}
+table.iso tr.in{animation:rowin .35s ease-out both}
+@keyframes rowin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+table.iso tr.chg td.num{background:color-mix(in srgb,var(--dcc) 12%,transparent);font-weight:500}
+table.iso th{color:var(--ink)}
+.same{color:var(--muted);font-size:12px}
+.tag.newt{color:var(--dcc);border-color:var(--dcc)}
+.checks{list-style:none;margin:0;padding:0;display:grid}
+.checks li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;align-items:start;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.checks li:last-child{border-bottom:0}
+.checks .src{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.fine{font-size:12px;color:var(--muted);margin-top:10px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:1020px){.two{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.lanes .lane small{display:none}.msg .lbl{font-size:11px;max-width:46%}.nbox{font-size:11.5px}.checks li{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>html,body{margin:0;padding:0;height:100%}</style>
+</head>
+<body>
+<div class="wrap">
+<div id="viewSim">
+
+<div class="simbar">
+<div class="ctl"><span class="ctl-l">Channel</span>
+<div class="chtabs" role="group" aria-label="Channel">
+  <button class="chtab" data-ch="ATM" aria-pressed="true"><b>ATM</b><span>Cash withdrawal, card present</span></button>
+  <button class="chtab" data-ch="POS" aria-pressed="false"><b>POS</b><span>Purchase, chip or contactless</span></button>
+  <button class="chtab" data-ch="ECOM" aria-pressed="false"><b>E-commerce</b><span>Checkout, card not present</span></button>
+</div>
+</div>
+<div class="ctlrow">
+  <div class="ctl"><span class="ctl-l">Scenario</span>
+    <div class="seg" role="group" aria-label="Scenario"><button id="mAsis" aria-pressed="false">Today, no DCC</button><button id="mDcc" aria-pressed="true">With IRIS DCC</button></div></div>
+  <div class="ctl"><span class="ctl-l">Scheme</span>
+    <div class="seg" role="group" aria-label="Scheme"><button data-sch="visa" aria-pressed="true">Visa</button><button data-sch="mc" aria-pressed="false">Mastercard</button></div></div>
+  <div class="ctl"><span class="ctl-l">Card number</span>
+    <select id="cardPick" class="cardpick" aria-label="Card number"></select></div>
+  <div class="ctl" id="ctxCtl"><span class="ctl-l" id="ctxLabel">ATM</span>
+    <select id="ctxPick" class="cardpick ctxpick" aria-label="Terminal"></select></div>
+  <div class="ctl"><span class="ctl-l">Exceptions</span>
+    <span style="display:flex;gap:6px 12px;flex-wrap:wrap">
+      <label class="chk dccx"><input type="checkbox" id="xStale"> Rate stale</label>
+      <label class="chk dccx"><input type="checkbox" id="xDown"> DCC service down</label>
+      <label class="chk"><input type="checkbox" id="xDecl"> Issuer declines</label>
+      <label class="chk" id="xPartL"><input type="checkbox" id="xPart"> Partial dispense</label>
+    </span></div>
+  <div class="ctl"><span class="ctl-l">Run</span><span style="display:flex;gap:8px"><button class="btn" id="speedBtn">Speed: normal</button><button class="btn" id="reset">Restart</button></span></div>
+</div>
+</div>
+
+<div class="stage">
+  <section class="devcol" aria-label="Channel device">
+    <div id="device"></div>
+    <div class="devtools" id="devtools"></div>
+    <div class="receipts" id="receipts"></div>
+  </section>
+  <section class="flowcard" aria-label="Message flow">
+    <div class="lanes">
+      <div class="grp a">ANB, acquirer</div><div class="grp s" id="grpSch">Scheme</div><div class="grp i">Card issuer</div>
+      <div class="lane" id="lane0" style="color:var(--dev)"></div>
+      <div class="lane" id="lane1" style="color:var(--acq)"></div>
+      <div class="lane" id="lane2" style="color:var(--dcc)">IRIS DCC<small>beside the switch</small></div>
+      <div class="lane" id="lane3" style="color:var(--sch)"></div>
+      <div class="lane" id="lane4" style="color:var(--iss)">Issuer<small>any bank</small></div>
+    </div>
+    <div id="flow"></div>
+    <div class="flowfoot" id="flowHint">Click any message to see its fields. DCC calls are listed in full below.</div>
+  </section>
+</div>
+
+<div class="lower">
+  <section class="block">
+    <h2>DCC API calls</h2>
+    <p class="lead">Each call the switch or gateway made to IRIS DCC in this run, with headers, request and response.</p>
+    <div class="apitabs" id="apiTabs"></div>
+    <div id="apiBody"><div class="ph">Calls appear here as the transaction runs.</div></div>
+  </section>
+  <section class="block" id="isoSec">
+    <h2>ISO 8583 messages</h2>
+    <p class="lead">Amount and DCC fields in each message of this run. With IRIS DCC, fields that differ from today's flow are marked.</p>
+    <div class="apitabs" id="isoTabs"></div>
+    <div id="isoBody"><div class="ph">Messages appear here as the transaction runs.</div></div>
+  </section>
+</div>
+</div>
+</div>
+
+<script>
+/* ================= data ================= */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const r2=n=>Math.round((n+Number.EPSILON)*100)/100;
+const f2=n=>r2(n).toFixed(2);
+const fmt=n=>Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const CNAME={SAR:'Saudi riyal',PKR:'Pakistani rupee',USD:'US dollar',GBP:'Pound sterling'};
+const CNUM={SAR:'682',PKR:'586',USD:'840',GBP:'826'};
+const CARDS={
+  gbp:{label:'GBP card',country:'the UK',cur:'GBP',bin:'49291234',last:'3301'},
+  pkr:{label:'PKR card',country:'Pakistan',cur:'PKR',bin:'45678912',last:'1234'},
+  usd:{label:'USD card',country:'the USA',cur:'USD',bin:'41234567',last:'8812'},
+  multi:{label:'Multi-currency card',country:'the UK',cur:'GBP',bin:'45991201',last:'7788',multi:true},
+  sar:{label:'Saudi card',country:'Saudi Arabia',cur:'SAR',bin:'48843012',last:'5520',domestic:true}};
+const SCH={visa:{name:'Visa',pfx:'4'},mc:{name:'Mastercard',pfx:'5'}};
+const CH={
+  ATM:{l0:['ATM','ANB ATM 0431'],l1:['IST switch','acquirer host'],tid:'ANB-ATM-004312',ref:'004312',type:'CASH_WITHDRAWAL',mti:'0200',de3:'01 · cash withdrawal',where:'ANB ATM 0431, Riyadh',amounts:[500,1000,2000,3000],word:'withdrawal'},
+  POS:{l0:['POS terminal','Al Noor Electronics'],l1:['Acquirer host','IST POS switch'],tid:'ANB-POS-118204',mid:'000000123456789',ref:'118204',type:'PURCHASE',mti:'0100',de3:'00 · purchase',where:'Al Noor Electronics, Riyadh',amounts:[150,850,2400],word:'purchase'},
+  ECOM:{l0:['Checkout page','najdhome.example'],l1:['Payment gateway','ANB e-commerce'],mid:'000000555000111',ref:'GW',type:'PURCHASE',mti:'0100',de3:'00 · purchase',where:'Najd Home Store (online)',amounts:[45,450,3200],word:'order'}};
+const P={rates:{GBP:0.21,PKR:74.5,USD:0.2667},mk:{GBP:3.5,PKR:3.5,USD:3.5},en:{GBP:true,PKR:true,USD:true},
+  vat:15,fee:{ATM:25,POS:0,ECOM:0},chEn:{ATM:true,POS:true,ECOM:true},feeBoth:false,cvm:300,min:50,max:20000,exp:{ATM:120,POS:120,ECOM:900}};
+const S={ch:'ATM',scheme:'visa',card:'',mcc:{POS:'',ECOM:''},mode:'dcc',ex:{stale:false,down:false,decl:false,part:false},
+  run:0,busy:false,fast:false,calls:[],callSel:0,chk:new Set(),auth:null,offer:null,sel:null,path:null,A:0,
+  stan:'',rrn:'',screen:'',pin:'',cardState:'insert',entry:'CHIP',approved:false,refunded:false,ecomAmt:450,choice:null,reversal:null,refund:null};
+const sleep=ms=>new Promise(r=>setTimeout(r,S.fast?ms*0.3:ms));
+const SN=()=>SCH[S.scheme].name;
+function card(){const hit=allCardChoices().find(c=>c.pan===String(S.card)||c.bin===String(S.card));if(hit)return hit;return {label:'No card',country:'',cur:'',bin:'000000',last:'0000',domestic:false,multi:false,issuer:'',scheme:'',kind:'missing',pan:'',kindLabel:'BIN not configured',hint:''}}
+const masked=()=>{const c=card();const pan=String(c.pan||c.bin).replace(/\D/g,'');return pan.slice(0,6)+'******'+pan.slice(-4)};
+function cardIntro(how){const c=card();const where=c.country?' Issued in '+c.country+'.':'';return how+': '+SN()+' card '+masked()+'. '+(c.kindLabel||'BIN not configured')+'.'+where}
+const vatPart=x=>r2(x*P.vat/(100+P.vat));
+const yymmdd=()=>{const d=new Date();return String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');};
+const rnd=n=>String(Math.floor(Math.random()*Math.pow(10,n))).padStart(n,'0');
+const isoNow=(addS=0)=>new Date(Date.now()+addS*1000).toISOString().replace(/\.\d+Z$/,'Z');
+const NOWTXT=()=>{const d=new Date();return d.toISOString().slice(0,10)+' '+d.toTimeString().slice(0,5);};
+const dccOn=()=>S.mode==='dcc';
+
+/* ================= IRIS DCC engine (implements the API spec) ================= */
+const DB={};
+const OFFER_META={};
+const STORE={rules:[],markup:[],fees:[],vat:[],fx:[],bins:[],currency:[],atms:[],groups:[],negBins:[],negCcy:[],mccGroups:[],rev:0};
+let simAtm='';
+let quoteChain=Promise.resolve();
+let configDirty=false;
+function isoToday(){const d=new Date(),p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())}
+function isoFromDisplay(text){if(!text||text==='No expiry')return '';if(/^\d{4}-\d{2}-\d{2}$/.test(text))return text;const months=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];const m=String(text).trim().match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);if(!m)return '';const mi=months.indexOf(m[2].slice(0,3).toLowerCase());if(mi<0)return '';return m[3]+'-'+String(mi+1).padStart(2,'0')+'-'+String(m[1]).padStart(2,'0')}
+function alphaOf(label){const text=String(label||'').trim();const head=text.split(/[·—–-]/)[0].trim();if(/^[A-Za-z]{3}$/.test(head))return head.toUpperCase();const row=(STORE.currency||[]).find(r=>text.toUpperCase()===String(r.alpha).toUpperCase()||text.toLowerCase()===String(r.name||'').toLowerCase());return row?String(row.alpha).toUpperCase():head.toUpperCase()}
+function baseAlpha(){const b=(STORE.currency||[]).find(r=>r.base);return b?String(b.alpha).toUpperCase():'SAR'}
+function currencyRow(alpha){return (STORE.currency||[]).find(r=>String(r.alpha).toUpperCase()===String(alpha||'').toUpperCase())||null}
+function decimalsOfCcy(alpha){const r=currencyRow(alpha);const d=r?Number(r.decimals):2;return Number.isFinite(d)&&d>=0?d:2}
+function roundTo(n,d){const f=Math.pow(10,d);return Math.round((Number(n)||0)*f)/f}
+const NOT_LIVE_WF=['Pending','Rejected','Archived'],NOT_LIVE_STATUS=['Draft','Pending','Submitted','Rejected','Archived','Disabled'];
+function binIsLive(b){if(!b)return false;if(NOT_LIVE_WF.includes(String(b.wf||'')))return false;return !NOT_LIVE_STATUS.includes(String(b.status||''))}
+function binPending(b){return !!b&&(b.wf==='Pending'||['Draft','Pending','Submitted'].includes(String(b.status||'')))}
+function liveBins(){return (STORE.bins||[]).filter(binIsLive)}
+const CARD_KIND={configured:'BIN configured in back office',missing:'BIN not configured',negative:'BIN in negative list'};
+function prettyPan(pan){return String(pan||'').replace(/\D/g,'').replace(/(\d{4})(?=\d)/g,'$1 ')}
+function panFromBin(bin,last){const b=String(bin||'').replace(/\D/g,'');const tail=String(last||'4242').replace(/\D/g,'').padStart(4,'0').slice(-4);return (b+'000000000000').slice(0,12)+tail}
+function effectiveNegBins(){const iso=isoToday();return (STORE.negBins||[]).filter(r=>r&&r[5]==='Effective'&&(!isoFromDisplay(r[4])||iso<=isoFromDisplay(r[4])))}
+function negRowFor(bin){const digits=String(bin||'').replace(/\D/g,'');if(!digits)return null;return effectiveNegBins().find(r=>digits.startsWith(String(r[0]))||String(r[0]).startsWith(digits))||null}
+function schemeName(scheme){return String(scheme||'').toUpperCase()==='MASTERCARD'?'MASTERCARD':'VISA'}
+/* BIN-level pre-check: the Rule Engine steps that do not depend on channel, terminal or amount */
+function binOutcome(row){
+  if(row.kind==='missing')return {ok:false,reason:row.pending?'PENDING_BIN':'UNKNOWN_BIN',short:row.pending?'Pending in BIN Management':'Not in BIN Management'};
+  if(row.kind==='negative')return {ok:false,reason:'NEG_BIN',short:'Negative list'+(row.why?': '+row.why:'')};
+  const iso=isoToday(),base=baseAlpha();
+  const negCountry=row.country&&(STORE.negCcy||[]).find(r=>r[4]==='Effective'&&(!isoFromDisplay(r[3])||iso<=isoFromDisplay(r[3]))&&String(r[0]).split(' · ').map(x=>x.trim()).includes(row.country));
+  if(negCountry)return {ok:false,reason:'NEG_COUNTRY',short:'Issuer country on negative list'};
+  if(!row.cur||row.cur===base)return {ok:false,reason:'SAME_CCY',short:'Local currency card'};
+  const ccyRow=currencyRow(row.cur);
+  if(!ccyRow||ccyRow.enabled===false)return {ok:false,reason:'CCY_DISABLED',short:'Currency '+row.cur+' disabled'};
+  const offer=effectivePolicies().find(p=>p.currency===row.cur);
+  if(!offer)return {ok:false,reason:'NO_POLICY',short:'No Effective offer for '+row.cur};
+  if(!cardsMatch(offer.cards,{bin:row.bin,scheme:row.scheme,country:row.country}))return {ok:false,reason:'NOT_ELIGIBLE',short:'Outside card scope of '+(offer.name||offer.currency)};
+  return {ok:true,reason:'OFFER',short:'Offer: '+(offer.name||offer.currency),offer};
+}
+function cardHintText(row){
+  const o=row.outcome||binOutcome(row);
+  const who=row.cur?' ('+[row.cur,row.issuer,row.country].filter(Boolean).join(', ')+')':'';
+  if(o.ok)return 'BIN '+row.bin+' is live in BIN Management'+who+' and '+o.short.replace('Offer: ','"')+'" is Effective. The run prices from that offer for the channel, terminal and amount; a tier set to no DCC or a stale rate still ends in NOT_OFFERED.';
+  if(row.kind==='negative'&&lookupBin(row.bin))return 'BIN '+row.bin+' is live and on the BIN negative list'+(row.why?' ('+row.why+')':'')+'. The Rule Engine will not offer DCC (DCC15).';
+  if(row.kind==='negative')return 'BIN '+row.bin+' is on the BIN negative list'+(row.why?' ('+row.why+')':'')+' and is not a live BIN. The Rule Engine stops at BIN Management (DCC15).';
+  if(row.kind==='missing')return 'BIN '+row.bin+' is not a live BIN'+(row.pending?' (pending in BIN Management)':'')+'. The Rule Engine will not offer DCC (DCC15).';
+  if(o.reason==='NEG_COUNTRY')return 'BIN '+row.bin+' is live'+who+', but '+row.country+' is on the country negative list. Not offered (DCC15).';
+  if(o.reason==='SAME_CCY')return 'BIN '+row.bin+' is live'+who+'. The card bills in the local currency, so there is nothing to convert (DCC10).';
+  if(o.reason==='CCY_DISABLED')return 'BIN '+row.bin+' is live'+who+', but '+row.cur+' is disabled in the Currency master (DCC15).';
+  if(o.reason==='NO_POLICY')return 'BIN '+row.bin+' is live'+who+', but no Effective Rule Engine offer exists for '+row.cur+' (DCC15).';
+  return 'BIN '+row.bin+' is live'+who+', but it is outside the card scope of the '+row.cur+' offer (DCC12).';
+}
+function finishChoice(row){
+  row.kindLabel=CARD_KIND[row.kind];
+  row.last=String(row.pan).slice(-4);
+  row.domestic=!!row.cur&&row.cur===baseAlpha();
+  row.outcome=binOutcome(row);
+  const bits=[prettyPan(row.pan)];
+  if(row.cur)bits.push(row.cur);
+  bits.push(row.scheme==='MASTERCARD'?'Mastercard':'Visa');
+  if(row.issuer)bits.push(row.issuer);
+  if(row.country)bits.push(row.country);
+  bits.push(row.outcome.short);
+  row.option=bits.join(' · ');
+  row.hint=cardHintText(row);
+  if(!row.label)row.label=(row.cur?row.cur+' · ':'')+row.bin;
+  return row;
+}
+function choiceFromBin(b,kind,neg){
+  const cur=b.currency?alphaOf(b.currency):'';
+  return finishChoice({kind,pan:panFromBin(b.bin,kind==='negative'?'0001':'4242'),bin:String(b.bin),scheme:schemeName(b.scheme),country:b.country||'',cur,issuer:b.issuer||'',why:neg?String(neg[3]||''):'',pending:binPending(b),multi:false,label:(cur?cur+' · ':'')+b.bin});
+}
+function choiceSynthetic(pan,scheme,kind,extra){
+  return finishChoice(Object.assign({kind,pan,bin:String(pan).replace(/\D/g,'').slice(0,6),scheme,country:'',cur:'',issuer:'',why:'',pending:false,multi:false},extra||{}));
+}
+function cardChoices(){
+  const configured=[],negative=[],missing=[];
+  liveBins().forEach(b=>{const neg=negRowFor(b.bin);if(neg)negative.push(choiceFromBin(b,'negative',neg));else configured.push(choiceFromBin(b,'configured'))});
+  effectiveNegBins().forEach(r=>{
+    if(negative.some(c=>c.bin===String(r[0])))return;
+    negative.push(choiceSynthetic(panFromBin(r[0],'0001'),schemeName(r[1]),'negative',{bin:String(r[0]),issuer:r[2]||'',why:String(r[3]||''),label:r[0]+' · negative list'}));
+  });
+  (STORE.bins||[]).filter(b=>b&&!binIsLive(b)).forEach(b=>missing.push(choiceFromBin(b,'missing')));
+  return {configured,negative,missing};
+}
+function schemeKeyOf(row){return row&&row.scheme==='MASTERCARD'?'mc':'visa'}
+function allCardChoices(){const g=cardChoices();return g.configured.concat(g.negative,g.missing)}
+function activeAtms(){return (STORE.atms||[]).filter(a=>a&&a.status==='Active')}
+function activeAtm(){const rows=activeAtms();return rows.find(a=>a.id===simAtm)||rows[0]||null}
+function syncChannel(){const atm=activeAtm();if(!atm)return;simAtm=atm.id;CH.ATM.tid=atm.id;CH.ATM.l0=['ATM',atm.name||atm.id];CH.ATM.where=[atm.name,atm.city||atm.address].filter(Boolean).join(', ')||atm.id;CH.ATM.ref=String(atm.id).replace(/\D/g,'').slice(-6)||'004312'}
+function ruleChannel(ch){return ch==='ECOM'?'Ecommerce':ch}
+function effectivePolicies(){
+  const today=isoToday();
+  return (STORE.rules||[]).map(row=>{
+    if(!row||!row.live)return null;
+    if(row.status==='Archived'||row.status==='Draft'||row.status==='Rejected'||row.status==='Disabled')return null;
+    if(row.status!=='Effective'&&row.status!=='Pending')return null;
+    const live=row.live;
+    if(live.enabled===false)return null;
+    if(live.effectiveFrom&&live.effectiveFrom>today)return null;
+    if(live.effectiveTo&&today>live.effectiveTo)return null;
+    return live;
+  }).filter(Boolean);
+}
+function channelOn(ch){
+  const want=ruleChannel(ch);
+  return effectivePolicies().some(p=>(p.segments||[]).some(s=>{const channels=(s.scope&&s.scope.channels)||['ANY'];return !channels.length||channels.includes('ANY')||channels.includes(want)}));
+}
+function chargeRow(kind,id){const rows=kind==='markup'?STORE.markup:kind==='fees'?STORE.fees:STORE.vat;const at=kind==='vat'?3:4;return (rows||[]).find(r=>r&&r[at]===id)||null}
+function chargeInfo(kind,id){
+  const r=chargeRow(kind,id);if(!r)return null;
+  if(kind==='markup'){const spread=r[0]==='Fixed spread';return {id,kind,status:r[3]||'',spread,value:parseFloat(String(r[1]).replace('%',''))||0,text:spread?'Spread '+r[1]:String(r[1]||''),name:r[2]||r[0]}}
+  if(kind==='fees'){const text=String(r[2]||'');const pct=text.match(/([\d.]+)\s*%/),flat=text.match(/[A-Z]{3}\s*([\d.,]+)/);return {id,kind,status:r[3]||'',pct:pct?Number(pct[1]):0,flat:flat?Number(String(flat[1]).replace(/,/g,'')):0,text,name:r[0]}}
+  return {id,kind,status:r[2]||'',pct:parseFloat(r[1])||0,text:String(r[1]||''),name:r[0]};
+}
+function chargeLive(info){return !!info&&info.status==='Effective'}
+function fxOf(alpha){const r=(STORE.fx||[]).find(x=>String(x.ccy).toUpperCase()===String(alpha).toUpperCase());const n=r?Number(r.rate):NaN;return Number.isFinite(n)&&n>0?{rate:n,source:r.source||''}:null}
+function parseRange(text){const m=String(text||'').replace(/\s/g,'').match(/^(\d{6,8})-(\d{6,8})$/);if(!m)return null;return m[1].length===m[2].length&&m[1]<=m[2]?{lo:m[1],hi:m[2]}:null}
+function binInRanges(bin,ranges){return (ranges||[]).some(r=>{const x=parseRange(r);if(!x)return false;const head=String(bin).padEnd(x.lo.length,'0').slice(0,x.lo.length);return head>=x.lo&&head<=x.hi})}
+function binListHit(bin,list){return (list||[]).some(b=>String(bin).startsWith(String(b))||String(b).startsWith(String(bin)))}
+function binMatches(scope,bin){if(!scope||scope.mode==='all'||!scope.mode)return true;const hit=binListHit(bin,scope.list)||binInRanges(bin,scope.ranges);return scope.mode==='include'?hit:!hit}
+function atmInGroups(atm,groups){return (groups||[]).some(code=>{const g=(STORE.groups||[]).find(x=>x.code===code);return !!g&&(g.atms||[]).includes(atm)})}
+function terminalMatches(t,atm){if(!t||t.mode==='all'||!t.mode)return true;const inSet=(t.atms||[]).includes(atm)||atmInGroups(atm,t.groups);return t.mode==='exclude'?!inSet:inSet}
+function cardsMatch(c,card){if(!c)return true;if(!binMatches(c.bins,card.bin))return false;if((c.schemes||[]).length&&!c.schemes.includes(card.scheme))return false;if((c.issuerCountries||[]).length&&!c.issuerCountries.includes(card.country))return false;return true}
+function scopeMatch(s,ctx){
+  if(!s)return true;
+  if(!cardsMatch(s,ctx.card))return false;
+  const ch=s.channels||['ANY'];
+  if(ch.length&&!ch.includes('ANY')&&!ch.includes(ctx.channel))return false;
+  const t=s.terminals||{};
+  if(t.mode&&t.mode!=='all'){if(ctx.channel!=='ATM'||!terminalMatches(t,ctx.atm))return false}
+  if((s.mccGroups||[]).length){if(ctx.channel==='ATM'||!s.mccGroups.includes(ctx.mccGroup))return false}
+  return true;
+}
+function inWindow(from,to,iso){return (!from||from<=iso)&&(!to||iso<=to)}
+function scopeScore(s){
+  if(!s)return 0;let n=0;const t=s.terminals||{};
+  if(t.mode==='atms'&&(t.atms||[]).length)n+=2;
+  else if((t.mode==='groups'&&(t.groups||[]).length)||(t.mode==='exclude'&&((t.groups||[]).length||(t.atms||[]).length)))n+=1;
+  const b=s.bins||{};
+  if(b.mode==='include')n+=(b.list||[]).length?2:(b.ranges||[]).length?1:0;
+  else if(b.mode==='exclude'&&((b.list||[]).length||(b.ranges||[]).length))n+=1;
+  if((s.mccGroups||[]).length)n+=1;
+  if((s.schemes||[]).length)n+=1;
+  if((s.issuerCountries||[]).length)n+=1;
+  const ch=s.channels||['ANY'];
+  if(ch.length&&!ch.includes('ANY'))n+=1;
+  return n;
+}
+function segmentScore(seg){return seg.isDefault?-1:scopeScore(seg.scope)+(seg.effectiveFrom||seg.effectiveTo?1:0)}
+function defaultSegment(p){return (p&&p.segments||[]).find(s=>s.isDefault)||null}
+function exceptionSegments(p){return (p&&p.segments||[]).filter(s=>!s.isDefault)}
+function pickSegment(offer,ctx){const hits=exceptionSegments(offer).filter(s=>inWindow(s.effectiveFrom,s.effectiveTo,ctx.date)&&scopeMatch(s.scope,ctx));hits.sort((a,b)=>segmentScore(b)-segmentScore(a)||(Number(b.priority)||0)-(Number(a.priority)||0));return hits[0]||defaultSegment(offer)}
+function pickTier(seg,amount){const tiers=(seg&&seg.tiers)||[];return tiers.find((t,i)=>{const next=tiers[i+1];return amount>=Number(t.from)&&(!next||amount<Number(next.from))})||null}
+function vatBaseOf(on,markup,fee){return on==='markup'?markup:on==='fee'?fee:markup+fee}
+function localQuote(tier,amount,base){
+  const d=decimalsOfCcy(base);
+  const fees=((tier.local&&tier.local.feeIds)||[]).map(id=>chargeInfo('fees',id)).filter(chargeLive);
+  const fee=roundTo(fees.reduce((s,f)=>s+roundTo(amount*f.pct/100+f.flat,d),0),d);
+  const vatInfo=chargeInfo('vat',tier.local&&tier.local.vatId);
+  const vatPct=chargeLive(vatInfo)?vatInfo.pct:0;
+  const vat=roundTo(fee*vatPct/100,d);
+  return {ccy:base,amount,fee,vatPct,vat,total:roundTo(amount+fee+vat,d)};
+}
+function dccQuote(tier,amount,rate,ccy){
+  const d=decimalsOfCcy(ccy);
+  const m=chargeInfo('markup',tier.dcc&&tier.dcc.markupId);
+  const live=chargeLive(m)?m:{spread:false,value:0,text:'0%'};
+  const base=roundTo(amount*rate,d);
+  const markup=roundTo(live.spread?amount*live.value:base*live.value/100,d);
+  const fees=((tier.dcc&&tier.dcc.feeIds)||[]).map(id=>chargeInfo('fees',id)).filter(chargeLive);
+  const fee=roundTo(fees.reduce((s,f)=>s+roundTo(base*f.pct/100+f.flat*rate,d),0),d);
+  const vatInfo=chargeInfo('vat',tier.dcc&&tier.dcc.vatId);
+  const vatPct=chargeLive(vatInfo)?vatInfo.pct:0;
+  const vat=roundTo(vatBaseOf((tier.dcc&&tier.dcc.vatOn)||'markup+fee',markup,fee)*vatPct/100,d);
+  return {ccy,rate,base,markup,markupPct:live.value,markupText:live.text||'',fee,vatPct,vat,total:roundTo(base+markup+fee+vat,d)};
+}
+const EVAL_MSG={INVALID_AMOUNT:'The amount must be above zero.',UNKNOWN_BIN:'The card BIN is not live in BIN Management.',NEG_BIN:'The BIN is on the BIN negative list.',NEG_COUNTRY:"The card's issuer country is on the country negative list.",SAME_CCY:'The card currency is the same as the local currency.',CCY_DISABLED:'The card currency is disabled in the Currency master.',NO_POLICY:'No effective Offer exists for the card currency on this date.',NOT_ELIGIBLE:"The card is outside the Offer's card scope.",NO_SEGMENT:'No segment matched and the Offer has no Default segment.',NO_TIER:'No amount tier covers this amount.',DCC_OFF_TIER:'The matched tier is set to not offer DCC.',CHARGE_EXPIRED:'A charge used by the matched tier is not effective on this date.',NO_RATE:'No FX rate is available for the card currency.',CHANNEL:'DCC is switched off for this channel.',STALE:'The FX rate is marked stale for this run.'};
+function blankLocal(amount,base){const n=Number.isFinite(amount)?amount:0;return {ccy:base,amount:n,fee:0,vatPct:0,vat:0,total:n}}
+function lookupBin(bin){const digits=String(bin||'').replace(/\D/g,'');if(!digits)return null;return liveBins().filter(b=>digits.startsWith(String(b.bin))).sort((a,b)=>String(b.bin).length-String(a.bin).length)[0]||null}
+function channelLabel(ch){return ch==='ECOM'?'e-commerce':ch}
+function evaluateOffer(txn){
+  const checks=[];
+  const step=(ok,text)=>{checks.push({ok:!!ok,text});return !!ok};
+  const out=(reason,extra)=>Object.assign({offered:false,reason,message:EVAL_MSG[reason]||'',checks},extra||{});
+  const base=baseAlpha(),iso=txn.date||isoToday(),amount=Number(txn.amount),localFallback=blankLocal(amount,base),channel=txn.channel||'ATM';
+  if(!step(Number.isFinite(amount)&&amount>0,'Amount '+(Number.isFinite(amount)?base+' '+fmt(amount):'is missing')))return out('INVALID_AMOUNT',{local:localFallback});
+  if(!step(channelOn(channel),'Channel '+channelLabel(channel)+(channelOn(channel)?' is covered by an Effective offer':' is not covered by any Effective offer')))return out('CHANNEL',{local:localFallback});
+  const binRow=lookupBin(txn.bin);
+  if(!step(!!binRow,binRow?'BIN '+binRow.bin+' is live ('+binRow.scheme+', '+(binRow.issuer||'unknown issuer')+', '+(binRow.country||'unknown country')+')':'BIN '+(String(txn.bin||'').slice(0,6)||'(blank)')+' is not a live BIN in BIN Management'))return out('UNKNOWN_BIN',{local:localFallback});
+  const cardInfo={bin:String(binRow.bin),scheme:binRow.scheme,country:binRow.country||'',issuer:binRow.issuer||'',currency:alphaOf(binRow.currency)};
+  const negBin=(STORE.negBins||[]).find(r=>r[5]==='Effective'&&(!isoFromDisplay(r[4])||iso<=isoFromDisplay(r[4]))&&cardInfo.bin.startsWith(String(r[0])));
+  if(!step(!negBin,negBin?'BIN '+negBin[0]+' is on the BIN negative list ('+(negBin[3]||negBin[2]||'')+')':'BIN is not on the BIN negative list'))return out('NEG_BIN',{card:cardInfo,local:localFallback});
+  const negCountry=cardInfo.country&&(STORE.negCcy||[]).find(r=>r[4]==='Effective'&&(!isoFromDisplay(r[3])||iso<=isoFromDisplay(r[3]))&&String(r[0]).split(' · ').map(x=>x.trim()).includes(cardInfo.country));
+  if(!step(!negCountry,negCountry?cardInfo.country+' is on the country negative list ('+(negCountry[1]||'')+')':'Issuer country '+(cardInfo.country||'unknown')+' is not on the negative list'))return out('NEG_COUNTRY',{card:cardInfo,local:localFallback});
+  if(!step(cardInfo.currency!==base,'Card currency '+cardInfo.currency+(cardInfo.currency===base?' is the local currency':' differs from '+base)))return out('SAME_CCY',{card:cardInfo,local:localFallback});
+  const ccyRow=currencyRow(cardInfo.currency);
+  if(!step(!!ccyRow&&ccyRow.enabled!==false,cardInfo.currency+(ccyRow&&ccyRow.enabled!==false?' is enabled in the Currency master':' is disabled or not configured in the Currency master')))return out('CCY_DISABLED',{card:cardInfo,local:localFallback});
+  const offer=effectivePolicies().find(p=>p.currency===cardInfo.currency);
+  if(!step(!!offer,offer?'Effective offer "'+(offer.name||offer.currency)+'"'+(offer.version?' v'+offer.version:'')+' applies':'No Effective offer for '+cardInfo.currency))return out('NO_POLICY',{card:cardInfo,local:localFallback});
+  if(!step(cardsMatch(offer.cards,cardInfo),cardsMatch(offer.cards,cardInfo)?'Card is inside the offer card scope':'Card is outside the offer card scope'))return out('NOT_ELIGIBLE',{card:cardInfo,offer,local:localFallback});
+  const ctx={card:cardInfo,channel:ruleChannel(channel),atm:txn.atm||'',mccGroup:txn.mccGroup||'',date:iso};
+  const where=channel==='ATM'?(ctx.atm?' at '+ctx.atm:''):(ctx.mccGroup?' in MCC group '+ctx.mccGroup:' with no MCC group');
+  const segment=pickSegment(offer,ctx);
+  if(!step(!!segment,segment?'Segment "'+segment.name+'"'+(segment.isDefault?' (default)':' matched')+' for '+channelLabel(channel)+where:'No segment matched for '+channelLabel(channel)+where))return out('NO_SEGMENT',{card:cardInfo,offer,local:localFallback});
+  const tier=pickTier(segment,amount);
+  if(!step(!!tier,tier?'Tier '+tierText(tier)+' applies':'No tier covers '+base+' '+fmt(amount)))return out('NO_TIER',{card:cardInfo,offer,segment,local:localFallback});
+  const local=localQuote(tier,amount,base);
+  const keep={card:cardInfo,offer,segment,tier,local};
+  if(!step(tier.offerDcc!==false,tier.offerDcc===false?'This tier does not offer DCC':'This tier offers DCC'))return out('DCC_OFF_TIER',keep);
+  const used=[['markup',tier.dcc&&tier.dcc.markupId]].concat(((tier.dcc&&tier.dcc.feeIds)||[]).map(id=>['fees',id])).concat(tier.dcc&&tier.dcc.vatId?[['vat',tier.dcc.vatId]]:[]);
+  const dead=used.map(([k,id])=>id?chargeInfo(k,id)||{id,status:'Missing'}:{id:'(none)',status:'Missing'}).find(c=>!chargeLive(c));
+  if(!step(!dead,dead?'Charge '+(dead.name||dead.id||'')+' is not effective ('+(dead.status||'unknown')+')':'All charges on the tier are effective'))return out('CHARGE_EXPIRED',keep);
+  if(!step(!txn.stale,txn.stale?'FX rate for '+cardInfo.currency+' is marked stale for this run':'FX rate is not stale'))return out('STALE',keep);
+  const fx=fxOf(cardInfo.currency);
+  if(!step(!!fx,fx?'FX rate 1 '+base+' = '+fx.rate+' '+cardInfo.currency+(fx.source?' ('+fx.source+')':''):'No FX rate for '+cardInfo.currency))return out('NO_RATE',keep);
+  const quote=dccQuote(tier,amount,fx.rate,cardInfo.currency);
+  step(true,'DCC quote '+cardInfo.currency+' '+fmt(quote.total));
+  return Object.assign({offered:true,reason:'OFFERED',message:'DCC offered.',checks,quote,fx},keep);
+}
+function reasonCode(reason){if(reason==='SAME_CCY')return 'DCC10';if(reason==='NOT_ELIGIBLE')return 'DCC12';if(reason==='NO_TIER'||reason==='DCC_OFF_TIER')return 'DCC30';if(reason==='NO_RATE'||reason==='STALE')return 'DCC21';if(reason==='CHANNEL')return 'DCC16';if(reason==='OFFERED')return 'DCC00';return 'DCC15'}
+function tierText(t){const base=baseAlpha();return base+' '+fmt(t.from)+' '+(t.to==null||t.to===''?'and above':'to '+fmt(t.to))}
+function syncP(){
+  effectivePolicies().forEach(p=>{
+    const fx=fxOf(p.currency);
+    if(fx)P.rates[p.currency]=fx.rate;
+    const seg=defaultSegment(p);
+    const tier=((seg&&seg.tiers)||[]).find(t=>t.offerDcc!==false);
+    const m=tier&&tier.dcc?chargeInfo('markup',tier.dcc.markupId):null;
+    P.mk[p.currency]=m?m.value:0;
+    P.en[p.currency]=!!fx;
+  });
+  (STORE.fx||[]).forEach(r=>{if(P.rates[r.ccy]==null)P.rates[r.ccy]=Number(r.rate)||0});
+  (STORE.currency||[]).forEach(r=>{CNAME[r.alpha]=r.name||r.alpha;CNUM[r.alpha]=String(r.iso||'')});
+  const vat=(STORE.vat||[]).find(r=>r[2]==='Effective');
+  if(vat)P.vat=parseFloat(vat[1])||0;
+  const access=(STORE.fees||[]).find(r=>r[0]==='ATM access fee'&&r[3]==='Effective');
+  if(access){const info=chargeInfo('fees',access[4]);P.fee.ATM=info?info.flat||0:0}
+  P.fee.POS=0;P.fee.ECOM=0;P.feeBoth=false;
+  P.chEn.ATM=channelOn('ATM');P.chEn.POS=channelOn('POS');P.chEn.ECOM=channelOn('ECOM');
+  syncChannel();
+}
+function priceOffer(req,ch){
+  const cd=card(),A=+req.amount;
+  syncChannel();
+  const result=evaluateOffer({bin:req.cardBin||cd.bin,amount:A,channel:ch,atm:ch==='ATM'?simAtm:'',mccGroup:ch==='ATM'?'':mccGroupFor(ch),date:isoToday(),stale:!!S.ex.stale});
+  const local=result.local||blankLocal(A,baseAlpha());
+  const rc=result.offered?'DCC00':reasonCode(result.reason);
+  const o={requestId:req.requestId,offerId:`DCC-${yymmdd()}-${rnd(6)}`,offerStatus:rc==='DCC00'?'OFFERED':'NOT_OFFERED',reasonCode:rc,amount:f2(A),currency:'SAR'};
+  if(rc==='DCC00'){
+    const q=result.quote,ex=A?(q.base+q.markup)/A:0;
+    o.expiresAt=isoNow(P.exp[ch]||120);
+    o.dccOption={amount:f2(q.total),currency:q.ccy,originalAmount:f2(A),exchangeRate:ex.toFixed(6),markupPercentage:Number(q.markupPct||0).toFixed(2),markupAmount:f2(q.markup),markupVat:f2(q.vat)};
+  }
+  o.localOption={amount:f2(local.total),fee:f2(local.fee),feeVat:f2(local.vat)};
+  OFFER_META[o.offerId]={message:result.message||'',reason:result.reason||'',checks:result.checks||[],fx:result.fx?result.fx.rate:null,fxSource:result.fx?result.fx.source:'',offer:result.offer?(result.offer.name||result.offer.currency):'',segment:result.segment?result.segment.name:'',tier:result.tier?tierText(result.tier):'',sar:A,card:result.card||null,mccGroup:ch==='ATM'?'':mccGroupFor(ch)};
+  return o;
+}
+function mccGroups(){return (STORE.mccGroups||[]).filter(g=>g&&!g.disabled&&!NOT_LIVE_WF.includes(String(g.wf||'')))}
+function mccGroupFits(g,ch){const want=String(g&&g.channel||'');if(ch==='POS')return want==='POS'||want==='Both';if(ch==='ECOM')return want==='Ecommerce'||want==='Both';return false}
+function mccGroupsFor(ch){return mccGroups().filter(g=>mccGroupFits(g,ch))}
+function mccGroupFor(ch){const name=S.mcc[ch]||'';return mccGroupsFor(ch).some(g=>g.name===name)?name:''}
+function mccOfGroup(name){const g=mccGroups().find(x=>x.name===name);if(!g)return '';const codes=[].concat(g.mccs||[]).map(x=>typeof x==='string'?x:(x&&(x.code||x.mcc))||'').filter(Boolean);return codes[0]?String(codes[0]).split('-')[0]:''}
+function quoteStamp(){const d=new Date(),months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],p=n=>String(n).padStart(2,'0');return p(d.getDate())+' '+months[d.getMonth()]+' '+d.getFullYear()+', '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())}
+function moneyLabel(ccy,n){return ccy+' '+fmt(n)}
+function terminalId(){if(S.ch==='ATM')return simAtm||CH.ATM.tid;if(S.ch==='POS')return CH.POS.tid;return CH.ECOM.tid||'GW000001'}
+function cardMask(bin){const digits=String(bin||'').replace(/\D/g,'').slice(0,6);let h=2166136261;for(let i=0;i<digits.length;i++){h^=digits.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return digits+'*********'+String(h%10000).padStart(4,'0')}
+function optionOf(sel){return sel==='DCC'?'OPT1':sel==='LOCAL'?'OPT2':'NONE'}
+function reasonForStatus(status){return {DECLINED:'HOST_DECLINE',CANCELLED:'CUSTOMER_CANCELLED',NO_SELECTION:'NO_SELECTION',PARTIALLY_REVERSED:'PARTIAL_REVERSAL',REVERSED:'FULL_REVERSAL',PARTIALLY_REFUNDED:'PARTIAL_REFUND',REFUNDED:'FULL_REFUND'}[status]||''}
+function dccCommissionSar(sar){const row=(STORE.fees||[]).find(r=>r[0]==='DCC commission'&&r[3]==='Effective');if(!row)return 0;const info=chargeInfo('fees',row[4]);if(!info)return 0;return Math.round((Number(sar)*(info.pct||0)/100+(info.flat||0))*100)/100}
+function persistQuote(mutator){
+  quoteChain=quoteChain.then(async()=>{
+    const host=portalHost();
+    if(host&&typeof host.dccLiveStore==='function'){
+      const snap=host.dccLiveStore();
+      const list=Array.isArray(snap.quotes)?snap.quotes:[];
+      mutator(list);
+      if(typeof host.dccWriteQuotes==='function')host.dccWriteQuotes(list);
+      return;
+    }
+    const rows=await fetchCollection('quotes.json');
+    const list=Array.isArray(rows)?rows:[];
+    mutator(list);
+    const bases=['/database','database'];
+    let ok=false;
+    for(const base of bases){
+      try{const put=await fetch(base+'/quotes.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(list)});if(put.ok){ok=true;break}}catch(e){}
+    }
+    if(!ok)throw new Error('quote write failed');
+  }).catch(()=>{});
+}
+function captureOffer(o){
+  const meta=OFFER_META[o.offerId]||{},cd=card(),time=quoteStamp(),status=o.offerStatus==='OFFERED'?'OFFERED':'NOT_OFFERED';
+  const pan=String(cd.pan||cd.bin||'').replace(/\D/g,'');
+  const info=meta.card||{};
+  const atm=S.ch==='ATM'?activeAtm():null;
+  const q={id:o.offerId,atm:terminalId(),time,option:'NONE',amount:moneyLabel('SAR',+o.amount),status,reason:status==='NOT_OFFERED'?o.reasonCode:'',rrn:'',rate:o.dccOption?'RATE-'+o.dccOption.currency+'-'+o.dccOption.exchangeRate:'',
+    bin:String(cd.bin||'').replace(/\D/g,'').slice(0,8),card:pan.slice(0,6)+'******'+pan.slice(-4),cycle:[{status,time}],
+    trace:{Offer:meta.offer||'',segment:meta.segment||'',tier:meta.tier||''},message:status==='NOT_OFFERED'?(meta.message||''):'',
+    channel:S.ch==='ECOM'?'E-commerce':S.ch,terminal:terminalId(),terminalName:S.ch==='ATM'?(atm?[atm.name,atm.city||atm.address].filter(Boolean).join(', '):''):CH[S.ch].where,
+    merchant:S.ch==='ATM'?'':(CH[S.ch].mid||''),mccGroup:meta.mccGroup||'',entryMode:S.entry,
+    scheme:cd.scheme==='MASTERCARD'?'Mastercard':'Visa',issuer:info.issuer||cd.issuer||'',country:info.country||cd.country||'',currency:info.currency||cd.cur||'',binClass:cd.kindLabel||'',
+    decision:status==='NOT_OFFERED'?'DCC not offered':'DCC offered',decisionReason:meta.reason||'',checks:(meta.checks||[]).map(c=>({ok:!!c.ok,text:c.text})),
+    sar:+o.amount,dccAmount:o.dccOption?+o.dccOption.amount:null,dccCurrency:o.dccOption?o.dccOption.currency:'',fx:meta.fx!=null?meta.fx:null,fxSource:meta.fxSource||'',exchangeRate:o.dccOption?+o.dccOption.exchangeRate:null,markupPct:o.dccOption?+o.dccOption.markupPercentage:null,
+    localAmount:o.localOption?+o.localOption.amount:+o.amount,localFee:o.localOption?+o.localOption.fee:0,expiresAt:o.expiresAt||'',scenario:S.ex.stale?'Rate stale':''};
+  persistQuote(rows=>rows.unshift(q));
+}
+function captureStatus(id,body){
+  const time=quoteStamp();
+  persistQuote(rows=>{
+    const q=rows.find(x=>x.id===id);if(!q)return;
+    const opt=optionOf(body.selectedOption);
+    if(opt!=='NONE')q.option=opt;
+    q.status=body.status;q.time=time;
+    if(body.rrn)q.rrn=body.rrn;
+    const why=reasonForStatus(body.status);if(why)q.reason=why;
+    const rec=DB[id];
+    if(opt==='OPT1'&&rec&&rec.offer&&rec.offer.dccOption)q.amount=moneyLabel(rec.offer.dccOption.currency,+rec.offer.dccOption.amount);
+    else if(opt==='OPT2'&&rec&&rec.offer&&rec.offer.localOption)q.amount=moneyLabel('SAR',+rec.offer.localOption.amount);
+    if(body.status==='COMPLETED'&&opt==='OPT1')q.commission=dccCommissionSar(+(rec&&rec.offer?rec.offer.amount:0));
+    q.cycle=q.cycle||[];q.cycle.push({status:q.status,time});
+  });
+}
+function captureLifecycle(id,status){
+  const time=quoteStamp();
+  persistQuote(rows=>{
+    const q=rows.find(x=>x.id===id);if(!q)return;
+    q.status=status;q.time=time;
+    const why=reasonForStatus(status);if(why)q.reason=why;
+    q.cycle=q.cycle||[];q.cycle.push({status,time});
+  });
+}
+function engine(method,path,body,ch){
+  if(method==='POST'&&path==='/dcc/offers'){
+    if(S.ex.down)return {status:503,body:{code:'DCC90',message:'Service unavailable'}};
+    const o=priceOffer(body,ch);DB[o.offerId]={offer:o,status:o.offerStatus,sel:null,remaining:+o.amount};captureOffer(o);return {status:200,body:o};}
+  const m=path.match(/^\/dcc\/offers\/([^/]+)\/(status|reversals|refunds)$/);
+  if(!m)return {status:404,body:{code:'DCC82',message:'Not found'}};
+  const rec=DB[m[1]];if(!rec)return {status:404,body:{code:'DCC82',message:'Offer not found'}};
+  if(m[2]==='status'){
+    if(rec.status!=='OFFERED')return {status:409,body:{code:'DCC41',message:'Status already final'}};
+    rec.status=body.status;rec.sel=body.selectedOption;captureStatus(m[1],body);return {status:202,body:{offerId:m[1],offerStatus:rec.status}};}
+  if(!['COMPLETED','PARTIALLY_REVERSED','PARTIALLY_REFUNDED'].includes(rec.status))return {status:409,body:{code:'DCC42',message:'Offer not completed'}};
+  const amt=body.amount!==undefined?+body.amount:rec.remaining;
+  if(amt>rec.remaining+1e-9)return {status:422,body:{code:'DCC43',message:'Amount exceeds remaining amount'}};
+  rec.remaining=r2(rec.remaining-amt);const rev=m[2]==='reversals';
+  rec.status=rec.remaining===0?(rev?'REVERSED':'REFUNDED'):(rev?'PARTIALLY_REVERSED':'PARTIALLY_REFUNDED');
+  const out={requestId:body.requestId,offerId:m[1],offerStatus:rec.status,amount:f2(amt)};
+  if(rec.sel==='DCC')out.dccAmount=f2(r2(amt*+rec.offer.dccOption.exchangeRate));
+  captureLifecycle(m[1],rec.status);
+  return {status:201,body:out};
+}
+function portalHost(){
+  try{if(window.parent&&window.parent!==window&&typeof window.parent.dccLiveStore==='function')return window.parent}catch(e){}
+  return null;
+}
+function storeFingerprint(s){
+  if(!s)return '';
+  return JSON.stringify({rules:s.ruleRows,markup:s.markupRules,fees:s.feeRules,vat:s.vatRows,fx:s.fxRateList,bins:s.binRows,ccy:s.masters&&s.masters.Currency,atms:s.masters&&s.masters.ATM,groups:s.masters&&s.masters['ATM Groups'],negBins:s.negBinRows,negCcy:s.negCcyRows,mcc:s.masters&&s.masters['MCC Grouping']});
+}
+function applyPortalSnap(s){
+  if(!s||typeof s!=='object')return false;
+  if(Array.isArray(s.ruleRows))STORE.rules=s.ruleRows;
+  if(Array.isArray(s.markupRules))STORE.markup=s.markupRules;
+  if(Array.isArray(s.feeRules))STORE.fees=s.feeRules;
+  if(Array.isArray(s.vatRows))STORE.vat=s.vatRows;
+  if(Array.isArray(s.fxRateList))STORE.fx=s.fxRateList;
+  if(Array.isArray(s.binRows))STORE.bins=s.binRows;
+  if(Array.isArray(s.negBinRows))STORE.negBins=s.negBinRows;
+  if(Array.isArray(s.negCcyRows))STORE.negCcy=s.negCcyRows;
+  const m=s.masters||{};
+  if(Array.isArray(m.Currency))STORE.currency=m.Currency;
+  if(Array.isArray(m.ATM))STORE.atms=m.ATM;
+  if(Array.isArray(m['ATM Groups']))STORE.groups=m['ATM Groups'];
+  if(Array.isArray(m['MCC Grouping']))STORE.mccGroups=m['MCC Grouping'];
+  return true;
+}
+async function fetchCollection(name){
+  const bases=[];
+  const host=portalHost();
+  if(host&&host.DCC_DATA_BASE)bases.push(String(host.DCC_DATA_BASE).replace(/\/$/,''));
+  bases.push('/database','database');
+  for(const base of bases){
+    try{const res=await fetch(base+'/'+name,{cache:'no-store'});if(res.ok)return await res.json()}catch(e){}
+  }
+  return null;
+}
+async function loadStore(){
+  const host=portalHost();
+  if(host){
+    const snap=host.dccLiveStore();
+    applyPortalSnap(snap);
+    STORE.fp=storeFingerprint(snap);
+    STORE.rev=STORE.fp?1:0;
+  }else{
+    const names=['rules.json','markup.json','fees.json','vat.json','fx-rates.json','bins.json','currency.json','atm.json','atm-groups.json','negative-bins.json','negative-currencies.json','mcc-groups.json','meta.json'];
+    const got={};
+    await Promise.all(names.map(async name=>{got[name]=await fetchCollection(name)}));
+    if(Array.isArray(got['rules.json']))STORE.rules=got['rules.json'];
+    if(Array.isArray(got['markup.json']))STORE.markup=got['markup.json'];
+    if(Array.isArray(got['fees.json']))STORE.fees=got['fees.json'];
+    if(Array.isArray(got['vat.json']))STORE.vat=got['vat.json'];
+    if(Array.isArray(got['fx-rates.json']))STORE.fx=got['fx-rates.json'];
+    if(Array.isArray(got['bins.json']))STORE.bins=got['bins.json'];
+    if(Array.isArray(got['currency.json']))STORE.currency=got['currency.json'];
+    if(Array.isArray(got['atm.json']))STORE.atms=got['atm.json'];
+    if(Array.isArray(got['atm-groups.json']))STORE.groups=got['atm-groups.json'];
+    if(Array.isArray(got['negative-bins.json']))STORE.negBins=got['negative-bins.json'];
+    if(Array.isArray(got['negative-currencies.json']))STORE.negCcy=got['negative-currencies.json'];
+    if(Array.isArray(got['mcc-groups.json']))STORE.mccGroups=got['mcc-groups.json'];
+    if(got['meta.json']&&got['meta.json'].revision)STORE.rev=got['meta.json'].revision;
+  }
+  if(!activeAtms().some(a=>a.id===simAtm)){const atm=activeAtms().find(a=>a.id==='ATM-0142')||activeAtms()[0];simAtm=atm?atm.id:''}
+  syncP();
+}
+async function pollMeta(){
+  try{
+    const host=portalHost();
+    if(host){
+      const snap=host.dccLiveStore();
+      const fp=storeFingerprint(snap);
+      if(fp===STORE.fp)return;
+      applyPortalSnap(snap);
+      STORE.fp=fp;STORE.rev=fp?1:0;
+      if(!activeAtms().some(a=>a.id===simAtm)){const atm=activeAtms().find(a=>a.id==='ATM-0142')||activeAtms()[0];simAtm=atm?atm.id:''}
+      syncP();
+      if(S.busy)configDirty=true;
+      else if(typeof renderConfig==='function')renderConfig();
+      return;
+    }
+    const meta=await fetchCollection('meta.json');
+    if(!meta||meta.revision===STORE.rev)return;
+    await loadStore();
+    if(S.busy)configDirty=true;
+    else if(typeof renderConfig==='function')renderConfig();
+  }catch(e){}
+}
+function api(method,path,body){
+  const ch=S.ch,res=engine(method,path,body,ch);
+  return {method,path,headers:{'Authorization':'Bearer ••••••••','X-Channel-Id':ch,'Content-Type':'application/json'},req:body,status:res.status,res:res.body};
+}
+const reqId=()=>`${S.ch}-${CH[S.ch].ref}-${yymmdd()}-${S.stan||rnd(6)}`;
+
+/* ================= derived money ================= */
+function opt(){ /* what the cardholder sees for each option */
+  const o=S.offer;if(!o)return null;
+  const d=o.dccOption,l=o.localOption;
+  return {o,d,l,cur:d?d.currency:null,name:d?CNAME[d.currency]:null,fee:+l.fee,feeVat:+l.feeVat,A:+o.amount};
+}
+function chargeNow(){ /* amount, currency actually authorised */
+  if(S.path==='dcc')return {amt:+S.offer.dccOption.amount,cur:S.offer.dccOption.currency};
+  if(S.path==='local'||S.path==='notoffered')return {amt:+S.offer.localOption.amount,cur:'SAR'};
+  return {amt:S.A,cur:'SAR'};
+}
+
+/* ================= lanes and flow ================= */
+const LANE=['dev','acq','dcc','sch','iss'];
+const LNAME=()=>[CH[S.ch].l0[0],CH[S.ch].l1[0],'IRIS DCC',SN(),'Issuer'];
+const flow=$('#flow');
+function setLanes(){
+  const c=CH[S.ch];
+  $('#lane0').innerHTML=`${c.l0[0]}<small>${c.l0[1]}</small>`;
+  $('#lane1').innerHTML=`${c.l1[0]}<small>${c.l1[1]}</small>`;
+  $('#lane3').innerHTML=`${SN()}<small>${S.ch==='ATM'?'single message':'dual message'}</small>`;
+  $('#lane2').classList.toggle('off',!dccOn());
+}
+function clearFlow(){
+  const start={ATM:'Insert the card to start.',POS:'Key in the amount on the terminal to start.',ECOM:'Choose an order amount and continue to payment.'}[S.ch];
+  flow.innerHTML=`<div class="empty">${start} ${dccOn()?'IRIS DCC sits beside the '+CH[S.ch].l1[0].toLowerCase()+' and is asked before authorisation.':'Today: no DCC in the path; the scheme converts.'}</div>`;
+}
+const scrollDown=()=>{flow.scrollTop=flow.scrollHeight;};
+const dropEmpty=()=>{const e=flow.querySelector('.empty');if(e)e.remove();};
+function sep(t){dropEmpty();const d=document.createElement('div');d.className='sep';d.textContent=t;flow.appendChild(d);scrollDown();}
+async function msg(f,t,label,fields,api){
+  dropEmpty();const row=document.createElement('div');row.className='msg'+(api?' api':'');row.tabIndex=0;
+  const a=Math.min(f,t),b=Math.max(f,t),left=(a+0.5)*20,w=(b-a)*20,mid=left+w/2;
+  row.innerHTML=`<span class="lbl" style="left:${mid}%">${esc(label)}</span><div class="arr ${t>f?'r':'l'}" style="left:${left}%;width:${w}%;--c:var(--${LANE[f]})"><i class="pkt"></i></div>`;
+  flow.appendChild(row);
+  const det=document.createElement('dl');det.className='det';const N=LNAME();
+  det.innerHTML=`<dt>From</dt><dd>${esc(N[f])} to ${esc(N[t])}</dd>`+Object.entries(fields||{}).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
+  flow.appendChild(det);
+  const tog=()=>det.classList.toggle('open');row.addEventListener('click',tog);row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});
+  scrollDown();await sleep(780);
+}
+async function note(lane,text){
+  dropEmpty();const d=document.createElement('div');d.className='nrow';const start=lane>=3?4:lane+1;
+  d.innerHTML=`<div class="nbox" style="grid-column:${start} / span 2;--c:var(--${LANE[lane]})"><b>${esc(LNAME()[lane])}</b>${esc(text)}</div>`;
+  flow.appendChild(d);scrollDown();await sleep(720);
+}
+async function play(steps){
+  S.busy=true;const token=S.run;
+  for(const s of steps){
+    if(token!==S.run)return false;
+    if(typeof s==='function'){s();continue;}
+    if(s.sep)sep(s.sep);
+    else if(s.note!==undefined)await note(s.note,s.text);
+    else {if(s.call){S.calls.push(s.call);S.callSel=S.calls.length-1;renderApi();}if(s.iso)addIso(s.iso);await msg(s.f,s.t,s.label,s.fields,!!s.call);}
+  }
+  if(token!==S.run)return false;S.busy=false;if(configDirty){configDirty=false;renderConfig();}return true;
+}
+const mark=k=>{S.chk.add(k);};
+
+/* ================= common journey pieces ================= */
+function entryText(e){return {CHIP:'chip + PIN',CONTACTLESS:'contactless',ECOM:'e-commerce (3-D Secure)'}[e];}
+function offerSteps(){
+  const cd=card(),c=CH[S.ch],A=S.A,steps=[];
+  S.stan=rnd(6);S.rrn=yymmdd().slice(1)+rnd(7);
+  const ask={ATM:'Foreign card, not mada. Before authorising, ask IRIS DCC.',POS:'Foreign card. Before authorising, ask IRIS DCC.',ECOM:'Foreign card. Before 3-D Secure and authorisation, ask IRIS DCC.'}[S.ch];
+  steps.push({sep:'DCC offer'},
+    {f:0,t:1,label:`${S.ch==='ECOM'?'Payment request':'Transaction request'}: SAR ${fmt(A)}`,fields:{Amount:'SAR '+fmt(A),Card:masked()+' ('+SN()+')','BIN class':cd.kindLabel||'','Entry mode':entryText(S.entry)}},
+    {note:1,text:cd.domestic?'Saudi-issued card. DCC still decides eligibility, so ask IRIS DCC.':ask});
+  const req=Object.assign({requestId:reqId()},c.tid&&S.ch!=='ECOM'?{terminalId:c.tid}:{},c.mid?{merchantId:c.mid}:{},
+    {cardBin:cd.bin,entryMode:S.entry,transactionType:c.type,amount:f2(A),currency:'SAR'});
+  const call=api('POST','/dcc/offers',req);
+  steps.push({call,f:1,t:2,label:'POST /dcc/offers',fields:{'X-Channel-Id':S.ch,'Card BIN':cd.bin,'BIN class':cd.kindLabel||'',Amount:'SAR '+fmt(A),'Entry mode':S.entry}});
+  if(call.status!==200){
+    steps.push({note:2,text:'No response: service unavailable.'},
+      {f:2,t:1,label:'503 DCC90',fields:{Code:'DCC90',Meaning:'Service unavailable'}},
+      ()=>mark('failsafe'),
+      {note:1,text:'Fail-safe: continue in SAR without DCC. The cardholder is not delayed.'});
+    S.offer=null;S.path='failsafe';return steps;
+  }
+  const o=call.res;S.offer=o;
+  const meta=OFFER_META[o.offerId]||{};
+  const why={DCC10:'Domestic card (billing currency SAR). Not offered.',DCC12:'Scheme BIN data flags a multi-currency card. Scheme rules exclude it. Not offered.',
+    DCC14:`Mastercard contactless at or below the no-PIN limit (SAR ${fmt(P.cvm)}). Not offered.`,DCC15:`Card bills in ${cd.cur}, which ANB has not enabled. Not offered.`,
+    DCC21:`Card bills in ${cd.cur}, but the SAR/${cd.cur} rate is stale. Not offered for ${cd.cur} only.`,DCC30:`Amount outside the DCC range. Not offered.`,DCC16:`DCC is switched off for the ${S.ch==='ECOM'?'e-commerce':S.ch} channel. Not offered.`};
+  if(o.offerStatus==='OFFERED'){
+    const d=o.dccOption;
+    const fx=meta.fx!=null?meta.fx:(P.rates[d.currency]!=null?P.rates[d.currency]:'—');
+    steps.push({note:2,text:`BIN ${cd.bin}: ${SN()}, issued in ${cd.country}, bills in ${d.currency}. Rate ${fx} + ${d.markupPercentage}% = ${d.exchangeRate}. Rate locked until ${o.expiresAt.slice(11,19)} UTC.`},
+      {f:2,t:1,label:`200 OFFERED: ${d.currency} ${fmt(d.amount)} or SAR ${fmt(o.localOption.amount)}`,fields:{'Offer ID':o.offerId,'Request ID':o.requestId,'Card currency':`${d.currency} ${fmt(d.amount)} incl. markup ${d.currency} ${fmt(d.markupAmount)}`,'Local currency':`SAR ${fmt(o.localOption.amount)} incl. fee SAR ${fmt(o.localOption.fee)}`}},
+      {f:1,t:0,label:{ATM:'Show currency choice',POS:'Show currency choice',ECOM:'Show currency choice on checkout'}[S.ch],fields:{Default:'none; cardholder must choose'}});
+    S.path='offered';
+  } else {
+    if(['DCC10','DCC12','DCC14'].includes(o.reasonCode))steps.push(()=>mark('excl'));
+    steps.push({note:2,text:meta.message||why[o.reasonCode]||'Not offered.'},
+      {f:2,t:1,label:`200 NOT_OFFERED: ${o.reasonCode}`,fields:{'Offer ID':o.offerId,'Reason':o.reasonCode,'Local option':`SAR ${fmt(o.localOption.amount)}`}});
+    S.path='notoffered';
+  }
+  return steps;
+}
+function statusSteps(status,sel,rc){
+  if(!S.offer||S.offer.offerStatus!=='OFFERED')return [];
+  const body=Object.assign({status,selectedOption:sel},sel!=='NONE'||status==='CANCELLED'?{decidedAt:isoNow()}:{},S.rrn&&!['CANCELLED','NO_SELECTION'].includes(status)?{rrn:S.rrn}:{},rc?{responseCode:rc}:{});
+  const call=api('POST',`/dcc/offers/${S.offer.offerId}/status`,body);
+  return [{call,f:1,t:2,label:`POST …/status ${status}`,fields:{Status:status,'Selected option':sel,RRN:S.rrn||'—'}},
+    {f:2,t:1,label:`${call.status} ${call.res.offerStatus||call.res.code}`,fields:{'Offer status':call.res.offerStatus||call.res.message}},
+    ()=>{if(sel!=='NONE'||status==='CANCELLED')mark('consent');}];
+}
+function authSteps(){
+  const cd=card(),c=CH[S.ch],{amt,cur}=chargeNow(),D=S.ex.decl,dcc=S.path==='dcc',steps=[];
+  const fee=(S.path==='local'||S.path==='notoffered')?+S.offer.localOption.fee:0;
+  if(!S.rrn){S.stan=rnd(6);S.rrn=yymmdd().slice(1)+rnd(7);}
+  S.auth={mti:c.mti,de3:c.de3,amt,cur,de22:entryText(S.entry),fee,dcc,orig:dcc?+S.offer.dccOption.originalAmount:null,rc:D?'51':'00'};
+  const rmti=c.mti==='0200'?'0210':'0110';
+  steps.push({sep:'Transaction'});
+  if(!dccOn())steps.push({f:0,t:1,label:`${S.ch==='ECOM'?'Payment request':'Transaction request'}: SAR ${fmt(S.A)}`,fields:{Amount:'SAR '+fmt(S.A),Card:masked()}},{note:1,text:'Foreign card: route to '+SN()+' in SAR.'});
+  steps.push({iso:'req',f:1,t:3,label:`${c.mti}: ${cur} ${fmt(amt)}${dcc?' with DCC data':''}`,fields:Object.assign({MTI:c.mti,'Amount (DE 4)':`${fmt(amt)} ${cur}`,'Currency (DE 49)':CNUM[cur]},
+      fee?{'Fee (DE 28)':`SAR ${fmt(fee)}`}:{},dcc?{'DCC data':`original SAR ${fmt(S.auth.orig)}${S.scheme==='mc'?' (DE 54, amount type 58)':' (Visa DCC indicator + original amount)'}`}:{})},
+    {note:3,text:dcc?`Amount is already in the card currency (${cur}), so ${SN()} does not convert it.`:`Converts SAR to the card's billing currency (${cd.cur}) at the ${SN()} rate.`},
+    {iso:'fwd',f:3,t:4,label:dcc?`${c.mti} in ${cur}, no conversion`:`${c.mti} with ${cd.cur} billing amount added`,fields:{Amount:`${fmt(amt)} ${cur}`,'Billing currency':cd.cur}},
+    {note:4,text:D?'Checks PIN or 3-D Secure, limits and balance: insufficient funds, decline 51.':dcc?`Approves and debits ${cur} ${fmt(amt)} exactly as shown to the cardholder.`:`Approves. Debits the ${cd.cur} amount from ${SN()} and may add its own foreign transaction fee.`},
+    {iso:'resp',f:4,t:3,label:`${rmti} ${D?'declined (51)':'approved (00)'}`,fields:{'Response code':D?'51':'00','Auth code':D?'—':'7H2K9Q'}},
+    {f:3,t:1,label:`${rmti} ${D?'declined (51)':'approved (00)'}`,fields:{'Response code':D?'51':'00',RRN:S.rrn||'—'}},
+    );
+  return steps;
+}
+
+/* ================= receipts ================= */
+const AIDS={visa:['A0000000031010','VISA DEBIT'],mc:['A0000000041010','DEBIT MASTERCARD']};
+const rl=(a,b)=>`<div class="r2"><span>${a}</span><span>${b}</span></div>`;
+function stmt(cur){return `I have been offered a choice of currencies and I accept the final amount in the transaction currency (${cur}).`;}
+function convBy(){return S.ch==='ATM'?'Currency conversion provided by ANB.':`Currency conversion provided by ANB for ${S.ch==='POS'?'Al Noor Electronics':'Najd Home Store'}.`;}
+function choiceProof(){
+  const o=S.offer;if(!o||o.offerStatus!=='OFFERED'||!['dcc','local'].includes(S.path))return '';
+  const d=o.dccOption,dcc=S.path==='dcc';
+  return `<div class="stmt">Currency offered and selected:</div>${rl(`[${dcc?' ':'X'}] SAR`,fmt(o.localOption.amount))}${rl(`[${dcc?'X':' '}] ${d.currency}`,fmt(d.amount))}`;
+}
+function head(title){
+  const c=CH[S.ch],now=NOWTXT(),cd=card(),pan=cd.bin.slice(0,6)+'******'+cd.last,atm=activeAtm();
+  const top={ATM:[atm?atm.name:'ANB',atm?String(atm.city||atm.address||atm.id).toUpperCase():'ATM'],POS:['AL NOOR ELECTRONICS','KING FAHD RD · RIYADH'],ECOM:['Najd Home Store','najdhome.example · order 51-'+S.stan]}[S.ch];
+  let h=`<div class="c"><b>${top[0]}</b><br>${top[1]}</div>`;
+  if(S.ch==='POS')h+=rl('TID','ANB18204')+rl('MID',c.mid);
+  if(S.ch==='ATM')h+=rl('TERMINAL',atm?atm.id:'ANB00431');
+  h+=rl('DATE',now.slice(0,10))+rl('TIME',now.slice(11))+`<div class="ttl">${title}</div>`+rl('CARD',pan);
+  if(S.ch==='POS')h+=rl(AIDS[S.scheme][1],'')+rl('AID',AIDS[S.scheme][0]);
+  h+=rl('ENTRY',{CHIP:'CHIP',CONTACTLESS:'CONTACTLESS',ECOM:'E-COMMERCE · 3-D SECURE'}[S.entry]);
+  return h;
+}
+function saleReceipt(){
+  const p=S.path,o=S.offer,dec=S.ex.decl,atm=S.ch==='ATM';
+  let b=head({ATM:'CASH WITHDRAWAL',POS:'SALE',ECOM:'PAYMENT'}[S.ch]);
+  const dispensed=S.reversal?S.A-+S.reversal.amount:S.A;
+  if(p==='dcc'){
+    const d=o.dccOption,fb=+d.originalAmount>+o.amount;
+    b+='<hr>'+rl(atm?'WITHDRAWAL AMOUNT':'AMOUNT',`SAR ${fmt(o.amount)}`);
+    if(fb)b+=rl(atm?'ATM ACCESS FEE':'SURCHARGE',`SAR ${fmt(o.localOption.fee)}`)+rl('&nbsp;INCL. VAT',`SAR ${fmt(o.localOption.feeVat)}`)+rl('AMOUNT CONVERTED',`SAR ${fmt(d.originalAmount)}`);
+    b+=rl('EXCHANGE RATE',`1 SAR = ${d.exchangeRate} ${d.currency}`)+rl('MARKUP OVER BASE RATE',`${d.markupPercentage}%`)
+      +rl('MARKUP AMOUNT',`${d.currency} ${fmt(d.markupAmount)}`)+rl(`&nbsp;INCL. VAT ${P.vat}%`,`${d.currency} ${fmt(d.markupVat)}`)
+      +'<hr>'+rl('<b>TRANSACTION AMOUNT</b>',`<b>${d.currency} ${fmt(d.amount)}</b>`);
+    if(S.reversal&&S.reversal.dccAmount)b+=rl('NOT DISPENSED',`SAR ${fmt(S.reversal.amount)}`)+rl('REVERSED',`${d.currency} ${fmt(S.reversal.dccAmount)}`)+rl('<b>AMOUNT CHARGED</b>',`<b>${d.currency} ${fmt(r2(+d.amount-+S.reversal.dccAmount))}</b>`);
+    b+=`<hr><div class="stmt">${stmt(d.currency)} ${convBy()}</div>${choiceProof()}<div class="stmt">DCC REF ${o.offerId}</div>`;
+  } else {
+    const fee=(p==='local'||p==='notoffered')?+o.localOption.fee:0,fv=(p==='local'||p==='notoffered')?+o.localOption.feeVat:0;
+    b+='<hr>'+rl(atm?'WITHDRAWAL AMOUNT':'AMOUNT',`SAR ${fmt(S.A)}`);
+    if(fee)b+=rl(atm?'ATM ACCESS FEE':'SURCHARGE',`SAR ${fmt(fee)}`)+rl(`&nbsp;INCL. VAT ${P.vat}%`,`SAR ${fmt(fv)}`);
+    const total=(o&&o.localOption&&(p==='local'||p==='notoffered'))?+o.localOption.amount:S.A+fee;
+    b+='<hr>'+rl('<b>TRANSACTION AMOUNT</b>',`<b>SAR ${fmt(total)}</b>`);
+    if(S.reversal)b+=rl('NOT DISPENSED',`SAR ${fmt(S.reversal.amount)}`)+rl('<b>AMOUNT CHARGED</b>',`<b>SAR ${fmt(total-+S.reversal.amount)}</b>`);
+    b+=`<hr>${choiceProof()}<div class="stmt">Your card issuer converts this amount to your card currency.</div>`;
+  }
+  b+='<hr>'+rl(dec?'<b>DECLINED</b>':'<b>APPROVED</b>',dec?'51':'AUTH 7H2K9Q')+rl('RRN',S.rrn||'—');
+  if(atm&&!dec)b+=rl('CASH DISPENSED',`SAR ${fmt(dispensed)}`);
+  if(S.ch==='POS'&&!dec)b+=`<div class="c" style="margin-top:6px">${posNeedsPin()?'PIN VERIFIED':'NO CARDHOLDER VERIFICATION'}<br>CARDHOLDER COPY</div>`;
+  b+=`<div class="c" style="margin-top:6px">THANK YOU</div>`;
+  addReceipt(b);
+}
+function refundReceipt(res){
+  let b=head('REFUND');const d=S.offer&&S.offer.dccOption;
+  b+='<hr>'+rl('REFUND AMOUNT',`SAR ${fmt(res.amount)}`);
+  if(S.path==='dcc')b+=rl('EXCHANGE RATE',`1 SAR = ${d.exchangeRate} ${d.currency}`)+rl('&nbsp;(RATE OF ORIGINAL SALE)','')+'<hr>'+rl('<b>TRANSACTION AMOUNT</b>',`<b>${d.currency} ${fmt(res.dccAmount)}</b>`)+`<div class="stmt">Refunded in ${d.currency}, the currency selected for the sale. ${convBy()}</div><div class="stmt">DCC REF ${S.offer.offerId}</div>`;
+  else b+='<hr>'+rl('<b>TRANSACTION AMOUNT</b>',`<b>SAR ${fmt(res.amount)}</b>`)+'<div class="stmt">Your card issuer converts this credit to your card currency.</div>';
+  b+=rl('<b>APPROVED</b>','AUTH 5K2M8T');
+  addReceipt(b);
+}
+function addReceipt(html){const el=document.createElement('div');el.className='receipt'+(S.ch==='ECOM'?' email':'');el.innerHTML=(S.ch==='ECOM'?'<div class="c"><b>E-mail receipt</b></div><hr>':'')+html;$('#receipts').appendChild(el);}
+
+/* ================= on-screen disclosure ================= */
+function cmpGrid(x,both,cls){
+  const fl=S.ch==='POS'?'Surcharge':'Access fee',dash='<i>—</i>';
+  const row=(k,a,b,sm)=>`<span class="k${sm?' sm':''}">${k}</span><span class="c1${sm?' sm':''}">${a}</span><span class="c2${sm?' sm':''}">${b}</span>`;
+  let r=`<span class="k"></span><span class="c1 hd"><em>Option 1</em>Pay in ${x.cur}</span><span class="c2 hd"><em>Option 2</em>Pay in SAR</span>`;
+  r+=row(`${S.ch==='POS'?'Amount':'Withdrawal'}<span class="u"> (SAR)</span>`,fmt(x.A),fmt(x.A));
+  if(x.fee){r+=row(`${fl}<span class="u"> (SAR)</span>`,both?fmt(x.fee):dash,fmt(x.fee));r+=row('incl. VAT',both?fmt(x.feeVat):dash,fmt(x.feeVat),1);}
+  r+=row('Exchange rate',x.d.exchangeRate,'<b class="tx">Card issuer</b>');
+  r+=row(`Markup ${x.d.markupPercentage}%`,`${fmt(x.d.markupAmount)}`,dash);
+  r+=row('incl. VAT',fmt(x.d.markupVat),dash,1);
+  r+=`<span class="k tt">Total</span><span class="c1 tt">${fmt(x.d.amount)}</span><span class="c2 tt">${fmt(x.l.amount)}</span>`;
+  return `<div class="${cls}">${r}</div>`;
+}
+const MC_DISCLAIMER='Make sure you understand the costs of currency conversion as they may be different depending on whether you select your home currency or the transaction currency.';
+function disclosure(cur){
+  return S.scheme==='mc'?MC_DISCLAIMER:`Paying in ${cur} is optional. If you choose ${cur}, ANB converts the amount at the rate shown. If you choose SAR, your card issuer converts it.`;
+}
+function onChoiceShown(){mark('choice');}
+const CTLS='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9.5a3.5 3.5 0 0 1 0 5"/><path d="M9.5 7a7 7 0 0 1 0 10"/><path d="M13 4.5a10.5 10.5 0 0 1 0 15"/><path d="M16.5 2a14 14 0 0 1 0 20"/></svg>';
+const CLOCK=()=>new Date().toTimeString().slice(0,5);
+
+/* ================= ATM ================= */
+function renderAtm(){
+  $('#device').innerHTML=`<div class="atm"><div class="brandrow"><b>ANB</b><span>ATM 0431 · Riyadh</span></div>
+  <div class="bezel"><div class="fdks">${['L1','L2','L3','L4'].map(k=>`<button data-k="${k}" aria-label="Left key ${k[1]}"></button>`).join('')}</div>
+  <div class="scr" id="scr" aria-live="polite"></div>
+  <div class="fdks">${['R1','R2','R3','R4'].map(k=>`<button data-k="${k}" aria-label="Right key ${k[1]}"></button>`).join('')}</div></div>
+  <div class="hw"><div class="slot" id="cardSlot"><div class="mouth"></div><button id="cardBtn">Insert card</button><span>Card reader</span></div>
+  <div class="slot" id="cashSlot"><div class="mouth"></div><div class="cash" id="cash"><i></i><i></i><i></i><i></i><i></i></div><button id="cashBtn" disabled>Take cash</button><span>Cash dispenser</span></div></div>
+  <div class="epp" id="epp" aria-label="PIN pad">
+    <button>1</button><button>2</button><button>3</button><button class="f cancel" data-f="cancel">Cancel</button>
+    <button>4</button><button>5</button><button>6</button><button class="f clear" data-f="clear">Clear</button>
+    <button>7</button><button>8</button><button>9</button><button class="f enter" data-f="enter">Enter</button>
+    <span></span><button>0</button><span></span><span></span></div></div>`;
+  $$('.fdks button').forEach(b=>b.addEventListener('click',()=>pressKey(b.dataset.k)));
+  $('#epp').addEventListener('click',atmPad);
+  $('#cardBtn').addEventListener('click',atmCard);
+  $('#cashBtn').addEventListener('click',atmCash);
+  atmCardState('insert');setAtm('idle');
+}
+let KEYS={};
+function pressKey(k){if(S.busy)return;const f=KEYS[k];if(f)f();}
+function atmOpt(k,v){
+  if(!v)return '<span></span>';
+  return `<div class="opt ${k[0]==='L'?'l':'r'}${v[1]?'':' off'}" data-k="${k}">${v[0]}</div>`;
+}
+function setAtm(id){
+  S.screen=id;KEYS={};const x=opt();let t='',o={},body=null,foot='<span>Press Cancel to end the transaction</span><span></span>';
+  const disp=S.reversal?S.A-+S.reversal.amount:S.A;
+  switch(id){
+    case 'idle':t=`<h3>Welcome to ANB</h3><p>Please insert your card to begin.</p><p class="dim">Visa, Mastercard and mada cards accepted.</p><div class="logos"><span>VISA</span><span>Mastercard</span><span>mada</span></div>`;foot='<span>Cash withdrawal 24/7</span><span>ATM 0431</span>';break;
+    case 'reading':t=`<h3>Reading your card</h3><p>Please wait.</p><div class="spin" aria-hidden="true"></div>`;foot='<span></span><span></span>';break;
+    case 'pin':t=`<h3>Please enter your PIN</h3><div class="pinbox">${[0,1,2,3].map(i=>`<i>${i<S.pin.length?'●':''}</i>`).join('')}</div><p class="dim">Press Enter when finished. Any 4 digits work in this demo.</p>`;break;
+    case 'menu':t=`<h3>Please select a transaction</h3><p class="dim">Press the key next to your choice.</p>`;
+      o={L1:['Fast cash 500',()=>atmPick(500)],L2:['Cash withdrawal',()=>setAtm('amount')],L3:['Balance inquiry',null],R1:['Mini statement',null],R2:['PIN change',null],R3:['Other services',null]};break;
+    case 'amount':t=`<h3>Please select an amount</h3><p class="dim">Cash is dispensed in Saudi riyal (SAR).</p>`;
+      o={L1:['SAR 100',()=>atmPick(100)],L2:['SAR 500',()=>atmPick(500)],L3:['SAR 1,000',()=>atmPick(1000)],R1:['SAR 2,000',()=>atmPick(2000)],R2:['SAR 3,000',()=>atmPick(3000)],R3:['Other amount',()=>{S.other='';S.otherErr='';setAtm('other');}]};break;
+    case 'other':t=`<h3>Please enter the amount</h3><div class="amtin">SAR ${S.other?Number(S.other).toLocaleString('en-US'):'0'}</div><p class="dim">Multiples of SAR 50, up to SAR 5,000. Press Enter to continue.</p>${S.otherErr?`<p class="serr">${S.otherErr}</p>`:''}`;break;
+    case 'wait':t=`<h3>Please wait</h3><p>Your transaction is being processed.</p><div class="spin" aria-hidden="true"></div>`;foot='<span></span><span></span>';break;
+    case 'choice':{
+      const both=+x.d.originalAmount>x.A;
+      body=`<div class="sbody choice"><div class="dccbox">
+        <h3>Choose your currency</h3>
+        <p class="dim sub">Card currency: ${x.cur}</p>
+        ${cmpGrid(x,both,'cmp')}</div>
+        <div class="orow"><div class="opt l opt2" data-k="L4"><span><small>Option 1</small><b>${x.cur} ${fmt(x.d.amount)}</b></span></div><div class="opt r opt2" data-k="R4"><span><small>Option 2</small><b>SAR ${fmt(x.l.amount)}</b></span></div></div></div>`;
+      o={L4:['',()=>atmChoose('DCC')],R4:['',()=>atmChoose('LOCAL')]};break;}
+    case 'fee':t=`<h3>ATM access fee</h3><p>This ATM charges an access fee of SAR ${fmt(x.fee)}, including VAT SAR ${fmt(x.feeVat)}.</p><p>Total for this withdrawal: <b>SAR ${fmt(x.l.amount)}</b></p><p class="dim">Your card issuer converts this amount to your card currency.</p>`;
+      o={L4:['Cancel',()=>atmCancel()],R4:['Continue',()=>atmAuth()]};break;
+    case 'takecard':t=`<h3>Please take your card</h3><p class="dim">Your cash will follow.</p>`;foot='<span></span><span></span>';break;
+    case 'takecash':t=`<h3>Please take your cash</h3><div class="amtin">SAR ${fmt(disp)}</div><p class="dim">Your receipt is printing.</p>`;foot='<span></span><span></span>';break;
+    case 'done':t=`<h3>Thank you for banking with ANB</h3><p>Please take your receipt.</p>`;o={R4:['New transaction',()=>restart()]};foot='<span></span><span></span>';break;
+    case 'declined':t=`<h3>Transaction declined</h3><p>Your card issuer did not approve this withdrawal. No cash was dispensed and nothing was charged.</p><p class="dim">Please take your card.</p>`;foot='<span></span><span></span>';break;
+    case 'cancelled':t=`<h3>Transaction cancelled</h3><p>Nothing was charged.</p><p class="dim">Please take your card.</p>`;foot='<span></span><span></span>';break;
+  }
+  if(!body){
+    const upper=['L1','R1','L2','R2','L3','R3'].some(k=>o[k]);
+    if(upper){let rows='';for(let i=1;i<=4;i++)rows+=`<div class="orow">${atmOpt('L'+i,o['L'+i])}${atmOpt('R'+i,o['R'+i])}</div>`;
+      body=`<div class="sbody"><div class="stext">${t}</div>${rows}</div>`;}
+    else body=`<div class="sbody choice"><div class="stext">${t}</div><div class="orow">${atmOpt('L4',o.L4)}${atmOpt('R4',o.R4)}</div></div>`;}
+  const scr=$('#scr');scr.className='scr';
+  scr.innerHTML=`<div class="shd"><b>ANB</b><span>ATM 0431 · ${CLOCK()}</span></div>${body}<div class="sft">${foot}</div>`;
+  for(const k in o)if(o[k][1])KEYS[k]=o[k][1];
+  scr.querySelectorAll('[data-k]').forEach(el=>el.addEventListener('click',()=>pressKey(el.dataset.k)));
+  if(id==='choice')onChoiceShown();
+  renderTools();
+}
+function atmCardState(st){S.cardState=st;const b=$('#cardBtn');if(!b)return;$('#cardSlot').classList.toggle('live',st==='insert'||st==='take');
+  b.disabled=!(st==='insert'||st==='take');b.textContent=st==='insert'?`Insert ${card().label}`:st==='in'?'Card inside':st==='take'?'Take card':'Card removed';}
+function atmPad(e){
+  const b=e.target.closest('button');if(!b||S.busy)return;const f=b.dataset.f;
+  if(f==='cancel'){if(['pin','menu','amount','other','choice','fee'].includes(S.screen))atmCancel();return;}
+  if(S.screen==='pin'){
+    if(f==='clear'){S.pin='';setAtm('pin');return;}
+    if(f==='enter'){if(S.pin.length===4)setAtm('menu');return;}
+    if(!f&&S.pin.length<4){S.pin+=b.textContent;setAtm('pin');}
+    return;}
+  if(S.screen==='other'){
+    if(f==='clear'){S.other='';S.otherErr='';setAtm('other');return;}
+    if(f==='enter'){const v=+S.other;if(v>=50&&v<=5000&&v%50===0)atmPick(v);else{S.otherErr='Please enter a multiple of SAR 50, up to SAR 5,000.';setAtm('other');}return;}
+    if(!f&&S.other.length<4){S.other=(S.other+b.textContent).replace(/^0+/,'');S.otherErr='';setAtm('other');}
+  }
+}
+async function atmCard(){
+  if(S.busy)return;
+  if(S.cardState==='insert'){atmCardState('in');S.entry='CHIP';setAtm('reading');if(!await play([{sep:'Card read'},{note:0,text:cardIntro('Chip read')}]))return;setAtm('pin');}
+  else if(S.cardState==='take'){atmCardState('out');
+    if(S.screen==='takecard'){$('#cash').classList.add('show');$$('#cash i').forEach((i,n)=>i.style.visibility=S.ex.part&&n>2?'hidden':'visible');$('#cashBtn').disabled=false;$('#cashSlot').classList.add('live');setAtm('takecash');}
+    else{setAtm('idle');$('#flowHint').textContent='Transaction ended. Press Restart to run again.';}}
+}
+async function atmPick(A){
+  S.A=A;setAtm('wait');
+  if(!dccOn()){S.path='asis';return atmAuth();}
+  if(!await play(offerSteps()))return;
+  if(S.path==='offered')setAtm('choice');
+  else if(S.path==='notoffered'&&+S.offer.localOption.fee>0)setAtm('fee');
+  else atmAuth();
+}
+function atmChoose(sel){S.choice=sel;S.path=sel==='DCC'?'dcc':'local';atmAuth();}
+async function atmAuth(){
+  setAtm('wait');
+  if(!await play(authSteps()))return;
+  if(S.ex.decl){
+    await play([...statusSteps('DECLINED',S.choice,'51'),{f:1,t:0,label:'Decline, return card',fields:{}}]);
+    setAtm('declined');atmCardState('take');saleReceipt();return;}
+  await play([{f:1,t:0,label:`Dispense SAR ${fmt(S.A)}`,fields:{Notes:'SAR '+fmt(S.A)}}]);
+  setAtm('takecard');atmCardState('take');
+}
+async function atmCash(){
+  $('#cash').classList.remove('show');$('#cashBtn').disabled=true;$('#cashSlot').classList.remove('live');
+  const part=S.ex.part,rev=part?r2(S.A*0.4):0,steps=[{sep:'Completion'}];
+  steps.push({f:0,t:1,label:part?`Dispensed SAR ${fmt(S.A-rev)} of ${fmt(S.A)}`:`Cash dispensed: SAR ${fmt(S.A)}`,fields:{Dispensed:'SAR '+fmt(S.A-rev)}});
+  steps.push(...statusSteps('COMPLETED',S.choice,'00'));
+  if(part){
+    steps.push({note:1,text:`Partial dispense: reverse SAR ${fmt(rev)} with the scheme and with IRIS DCC.`});
+    if(S.offer&&S.offer.offerStatus==='OFFERED'){
+      const call=api('POST',`/dcc/offers/${S.offer.offerId}/reversals`,{requestId:`ATM-${CH.ATM.ref}-${yymmdd()}-${rnd(6)}`,amount:f2(rev)});
+      S.reversal=call.res;
+      steps.push({call,f:1,t:2,label:'POST …/reversals',fields:{Amount:'SAR '+fmt(rev)}},
+        {f:2,t:1,label:call.res.dccAmount?`201 ${S.offer.dccOption.currency} ${fmt(call.res.dccAmount)} at locked rate`:`201 ${call.res.offerStatus}`,fields:{'Offer status':call.res.offerStatus,'Card-currency amount':call.res.dccAmount||'—'}},()=>{if(S.path==='dcc')mark('lock');});
+    } else S.reversal={amount:f2(rev)};
+    const rc=S.path==='dcc'?`${S.offer.dccOption.currency} ${fmt(S.reversal.dccAmount)}`:`SAR ${fmt(rev)}`;
+    steps.push({iso:'rev',f:1,t:3,label:`0420 reversal: ${rc}`,fields:{'Reversal amount':rc,'Cash dispensed':'SAR '+fmt(S.A-rev)}},{f:3,t:4,label:`0420 reversal: ${rc}`,fields:{}});
+  }
+  if(!await play(steps))return;
+  saleReceipt();mark('receipt');setAtm('done');
+}
+async function atmCancel(){
+  if(S.busy)return;const steps=[{sep:'Cancelled'},{f:0,t:1,label:'Cardholder cancelled',fields:{}}];
+  if(S.screen==='choice')steps.push(...statusSteps('CANCELLED','NONE'));
+  setAtm('cancelled');await play(steps);atmCardState('take');
+}
+
+/* ================= POS ================= */
+function renderPos(){
+  $('#device').innerHTML=`<div class="pos"><div class="pctl">${CTLS}</div>
+  <div class="pscr" id="pscr" aria-live="polite"></div>
+  <div class="ppad" id="ppad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button>${n}</button>`).join('')}<span></span><button>0</button><span></span>
+  <button class="cancel" data-f="cancel" aria-label="Cancel">✕</button><button class="clear" data-f="clear" aria-label="Clear">‹</button><button class="enter" data-f="enter" aria-label="Enter">✓</button></div>
+  <div class="pslot" aria-hidden="true"></div></div>
+  <div class="pcard"><button id="pInsert">Insert card (chip)</button><button id="pTap">Tap card</button></div>`;
+  $('#pInsert').addEventListener('click',()=>posCard('CHIP'));$('#pTap').addEventListener('click',()=>posCard('CONTACTLESS'));
+  $('#ppad').addEventListener('click',posPad);posCardBtns(false);S.posAmt='';setPos('amount');
+}
+function posCardBtns(on){['#pInsert','#pTap'].forEach(s=>{const b=$(s);if(b){b.disabled=!on;b.classList.toggle('live',on);}});}
+function setPos(id,waitText){
+  S.screen=id;const x=opt();let h='',hd='SALE';
+  switch(id){
+    case 'amount':h=`<p class="dim">Merchant: key in the sale amount</p><div class="pamt">SAR ${fmt((+S.posAmt||0)/100)}</div><div class="pchips">${CH.POS.amounts.map(a=>`<button class="pchip" data-a="${a}">${fmt(a)}</button>`).join('')}</div><div class="grow"></div><p class="dim c">Keypad to enter · ✓ to confirm</p>`;break;
+    case 'present':h=`<div class="pamt">SAR ${fmt(S.A)}</div><div class="pctlbig">${CTLS.replace('width="22" height="22"','width="40" height="40"')}</div><p class="c">Insert or tap card</p><div class="grow"></div><p class="dim c">✕ to cancel</p>`;break;
+    case 'wait':h=`<div class="grow"></div><div class="pspin" aria-hidden="true"></div><p class="c">${waitText||'Processing'}</p><p class="dim c">${S.entry==='CHIP'?'Do not remove card':'Please wait'}</p><div class="grow"></div>`;break;
+    case 'handover':hd='CURRENCY';h=`<div class="grow"></div><p class="c" style="font-size:16px;font-weight:600">Please hand the terminal to the cardholder</p><p class="dim c">The cardholder chooses the payment currency.</p><div class="grow"></div><button class="pbtn" id="pHand">OK</button>`;break;
+    case 'choice':hd='CURRENCY';{
+      h=`<h3>Select payment currency</h3><p class="dim">Your card currency is ${x.name} (${x.cur}).</p>
+      ${cmpGrid(x,+x.d.originalAmount>x.A,'cmp pcmp')}
+      <div class="ptiles"><button class="ptile" data-sel="DCC"><span class="lab">Option 1</span><span class="amt">${x.cur} ${fmt(x.d.amount)}</span></button><button class="ptile" data-sel="LOCAL"><span class="lab">Option 2</span><span class="amt">SAR ${fmt(x.l.amount)}</span></button></div>
+      <p class="pdisc">${S.scheme==='mc'?MC_DISCLAIMER:`Paying in ${x.cur} is optional. Conversion by ANB. ✕ cancels.`}</p>`;}break;
+    case 'pin':hd='PIN';{const {amt,cur}=chargeNow();h=`<div class="pamt">${cur} ${fmt(amt)}</div><p class="c">Enter PIN</p><div class="ppin">${[0,1,2,3].map(i=>`<i>${i<S.pin.length?'●':''}</i>`).join('')}</div><div class="grow"></div><p class="dim c">Press ✓ when finished · any 4 digits</p>`;}break;
+    case 'approved':{const {amt,cur}=chargeNow();h=`<div class="grow"></div><div class="pok">✓</div><p class="c" style="font-weight:600">APPROVED</p><div class="pamt">${cur} ${fmt(amt)}</div><p class="c">${S.entry==='CHIP'?'Please remove card':'Thank you'}</p><p class="dim c">Printing receipt…</p><div class="grow"></div>`;}break;
+    case 'declined':h=`<div class="grow"></div><div class="pok no">✕</div><p class="c" style="font-weight:600">DECLINED</p><p class="c">Card issuer declined. Nothing was charged.</p><div class="grow"></div>`;break;
+    case 'cancelled':h=`<div class="grow"></div><p class="c" style="font-weight:600">CANCELLED</p><p class="c">Nothing was charged.</p><div class="grow"></div>`;break;
+    case 'refunded':hd='REFUND';h=`<div class="grow"></div><div class="pok">✓</div><p class="c" style="font-weight:600">REFUND APPROVED</p><p class="dim c">Printing receipt…</p><div class="grow"></div>`;break;
+  }
+  const s=$('#pscr');
+  s.innerHTML=`<div class="psb"><span>${CLOCK()}</span><span>4G ▮▮▮ · 86%</span></div><div class="pah"><span>Al Noor Electronics</span><span>${hd}</span></div><div class="pbody">${h}</div>`;
+  s.querySelectorAll('[data-a]').forEach(b=>b.addEventListener('click',()=>{if(S.busy)return;S.A=+b.dataset.a;setPos('present');posCardBtns(true);}));
+  s.querySelectorAll('[data-sel]').forEach(b=>b.addEventListener('click',()=>posChoose(b.dataset.sel)));
+  const hb=s.querySelector('#pHand');if(hb)hb.addEventListener('click',()=>{if(!S.busy)setPos('choice');});
+  if(id==='choice')onChoiceShown();
+  renderTools();
+}
+function posPad(e){
+  const b=e.target.closest('button');if(!b||S.busy)return;const f=b.dataset.f;
+  if(f==='cancel'){if(['present','handover','choice','pin'].includes(S.screen))posCancel();else if(S.screen==='amount'){S.posAmt='';setPos('amount');}return;}
+  if(S.screen==='amount'){
+    if(f==='clear'){S.posAmt=S.posAmt.slice(0,-1);setPos('amount');return;}
+    if(f==='enter'){const v=(+S.posAmt||0)/100;if(v>0){S.A=v;setPos('present');posCardBtns(true);}return;}
+    if(!f&&S.posAmt.length<8){S.posAmt=(S.posAmt+b.textContent).replace(/^0+/,'');setPos('amount');}
+    return;}
+  if(S.screen!=='pin')return;
+  if(f==='clear'){S.pin=S.pin.slice(0,-1);setPos('pin');return;}
+  if(f==='enter'){if(S.pin.length===4)posAuth();return;}
+  if(!f&&S.pin.length<4){S.pin+=b.textContent;setPos('pin');}
+}
+async function posCard(entry){
+  if(S.busy||S.screen!=='present')return;S.entry=entry;posCardBtns(false);setPos('wait',entry==='CHIP'?'Reading card':'Card read');
+  if(!await play([{sep:'Card read'},{note:0,text:cardIntro(entry==='CHIP'?'Chip read':'Contactless tap')}]))return;
+  if(!dccOn()){S.path='asis';return posNext();}
+  if(!await play(offerSteps()))return;
+  if(S.path==='offered')setPos('handover');else posNext();
+}
+function posNeedsPin(){return !(S.entry==='CONTACTLESS'&&S.A<=P.cvm);}
+function posNext(){if(posNeedsPin()){S.pin='';setPos('pin');}else posAuth();}
+function posChoose(sel){if(S.busy)return;S.choice=sel;S.path=sel==='DCC'?'dcc':'local';posNext();}
+async function posAuth(){
+  setPos('wait','Processing');
+  if(!await play(authSteps()))return;
+  const D=S.ex.decl;
+  await play([...statusSteps(D?'DECLINED':'COMPLETED',S.choice,D?'51':'00'),{f:1,t:0,label:D?'Declined':'Approved',fields:{}}]);
+  S.approved=!D;setPos(D?'declined':'approved');saleReceipt();if(!D)mark('receipt');
+}
+async function posCancel(){
+  if(S.busy)return;const steps=[{sep:'Cancelled'},{f:0,t:1,label:'Cardholder cancelled',fields:{}}];
+  if(['handover','choice'].includes(S.screen)||(S.screen==='pin'&&S.offer&&S.offer.offerStatus==='OFFERED'))steps.push(...statusSteps('CANCELLED','NONE'));
+  setPos('cancelled');posCardBtns(false);await play(steps);
+}
+
+/* ================= E-commerce ================= */
+function renderEcom(){
+  $('#device').innerHTML=`<div class="browser"><div class="bchrome"><span class="bdots"><i></i><i></i><i></i></span><span class="burl" id="burl">https://najdhome.example/checkout</span></div><div class="bpage" id="bpage"></div></div>`;
+  setWeb('cart');
+}
+function setWeb(id){
+  S.screen=id;const x=opt(),pg=$('#bpage');let h=`<div class="shop"><b>Najd Home Store</b><span>Secure checkout</span></div>`;
+  const items=S.ecomAmt===45?[['Ceramic mug set',45]]:S.ecomAmt===450?[['Linen bedding set',380],['Cushion covers (2)',70]]:[['Oak dining chairs (4)',2800],['Table runner',400]];
+  switch(id){
+    case 'cart':h+=`<h3>Your order</h3><div class="amtpick" role="group" aria-label="Order">${CH.ECOM.amounts.map(a=>`<button data-amt="${a}" aria-pressed="${a===S.ecomAmt}">SAR ${fmt(a)}</button>`).join('')}</div>
+      <div class="cart">${items.map(i=>`<div class="row"><span>${i[0]}</span><span>SAR ${fmt(i[1])}</span></div>`).join('')}<div class="row t"><span>Total</span><span>SAR ${fmt(S.ecomAmt)}</span></div></div>
+      <div class="wform"><label class="full">Card number<span class="inp">${esc((()=>{const pan=String(card().pan||card().bin).replace(/\D/g,'');return pan.slice(0,4)+' '+pan.slice(4,6)+'** **** '+pan.slice(-4)})())}</span></label><label>Expiry<span class="inp">09/29</span></label><label>CVV<span class="inp">***</span></label></div>
+      <button class="wbtn" id="wCont">Continue to payment</button>`;break;
+    case 'wait':h+=`<h3>Processing</h3><p style="color:var(--web-dim)">One moment, please.</p>`;break;
+    case 'pay':
+      if(S.path==='offered'){
+        h+=`<h3>Choose your payment currency</h3><p style="margin:0;color:var(--web-dim);font-size:13px">Your card is billed in ${x.name}. Select one option to continue. Nothing is selected for you.</p>
+        <div class="wchoice">
+          <label class="wopt" id="wLoc"><span class="cur"><input type="radio" name="wcur" value="LOCAL" id="rLoc">Pay in SAR</span><span class="k">Order total</span><span class="v">SAR ${fmt(x.A)}</span>${x.fee?`<span class="k">Surcharge incl. VAT</span><span class="v">SAR ${fmt(x.fee)}</span>`:''}<span class="k">Your card issuer converts at its own rate</span><span class="tot">SAR ${fmt(x.l.amount)}</span></label>
+          <label class="wopt" id="wDcc"><span class="cur"><input type="radio" name="wcur" value="DCC" id="rDcc">Pay in ${x.cur}</span><span class="k">Exchange rate incl. ${x.d.markupPercentage}% markup</span><span class="v">1 SAR = ${x.d.exchangeRate} ${x.cur}</span><span class="k">Markup incl. VAT ${x.cur} ${fmt(x.d.markupVat)}</span><span class="v">${x.cur} ${fmt(x.d.markupAmount)}</span><span class="tot">${x.cur} ${fmt(x.d.amount)}</span></label>
+        </div><div class="wdisc">${disclosure(x.cur)} Currency conversion is provided by ANB, Najd Home Store's bank.</div>
+        <button class="wbtn" id="wPay" disabled>Pay</button><button class="wlink" id="wCancel">Cancel and return to cart</button>`;
+      } else {
+        const amt=S.path==='notoffered'?+x.l.amount:S.A;
+        h+=`<h3>Review and pay</h3><div class="cart"><div class="row t"><span>Total</span><span>SAR ${fmt(amt)}</span></div></div><p style="margin:0;color:var(--web-dim);font-size:13px">Your card issuer converts this amount to your card currency at its own rate.</p>
+        <button class="wbtn" id="wPay">Pay SAR ${fmt(amt)}</button><button class="wlink" id="wCancel">Cancel and return to cart</button>`;
+      }break;
+    case '3ds':{const {amt,cur}=chargeNow();h=`<div class="acs"><span class="bank">Your card issuer · 3-D Secure</span><span>Approve a payment to <b>Najd Home Store</b></span><span style="font-family:var(--mono);font-size:20px">${cur} ${fmt(amt)}</span><span style="font-size:12px;color:var(--web-dim)">One-time code sent to your phone</span><span class="inp" style="border:1px solid var(--web-line);border-radius:6px;padding:6px 8px;font-family:var(--mono)">482 913</span><button class="wbtn" id="wOtp">Submit</button></div>`;
+      $('#burl').textContent='https://acs.issuer.example/3ds';break;}
+    case 'done':{const {amt,cur}=chargeNow();h+=`<div class="wdone"><span class="okmark">Payment approved</span><span>Order 51-${S.stan} is confirmed. Charged <b>${cur} ${fmt(amt)}</b>.</span><span style="color:var(--web-dim);font-size:13px">Your e-mail receipt is shown below the browser.</span></div>`;break;}
+    case 'declined':h+=`<div class="wdone"><span class="okmark" style="color:var(--bad)">Payment declined</span><span>Your card issuer declined the payment. Nothing was charged.</span></div>`;break;
+    case 'cancelled':h+=`<div class="wdone"><span>Payment cancelled. Nothing was charged.</span></div>`;break;
+    case 'refunded':h+=`<div class="wdone"><span class="okmark">Refund issued</span><span>See the refund receipt below.</span></div>`;break;
+  }
+  if(id!=='3ds')$('#burl').textContent=id==='cart'?'https://najdhome.example/checkout':'https://najdhome.example/checkout/payment';
+  pg.innerHTML=h;
+  pg.querySelectorAll('[data-amt]').forEach(b=>b.addEventListener('click',()=>{S.ecomAmt=+b.dataset.amt;setWeb('cart');}));
+  const on=(sel,fn)=>{const el=pg.querySelector(sel);if(el)el.addEventListener('click',fn);};
+  on('#wCont',webContinue);on('#wPay',webPay);on('#wCancel',webCancel);on('#wOtp',webOtp);
+  pg.querySelectorAll('input[name=wcur]').forEach(r=>r.addEventListener('change',()=>{S.choice=r.value;S.path=r.value==='DCC'?'dcc':'local';
+    $('#wLoc').classList.toggle('sel',r.value==='LOCAL');$('#wDcc').classList.toggle('sel',r.value==='DCC');
+    const {amt,cur}=chargeNow();const p=$('#wPay');p.disabled=false;p.textContent=`Pay ${cur} ${fmt(amt)}`;}));
+  if(id==='pay'&&S.path==='offered')onChoiceShown();
+  renderTools();
+}
+async function webContinue(){
+  if(S.busy)return;S.A=S.ecomAmt;S.entry='ECOM';setWeb('wait');
+  if(!await play([{sep:'Checkout'},{note:0,text:cardIntro('Card details entered')}]))return;
+  if(!dccOn()){S.path='asis';return setWeb('pay');}
+  if(!await play(offerSteps()))return;
+  setWeb('pay');
+}
+async function webPay(){
+  if(S.busy)return;if(S.path==='offered')return;
+  setWeb('3ds');
+  const {amt,cur}=chargeNow();
+  await play([{sep:'3-D Secure'},{f:1,t:4,label:`Authenticate ${cur} ${fmt(amt)}`,fields:{Amount:`${cur} ${fmt(amt)}`,'Why this currency':S.path==='dcc'?'DCC chosen before 3-D Secure, so the cardholder approves the final amount':'Local currency'}},{note:4,text:'Issuer access control server sends a one-time code.'}]);
+}
+async function webOtp(){
+  if(S.busy)return;setWeb('wait');
+  await play([{f:4,t:1,label:'Authenticated',fields:{Result:'Cardholder verified'}}]);
+  if(!await play(authSteps()))return;
+  const D=S.ex.decl;
+  await play([...statusSteps(D?'DECLINED':'COMPLETED',S.choice,D?'51':'00'),{f:1,t:0,label:D?'Payment declined':'Payment approved',fields:{}}]);
+  S.approved=!D;setWeb(D?'declined':'done');saleReceipt();if(!D)mark('receipt');
+}
+async function webCancel(){
+  if(S.busy)return;const steps=[{sep:'Cancelled'},{f:0,t:1,label:'Cardholder cancelled checkout',fields:{}}];
+  if(S.offer&&S.offer.offerStatus==='OFFERED')steps.push(...statusSteps('CANCELLED','NONE'));
+  setWeb('cancelled');await play(steps);
+}
+
+/* ================= refund (POS, e-commerce) ================= */
+async function doRefund(){
+  if(S.busy||!S.approved||S.refunded)return;S.refunded=true;renderTools();
+  const amt=S.ch==='POS'?r2(Math.min(200,S.A)):r2(Math.min(200,S.A)),steps=[{sep:'Refund'},{f:0,t:1,label:`Refund SAR ${fmt(amt)}`,fields:{Amount:'SAR '+fmt(amt)}}];
+  let res={amount:f2(amt)};S.refund=res;
+  if(dccOn()&&S.offer&&S.offer.offerStatus==='OFFERED'){
+    const call=api('POST',`/dcc/offers/${S.offer.offerId}/refunds`,{requestId:`${S.ch}-${CH[S.ch].ref}-${yymmdd()}-${rnd(6)}`,amount:f2(amt)});res=call.res;S.refund=res;
+    steps.push({call,f:1,t:2,label:'POST …/refunds',fields:{Amount:'SAR '+fmt(amt)}},
+      {f:2,t:1,label:res.dccAmount?`201 ${S.offer.dccOption.currency} ${fmt(res.dccAmount)} at locked rate`:`201 ${res.offerStatus}`,fields:{'Offer status':res.offerStatus,'Card-currency amount':res.dccAmount||'—'}},()=>{if(S.path==='dcc')mark('lock');});
+  }
+  const lbl=res.dccAmount?`${S.offer.dccOption.currency} ${fmt(res.dccAmount)}`:`SAR ${fmt(amt)}`;
+  steps.push({iso:'refund',f:1,t:3,label:`0100 refund: ${lbl}`,fields:{Amount:lbl,'Processing code':'20 · refund'}},{f:3,t:4,label:`0100 refund: ${lbl}`,fields:{}},{f:4,t:1,label:'0110 approved (00)',fields:{}},{f:1,t:0,label:'Refund approved',fields:{}});
+  if(!await play(steps))return;
+  if(S.ch==='POS')setPos('refunded');else setWeb('refunded');
+  refundReceipt(res);
+}
+
+/* ================= tools under device ================= */
+function renderTools(){
+  const t=$('#devtools');let h='';
+  if(!S.busy&&(S.screen==='choice'||S.screen==='handover'||(S.screen==='pay'&&S.path==='offered')))
+    h+=`<button class="btn" id="tWalk">Cardholder walks away (no choice)</button>`;
+  if((S.ch==='POS'||S.ch==='ECOM')&&S.approved&&!S.refunded)h+=`<button class="btn primary" id="tRefund">Refund SAR ${fmt(Math.min(200,S.A))}</button>`;
+  if(['done','approved','declined','cancelled','refunded'].includes(S.screen))h+=`<button class="btn" id="tAgain">New transaction</button>`;
+  t.innerHTML=h;
+  const w=$('#tWalk');if(w)w.addEventListener('click',walkAway);
+  const r=$('#tRefund');if(r)r.addEventListener('click',doRefund);
+  const a=$('#tAgain');if(a)a.addEventListener('click',restart);
+}
+async function walkAway(){
+  if(S.busy)return;const steps=[{sep:'No selection'},{f:0,t:1,label:'Choice screen timed out',fields:{}}];
+  steps.push(...statusSteps('NO_SELECTION','NONE'));
+  if(S.ch==='ATM'){setAtm('cancelled');await play(steps);atmCardState('take');}
+  else if(S.ch==='POS'){setPos('cancelled');await play(steps);}
+  else {setWeb('cancelled');await play(steps);}
+  mark('cancel');
+}
+
+/* ================= lower panels ================= */
+function jsonHTML(o){
+  return esc(JSON.stringify(o,null,2)).replace(/(&quot;(?:[^&]|&(?!quot;))*?&quot;)(\s*:)?/g,(m,s,c)=>c?`<span class="jk">${s}</span>${c}`:`<span class="js">${s}</span>`);
+}
+function renderApi(){
+  const L=S.calls;
+  if(!L.length){$('#apiTabs').innerHTML='';$('#apiBody').innerHTML=`<div class="ph">${dccOn()?'Calls appear here as the transaction runs.':'No DCC calls today: there is no DCC service in the path.'}</div>`;return;}
+  $('#apiTabs').innerHTML=L.map((c,i)=>`<button class="atab" aria-pressed="${i===S.callSel}" data-i="${i}">${i+1} · ${c.method} ${c.path.replace(/DCC-\d+-\d+/,'{offerId}')} · ${c.status}</button>`).join('');
+  $('#apiTabs').querySelectorAll('.atab').forEach(b=>b.addEventListener('click',()=>{S.callSel=+b.dataset.i;renderApi();}));
+  const c=L[S.callSel],ok=c.status<300;
+  $('#apiBody').innerHTML=`<div class="apibody">
+   <div class="apibox"><h3>Request</h3><div class="hdr">${c.method} ${esc(c.path)}<br>${Object.entries(c.headers).map(([k,v])=>`${k}: ${esc(v)}`).join('<br>')}</div><pre class="json">${jsonHTML(c.req)}</pre></div>
+   <div class="apibox"><h3>Response <span class="tag ${ok?'pass':'bad'}">${c.status}</span></h3><div class="hdr">Content-Type: application/json</div><pre class="json">${jsonHTML(c.res)}</pre></div></div>`;
+}
+const minor=n=>String(Math.round(n*100)).padStart(12,'0');
+function de10(rate){for(let d=9;d>=0;d--){const v=Math.round(rate*Math.pow(10,d));if(v<1e7)return String(d)+String(v).padStart(7,'0');}return '';}
+function isoRows(key,today){
+  const cd=card(),c=CH[S.ch],mc=S.scheme==='mc',sn=SN(),atm=S.ch==='ATM',ecom=S.ch==='ECOM',D=S.ex.decl;
+  const dcc=!today&&S.path==='dcc',d=dcc?S.offer.dccOption:null;
+  const fee=!today&&(S.path==='local'||S.path==='notoffered')?+S.offer.localOption.fee:0;
+  const amt=dcc?+d.amount:r2(S.A+fee),cur=dcc?d.currency:'SAR',orig=dcc?+d.originalAmount:null;
+  const mti=c.mti,rmti=mti==='0200'?'0210':'0110',feeName=atm?'ATM access fee':'surcharge';
+  const bilCur=cd.cur,bilRate=bilCur==='SAR'?1:P.rates[bilCur];
+  const de22={CHIP:'051',CONTACTLESS:'071',ECOM:mc?'812':'010'}[S.entry];
+  const de22m={CHIP:'Chip read, PIN entered',CONTACTLESS:'Contactless chip',ECOM:mc?'E-commerce':'Card not present, e-commerce'}[S.entry];
+  const de28=a=>['DE 28','Amount, transaction fee',a?'D'+String(Math.round(a*100)).padStart(8,'0'):'not present',a?`SAR ${fmt(a)} ${feeName}, incl. VAT`:'No fee on this path'];
+  const mkRow=['DCC markup','No ISO field',dcc?'inside DE 4':'not applicable',dcc?`${cur} ${fmt(d.markupAmount)} incl. VAT ${cur} ${fmt(d.markupVat)}; never sent as a separate field`:'—'];
+  const dccRows=(o,suffix='')=>mc
+    ?[['DE 54 · amount type','Amounts, additional','58','DCC performed at the point of interaction'+suffix],['DE 54 · currency','Amounts, additional','682','Original currency: SAR'+suffix],['DE 54 · amount','Amounts, additional',minor(o),`SAR ${fmt(o)} before conversion`+suffix]]
+    :[['Field 126.19','Visa DCC indicator',atm?'to confirm':'1',atm?'Specified for non-ATM transactions; confirm the ATM placement with Visa':'Cardholder chose to pay in the card currency'],['Original amount','Visa DCC data',minor(o)+' / 682',`SAR ${fmt(o)} before conversion (field confirmed in Visa certification)`]];
+  const amtNote=dcc?`${cur} ${fmt(amt)} = SAR ${fmt(orig)} × ${d.exchangeRate}; ANB markup is inside this amount`:fee?`SAR ${fmt(amt)} = SAR ${fmt(S.A)} + SAR ${fmt(fee)} ${feeName}`:`SAR ${fmt(amt)}`;
+  if(key==='req'){
+    const r=[['MTI','Message type',mti,atm?'Financial request: authorises and posts (single message)':'Authorisation request (dual message; clearing follows)'],
+      ['DE 2','Primary account number',masked(),`${sn} card. ${cd.kindLabel||''}${cd.country?'. Issued in '+cd.country:''}`],
+      ['DE 3','Processing code',atm?'010000':'000000',atm?'Cash withdrawal':'Purchase'],
+      ['DE 4','Amount, transaction',minor(amt),amtNote],
+      ['DE 49','Currency code, transaction',CNUM[cur],`${cur}, ${CNAME[cur]}`],
+      de28(fee),mkRow,
+      ['DE 18','Merchant type',S.ch==='ATM'?'6011':(mccOfGroup(mccGroupFor(S.ch))||{POS:'5732',ECOM:'5712'}[S.ch]),S.ch!=='ATM'&&mccGroupFor(S.ch)?'MCC group '+mccGroupFor(S.ch):{ATM:'ATM cash',POS:'Electronics store',ECOM:'Home furnishings, online'}[S.ch]],
+      ['DE 22','POS entry mode',de22,de22m]];
+    if(ecom)r.push(mc?['DE 48 · SE 42','Security level indicator','212','3-D Secure authenticated']:['Field 60.8','E-commerce indicator','05','3-D Secure authenticated']);
+    if(!ecom&&!(S.entry==='CONTACTLESS'&&S.A<=P.cvm))r.push(['DE 52','PIN data','encrypted','PIN block under the zone key']);
+    if(!ecom)r.push(['DE 55','Chip data','ARQC + EMV tags','Card cryptogram']);
+    r.push(['DE 41','Card acceptor terminal ID',{ATM:simAtm||'ANB00431',POS:'ANB18204',ECOM:'GW000001'}[S.ch],ecom?'Gateway terminal':CH[S.ch].l0[1]]);
+    if(!atm)r.push(['DE 42','Card acceptor ID',c.mid,c.where]);
+    return dcc?[...r,...dccRows(orig)]:r;
+  }
+  if(key==='fwd'){
+    const bil=dcc?amt:r2(amt*bilRate);
+    const r=[['MTI','Message type',mti,`Forwarded by ${sn} to the card issuer`],
+      ['DE 4','Amount, transaction',minor(amt),`${cur} ${fmt(amt)}, unchanged`],
+      ['DE 49','Currency code, transaction',CNUM[cur],cur]];
+    if(fee)r.push(de28(fee));
+    r.push(['DE 6','Amount, cardholder billing',minor(bil),`${bilCur} ${fmt(bil)}${dcc?', equal to DE 4':''}`],
+      ['DE 10','Conversion rate, cardholder billing',de10(dcc?1:bilRate),dcc?'1: the scheme does not convert':`${bilRate} ${bilCur} per SAR (${sn} rate, shown here at ANB's base rate)`],
+      ['DE 51','Currency code, cardholder billing',CNUM[bilCur],bilCur]);
+    if(dcc)r.push(...(mc?dccRows(orig,' (passed to the issuer)'):[['DCC indicator','Not forwarded','—','Visa does not send the DCC indicator to issuers']]));
+    return r;
+  }
+  if(key==='resp')return [['MTI','Message type',rmti,atm?'Financial response':'Authorisation response'],
+    ['DE 4','Amount, transaction',minor(amt),`${cur} ${fmt(amt)}`],['DE 49','Currency code, transaction',CNUM[cur],cur],
+    ['DE 11','System trace audit number',S.stan,'Matches the request'],['DE 37','Retrieval reference number',S.rrn,'Matches the request'],
+    ['DE 38','Authorisation ID',D?'none':'7H2K9Q',D?'No approval':'Approval code'],['DE 39','Response code',D?'51':'00',D?'Declined, insufficient funds':'Approved']];
+  if(key==='rev'){
+    const rv=+S.reversal.amount,disp=r2(S.A-rv),repl=dcc?r2(amt-+S.reversal.dccAmount):r2(amt-rv);
+    const r=[['MTI','Message type','0420','Reversal advice: part of the cash was not dispensed'],
+      ['DE 3','Processing code','010000','Cash withdrawal'],
+      ['DE 4','Amount, transaction',minor(amt),`${cur} ${fmt(amt)}, original amount`],['DE 49','Currency code, transaction',CNUM[cur],cur],
+      ['DE 95','Replacement amounts',minor(repl),dcc?`${cur} ${fmt(repl)} = SAR ${fmt(disp)} dispensed × ${d.exchangeRate}, the locked rate`:`SAR ${fmt(repl)} actually charged`],
+      ['DE 90','Original data elements',`0200 ${S.stan}…`,'Links to the original 0200']];
+    return dcc?[...r,...dccRows(disp,' (dispensed amount)')]:r;
+  }
+  if(key==='refund'){
+    const rs=S.refund||{amount:'0'},ra=+rs.amount,rc=dcc&&rs.dccAmount?+rs.dccAmount:ra,rcur=dcc&&rs.dccAmount?cur:'SAR';
+    const r=[['MTI','Message type',mti,'Refund authorisation (dual message; clearing follows)'],
+      ['DE 3','Processing code','200000','Refund'],
+      ['DE 4','Amount, transaction',minor(rc),dcc?`${rcur} ${fmt(rc)} = SAR ${fmt(ra)} × ${d.exchangeRate}, the rate of the original sale`:`SAR ${fmt(ra)}`],
+      ['DE 49','Currency code, transaction',CNUM[rcur],`${rcur}, same currency as the sale`],
+      ['DE 22','POS entry mode',de22,de22m],['DE 42','Card acceptor ID',c.mid,c.where]];
+    return dcc?[...r,...dccRows(ra)]:r;
+  }
+  return [];
+}
+const ISOT=()=>{const m=CH[S.ch].mti,sn=SN();return {req:`${m} · ANB → ${sn}`,fwd:`${m} · ${sn} → issuer`,resp:`${m==='0200'?'0210':'0110'} · issuer → ANB`,rev:'0420 · reversal',refund:`${m} · refund`};};
+function addIso(key){S.isoList.push(key);S.isoSel=S.isoList.length-1;renderIso(true);}
+function renderIso(anim){
+  const L=S.isoList||[];
+  if(!L.length){$('#isoTabs').innerHTML='';$('#isoBody').innerHTML='<div class="ph">Messages appear here as the transaction runs.</div>';return;}
+  const T=ISOT();
+  $('#isoTabs').innerHTML=L.map((k,i)=>`<button class="atab" aria-pressed="${i===S.isoSel}" data-i="${i}">${i+1}. ${T[k]}</button>`).join('');
+  $('#isoTabs').querySelectorAll('.atab').forEach(b=>b.addEventListener('click',()=>{S.isoSel=+b.dataset.i;renderIso(true);}));
+  const key=L[S.isoSel],rows=isoRows(key,false),cmp=dccOn();
+  const today={};if(cmp)isoRows(key,true).forEach(r=>today[r[0]]=r[2]);
+  const skip=['DE 2','DE 11','DE 37','DE 38','DE 39','DE 52','DE 55','DE 90'];
+  $('#isoBody').innerHTML=`<div class="tbl-wrap"><table class="iso"><thead><tr><th>Element</th><th>Name</th><th>Value</th><th>Meaning</th>${cmp?'<th>vs today</th>':''}</tr></thead><tbody>${rows.map((r,i)=>{
+    const isnew=cmp&&today[r[0]]===undefined,chg=cmp&&!isnew&&today[r[0]]!==r[2]&&!skip.includes(r[0]);
+    return `<tr class="${anim?'in':''}${chg||isnew?' chg':''}" style="animation-delay:${i*60}ms"><th>${esc(r[0])}</th><td>${esc(r[1])}</td><td class="num">${esc(r[2])}</td><td>${esc(r[3])}</td>${cmp?`<td>${isnew?'<span class="tag newt">New</span>':chg?'<span class="tag review">Changed</span>':'<span class="same">Same</span>'}</td>`:''}</tr>`;}).join('')}</tbody></table></div>`;
+}
+/* ================= configuration ================= */
+function paintCards(){
+  const groups=cardChoices();
+  const flat=groups.configured.concat(groups.negative,groups.missing);
+  if(!flat.some(c=>c.pan===String(S.card))){const prefer=flat.filter(c=>schemeKeyOf(c)===S.scheme);S.card=(prefer.find(c=>c.kind==='configured')||prefer[0]||flat.find(c=>c.kind==='configured')||flat[0]||{pan:''}).pan}
+  const host=$('#cardPick');if(!host)return;
+  const opt=c=>`<option value="${esc(c.pan)}"${c.pan===String(S.card)?' selected':''}>${esc(c.option)}</option>`;
+  const group=(key,rows)=>`<optgroup label="${esc(CARD_KIND[key])}">${rows.length?rows.map(opt).join(''):'<option value="" disabled>None</option>'}</optgroup>`;
+  host.innerHTML=flat.length?group('configured',groups.configured)+group('negative',groups.negative)+group('missing',groups.missing):'<option value="" disabled>No BIN is configured in BIN Management</option>';
+  paintContext();
+}
+function paintContext(){
+  const pick=$('#ctxPick'),label=$('#ctxLabel');if(!pick)return;
+  if(S.ch==='ATM'){
+    const atms=activeAtms();
+    label.textContent='ATM';
+    pick.innerHTML=atms.length?atms.map(a=>`<option value="${esc(a.id)}"${a.id===simAtm?' selected':''}>${esc(a.id+' · '+(a.name||'')+(a.city?' · '+a.city:''))}</option>`).join(''):'<option value="" disabled>No Active ATM</option>';
+  }else{
+    const groups=mccGroupsFor(S.ch),chosen=mccGroupFor(S.ch);
+    label.textContent='Merchant MCC group';
+    pick.innerHTML=`<option value=""${chosen?'':' selected'}>Not in a group</option>`+groups.map(g=>`<option value="${esc(g.name)}"${g.name===chosen?' selected':''}>${esc(g.name+(g.channel?' · '+g.channel:''))}</option>`).join('');
+  }
+}
+function renderConfig(){
+  syncChannel();
+  paintCards();
+}
+
+/* ================= controls ================= */
+function restart(){
+  syncChannel();
+  S.run++;S.busy=false;S.calls=[];S.callSel=0;S.chk=new Set();S.auth=null;S.offer=null;S.path=null;S.choice=null;S.A=0;S.pin='';S.stan='';S.rrn='';
+  S.approved=false;S.refunded=false;S.reversal=null;S.entry=S.ch==='ECOM'?'ECOM':'CHIP';
+  $('#receipts').innerHTML='';$('#devtools').innerHTML='';$('#flowHint').textContent='Click any message to see its fields. DCC calls are listed in full below.';
+  S.isoList=[];S.isoSel=0;S.refund=null;
+  setLanes();clearFlow();renderConfig();renderApi();renderIso();
+  $$('.dccx').forEach(l=>l.classList.toggle('off',!dccOn()));
+  $('#xPartL').hidden=S.ch!=='ATM';
+  if(S.ch==='ATM')renderAtm();else if(S.ch==='POS')renderPos();else renderEcom();
+}
+const press=(sel,attr,val)=>$$(sel).forEach(b=>b.setAttribute('aria-pressed',b.dataset[attr]===val));
+$$('[data-ch]').forEach(b=>b.addEventListener('click',()=>{S.ch=b.dataset.ch;press('[data-ch]','ch',S.ch);restart();}));
+$$('[data-sch]').forEach(b=>b.addEventListener('click',()=>{S.scheme=b.dataset.sch;S.card='';press('[data-sch]','sch',S.scheme);restart();}));
+$('#cardPick').addEventListener('change',()=>{S.card=$('#cardPick').value;const hit=allCardChoices().find(c=>c.pan===S.card);if(hit){S.scheme=schemeKeyOf(hit);press('[data-sch]','sch',S.scheme);}restart();});
+$('#ctxPick').addEventListener('change',()=>{const v=$('#ctxPick').value;if(S.ch==='ATM')simAtm=v;else S.mcc[S.ch]=v;restart();});
+$('#mAsis').addEventListener('click',()=>{S.mode='asis';$('#mAsis').setAttribute('aria-pressed','true');$('#mDcc').setAttribute('aria-pressed','false');restart();});
+$('#mDcc').addEventListener('click',()=>{S.mode='dcc';$('#mDcc').setAttribute('aria-pressed','true');$('#mAsis').setAttribute('aria-pressed','false');restart();});
+[['#xStale','stale'],['#xDown','down'],['#xDecl','decl'],['#xPart','part']].forEach(([id,k])=>$(id).addEventListener('change',e=>{S.ex[k]=e.target.checked;restart();}));
+$('#reset').addEventListener('click',restart);
+$('#speedBtn').addEventListener('click',()=>{S.fast=!S.fast;$('#speedBtn').textContent='Speed: '+(S.fast?'fast':'normal');});
+loadStore().finally(()=>restart());
+setInterval(pollMeta,3000);
+</script>
+</body>
+</html>

@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "POL-AED-01",
+    "entityId": "POL-AED-01",
+    "live": null,
+    "history": [],
+    "version": 1,
+    "by": "dcc.maker",
+    "currency": "AED",
+    "name": "AED card Offer",
+    "effectiveFrom": "2026-10-21",
+    "effectiveTo": "",
+    "enabled": true,
+    "cards": {
+      "bins": {
+        "mode": "all",
+        "list": [],
+        "ranges": []
+      },
+      "schemes": [],
+      "issuerCountries": []
+    },
+    "segments": [
+      {
+        "id": "SEG-MVI95VAHYA",
+        "name": "Default pricing",
+        "isDefault": true,
+        "priority": 0,
+        "effectiveFrom": "",
+        "effectiveTo": "",
+        "scope": {
+          "bins": {
+            "mode": "all",
+            "list": [],
+            "ranges": []
+          },
+          "schemes": [],
+          "issuerCountries": [],
+          "channels": [
+            "ANY"
+          ],
+          "terminals": {
+            "mode": "all",
+            "groups": [],
+            "atms": []
+          },
+          "mccGroups": []
+        },
+        "tiers": [
+          {
+            "from": 0,
+            "to": 499,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0001",
+              "feeIds": [],
+              "vatId": "VAT-0001",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001"
+              ],
+              "vatId": "VAT-0001"
+            }
+          },
+          {
+            "from": 500,
+            "to": null,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0002",
+              "feeIds": [],
+              "vatId": "",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001",
+                "FEE-0002"
+              ],
+              "vatId": ""
+            }
+          }
+        ]
+      },
+      {
+        "id": "SEG-MVI9AFN3JD",
+        "name": "ATM Malls",
+        "isDefault": false,
+        "priority": 10,
+        "effectiveFrom": "",
+        "effectiveTo": "",
+        "scope": {
+          "bins": {
+            "mode": "all",
+            "list": [],
+            "ranges": []
+          },
+          "schemes": [],
+          "issuerCountries": [],
+          "channels": [
+            "ATM"
+          ],
+          "terminals": {
+            "mode": "groups",
+            "groups": [
+              "ATM-GRP-RYD-02"
+            ],
+            "atms": []
+          },
+          "mccGroups": []
+        },
+        "tiers": [
+          {
+            "from": 0,
+            "to": 499,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0001",
+              "feeIds": [],
+              "vatId": "VAT-0001",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001"
+              ],
+              "vatId": "VAT-0001"
+            }
+          },
+          {
+            "from": 500,
+            "to": 999,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0002",
+              "feeIds": [],
+              "vatId": "",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001",
+                "FEE-0002"
+              ],
+              "vatId": ""
+            }
+          },
+          {
+            "from": 1000,
+            "to": null,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0002",
+              "feeIds": [],
+              "vatId": "",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001",
+                "FEE-0002"
+              ],
+              "vatId": ""
+            }
+          }
+        ]
+      }
+    ],
+    "pendingAction": "CREATE",
+    "lastRejected": null,
+    "ts": "21 Oct 2026, 20:21",
+    "upd": "dcc.maker",
+    "wf": "Pending",
+    "status": "Pending",
+    "apr": "APR-00134"
+  },
+  {
+    "id": "POL-USD-01",
+    "entityId": "POL-USD-01",
+    "currency": "USD",
+    "name": "USD card Offer",
+    "effectiveFrom": "2026-09-01",
+    "effectiveTo": "",
+    "enabled": true,
+    "cards": {
+      "bins": {
+        "mode": "all",
+        "list": [],
+        "ranges": []
+      },
+      "schemes": [],
+      "issuerCountries": []
+    },
+    "segments": [
+      {
+        "id": "SEG-USD-DEF",
+        "name": "Default pricing",
+        "isDefault": true,
+        "priority": 0,
+        "effectiveFrom": "",
+        "effectiveTo": "",
+        "scope": {
+          "bins": {
+            "mode": "all",
+            "list": [],
+            "ranges": []
+          },
+          "schemes": [],
+          "issuerCountries": [],
+          "channels": [
+            "ANY"
+          ],
+          "terminals": {
+            "mode": "all",
+            "groups": [],
+            "atms": []
+          },
+          "mccGroups": []
+        },
+        "tiers": [
+          {
+            "from": 0,
+            "to": 999,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0002",
+              "feeIds": [],
+              "vatId": "VAT-0001",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001"
+              ],
+              "vatId": "VAT-0001"
+            }
+          },
+          {
+            "from": 1000,
+            "to": null,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0001",
+              "feeIds": [],
+              "vatId": "VAT-0001",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001"
+              ],
+              "vatId": "VAT-0001"
+            }
+          }
+        ]
+      },
+      {
+        "id": "SEG-USD-RYD",
+        "name": "Riyadh Pilot ATMs",
+        "isDefault": false,
+        "priority": 10,
+        "effectiveFrom": "",
+        "effectiveTo": "",
+        "scope": {
+          "bins": {
+            "mode": "all",
+            "list": [],
+            "ranges": []
+          },
+          "schemes": [],
+          "issuerCountries": [],
+          "channels": [
+            "ATM"
+          ],
+          "terminals": {
+            "mode": "groups",
+            "groups": [
+              "ATM-GRP-RYD-01"
+            ],
+            "atms": []
+          },
+          "mccGroups": []
+        },
+        "tiers": [
+          {
+            "from": 0,
+            "to": null,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0003",
+              "feeIds": [],
+              "vatId": "VAT-0001",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001"
+              ],
+              "vatId": "VAT-0001"
+            }
+          }
+        ]
+      }
+    ],
+    "version": 1,
+    "status": "Effective",
+    "pendingAction": null,
+    "ts": "13 Oct 2026, 11:05",
+    "by": "iris.admin",
+    "upd": "dcc.checker",
+    "live": {
+      "currency": "USD",
+      "name": "USD card Offer",
+      "effectiveFrom": "2026-09-01",
+      "effectiveTo": "",
+      "enabled": true,
+      "cards": {
+        "bins": {
+          "mode": "all",
+          "list": [],
+          "ranges": []
+        },
+        "schemes": [],
+        "issuerCountries": []
+      },
+      "segments": [
+        {
+          "id": "SEG-USD-DEF",
+          "name": "Default pricing",
+          "isDefault": true,
+          "priority": 0,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ANY"
+            ],
+            "terminals": {
+              "mode": "all",
+              "groups": [],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": 999,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            },
+            {
+              "from": 1000,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0001",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            }
+          ]
+        },
+        {
+          "id": "SEG-USD-RYD",
+          "name": "Riyadh Pilot ATMs",
+          "isDefault": false,
+          "priority": 10,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ATM"
+            ],
+            "terminals": {
+              "mode": "groups",
+              "groups": [
+                "ATM-GRP-RYD-01"
+              ],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0003",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            }
+          ]
+        }
+      ],
+      "version": 1
+    },
+    "history": [
+      {
+        "version": 1,
+        "action": "CREATE",
+        "outcome": "Approved",
+        "at": "13 Oct 2026, 11:05",
+        "maker": "iris.admin",
+        "checker": "dcc.checker",
+        "snap": {
+          "currency": "USD",
+          "name": "USD card Offer",
+          "effectiveFrom": "2026-09-01",
+          "effectiveTo": "",
+          "enabled": true,
+          "cards": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": []
+          },
+          "segments": [
+            {
+              "id": "SEG-USD-DEF",
+              "name": "Default pricing",
+              "isDefault": true,
+              "priority": 0,
+              "effectiveFrom": "",
+              "effectiveTo": "",
+              "scope": {
+                "bins": {
+                  "mode": "all",
+                  "list": [],
+                  "ranges": []
+                },
+                "schemes": [],
+                "issuerCountries": [],
+                "channels": [
+                  "ANY"
+                ],
+                "terminals": {
+                  "mode": "all",
+                  "groups": [],
+                  "atms": []
+                },
+                "mccGroups": []
+              },
+              "tiers": [
+                {
+                  "from": 0,
+                  "to": 999,
+                  "offerDcc": true,
+                  "dcc": {
+                    "markupId": "MKP-0002",
+                    "feeIds": [],
+                    "vatId": "VAT-0001",
+                    "vatOn": "markup+fee",
+                    "zeroOk": false
+                  },
+                  "local": {
+                    "feeIds": [
+                      "FEE-0001"
+                    ],
+                    "vatId": "VAT-0001"
+                  }
+                },
+                {
+                  "from": 1000,
+                  "to": null,
+                  "offerDcc": true,
+                  "dcc": {
+                    "markupId": "MKP-0001",
+                    "feeIds": [],
+                    "vatId": "VAT-0001",
+                    "vatOn": "markup+fee",
+                    "zeroOk": false
+                  },
+                  "local": {
+                    "feeIds": [
+                      "FEE-0001"
+                    ],
+                    "vatId": "VAT-0001"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "SEG-USD-RYD",
+              "name": "Riyadh Pilot ATMs",
+              "isDefault": false,
+              "priority": 10,
+              "effectiveFrom": "",
+              "effectiveTo": "",
+              "scope": {
+                "bins": {
+                  "mode": "all",
+                  "list": [],
+                  "ranges": []
+                },
+                "schemes": [],
+                "issuerCountries": [],
+                "channels": [
+                  "ATM"
+                ],
+                "terminals": {
+                  "mode": "groups",
+                  "groups": [
+                    "ATM-GRP-RYD-01"
+                  ],
+                  "atms": []
+                },
+                "mccGroups": []
+              },
+              "tiers": [
+                {
+                  "from": 0,
+                  "to": null,
+                  "offerDcc": true,
+                  "dcc": {
+                    "markupId": "MKP-0003",
+                    "feeIds": [],
+                    "vatId": "VAT-0001",
+                    "vatOn": "markup+fee",
+                    "zeroOk": false
+                  },
+                  "local": {
+                    "feeIds": [
+                      "FEE-0001"
+                    ],
+                    "vatId": "VAT-0001"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "POL-EUR-01",
+    "entityId": "POL-EUR-01",
+    "currency": "EUR",
+    "name": "EUR card Offer",
+    "effectiveFrom": "2026-09-01",
+    "effectiveTo": "",
+    "enabled": true,
+    "cards": {
+      "bins": {
+        "mode": "all",
+        "list": [],
+        "ranges": []
+      },
+      "schemes": [],
+      "issuerCountries": []
+    },
+    "segments": [
+      {
+        "id": "SEG-EUR-DEF",
+        "name": "Default pricing",
+        "isDefault": true,
+        "priority": 0,
+        "effectiveFrom": "",
+        "effectiveTo": "",
+        "scope": {
+          "bins": {
+            "mode": "all",
+            "list": [],
+            "ranges": []
+          },
+          "schemes": [],
+          "issuerCountries": [],
+          "channels": [
+            "ANY"
+          ],
+          "terminals": {
+            "mode": "all",
+            "groups": [],
+            "atms": []
+          },
+          "mccGroups": []
+        },
+        "tiers": [
+          {
+            "from": 0,
+            "to": 99,
+            "offerDcc": false,
+            "dcc": {
+              "markupId": "",
+              "feeIds": [],
+              "vatId": "",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001"
+              ],
+              "vatId": "VAT-0001"
+            }
+          },
+          {
+            "from": 100,
+            "to": null,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0001",
+              "feeIds": [],
+              "vatId": "VAT-0001",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001"
+              ],
+              "vatId": "VAT-0001"
+            }
+          }
+        ]
+      },
+      {
+        "id": "SEG-EUR-JED",
+        "name": "Jeddah Airport ATM",
+        "isDefault": false,
+        "priority": 10,
+        "effectiveFrom": "",
+        "effectiveTo": "",
+        "scope": {
+          "bins": {
+            "mode": "all",
+            "list": [],
+            "ranges": []
+          },
+          "schemes": [],
+          "issuerCountries": [],
+          "channels": [
+            "ATM"
+          ],
+          "terminals": {
+            "mode": "atms",
+            "groups": [],
+            "atms": [
+              "ATM-0188"
+            ]
+          },
+          "mccGroups": []
+        },
+        "tiers": [
+          {
+            "from": 0,
+            "to": null,
+            "offerDcc": true,
+            "dcc": {
+              "markupId": "MKP-0002",
+              "feeIds": [],
+              "vatId": "VAT-0001",
+              "vatOn": "markup+fee",
+              "zeroOk": false
+            },
+            "local": {
+              "feeIds": [
+                "FEE-0001"
+              ],
+              "vatId": "VAT-0001"
+            }
+          }
+        ]
+      }
+    ],
+    "version": 1,
+    "status": "Effective",
+    "pendingAction": null,
+    "ts": "13 Oct 2026, 11:12",
+    "by": "dcc.maker",
+    "upd": "dcc.checker",
+    "live": {
+      "currency": "EUR",
+      "name": "EUR card Offer",
+      "effectiveFrom": "2026-09-01",
+      "effectiveTo": "",
+      "enabled": true,
+      "cards": {
+        "bins": {
+          "mode": "all",
+          "list": [],
+          "ranges": []
+        },
+        "schemes": [],
+        "issuerCountries": []
+      },
+      "segments": [
+        {
+          "id": "SEG-EUR-DEF",
+          "name": "Default pricing",
+          "isDefault": true,
+          "priority": 0,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ANY"
+            ],
+            "terminals": {
+              "mode": "all",
+              "groups": [],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": 99,
+              "offerDcc": false,
+              "dcc": {
+                "markupId": "",
+                "feeIds": [],
+                "vatId": "",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            },
+            {
+              "from": 100,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0001",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            }
+          ]
+        },
+        {
+          "id": "SEG-EUR-JED",
+          "name": "Jeddah Airport ATM",
+          "isDefault": false,
+          "priority": 10,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ATM"
+            ],
+            "terminals": {
+              "mode": "atms",
+              "groups": [],
+              "atms": [
+                "ATM-0188"
+              ]
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            }
+          ]
+        }
+      ],
+      "version": 1
+    },
+    "history": [
+      {
+        "version": 1,
+        "action": "CREATE",
+        "outcome": "Approved",
+        "at": "13 Oct 2026, 11:12",
+        "maker": "dcc.maker",
+        "checker": "dcc.checker",
+        "snap": {
+          "currency": "EUR",
+          "name": "EUR card Offer",
+          "effectiveFrom": "2026-09-01",
+          "effectiveTo": "",
+          "enabled": true,
+          "cards": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": []
+          },
+          "segments": [
+            {
+              "id": "SEG-EUR-DEF",
+              "name": "Default pricing",
+              "isDefault": true,
+              "priority": 0,
+              "effectiveFrom": "",
+              "effectiveTo": "",
+              "scope": {
+                "bins": {
+                  "mode": "all",
+                  "list": [],
+                  "ranges": []
+                },
+                "schemes": [],
+                "issuerCountries": [],
+                "channels": [
+                  "ANY"
+                ],
+                "terminals": {
+                  "mode": "all",
+                  "groups": [],
+                  "atms": []
+                },
+                "mccGroups": []
+              },
+              "tiers": [
+                {
+                  "from": 0,
+                  "to": 99,
+                  "offerDcc": false,
+                  "dcc": {
+                    "markupId": "",
+                    "feeIds": [],
+                    "vatId": "",
+                    "vatOn": "markup+fee",
+                    "zeroOk": false
+                  },
+                  "local": {
+                    "feeIds": [
+                      "FEE-0001"
+                    ],
+                    "vatId": "VAT-0001"
+                  }
+                },
+                {
+                  "from": 100,
+                  "to": null,
+                  "offerDcc": true,
+                  "dcc": {
+                    "markupId": "MKP-0001",
+                    "feeIds": [],
+                    "vatId": "VAT-0001",
+                    "vatOn": "markup+fee",
+                    "zeroOk": false
+                  },
+                  "local": {
+                    "feeIds": [
+                      "FEE-0001"
+                    ],
+                    "vatId": "VAT-0001"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "SEG-EUR-JED",
+              "name": "Jeddah Airport ATM",
+              "isDefault": false,
+              "priority": 10,
+              "effectiveFrom": "",
+              "effectiveTo": "",
+              "scope": {
+                "bins": {
+                  "mode": "all",
+                  "list": [],
+                  "ranges": []
+                },
+                "schemes": [],
+                "issuerCountries": [],
+                "channels": [
+                  "ATM"
+                ],
+                "terminals": {
+                  "mode": "atms",
+                  "groups": [],
+                  "atms": [
+                    "ATM-0188"
+                  ]
+                },
+                "mccGroups": []
+              },
+              "tiers": [
+                {
+                  "from": 0,
+                  "to": null,
+                  "offerDcc": true,
+                  "dcc": {
+                    "markupId": "MKP-0002",
+                    "feeIds": [],
+                    "vatId": "VAT-0001",
+                    "vatOn": "markup+fee",
+                    "zeroOk": false
+                  },
+                  "local": {
+                    "feeIds": [
+                      "FEE-0001"
+                    ],
+                    "vatId": "VAT-0001"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

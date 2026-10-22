@@ -1,0 +1,37 @@
+[
+  [
+    "Percentage",
+    "4.00%",
+    "Standard DCC markup",
+    "Effective",
+    "MKP-0001"
+  ],
+  [
+    "Percentage",
+    "3.50%",
+    "Promotional ATM band",
+    "Effective",
+    "MKP-0002"
+  ],
+  [
+    "Percentage",
+    "3.25%",
+    "Corridor markup",
+    "Effective",
+    "MKP-0003"
+  ],
+  [
+    "Fixed spread",
+    "0.0150",
+    "Fixed spread for selected pairs",
+    "Effective",
+    "MKP-0004"
+  ],
+  [
+    "Percentage",
+    "3.10%",
+    "Proposed year-end markup",
+    "Pending",
+    "MKP-0005"
+  ]
+]

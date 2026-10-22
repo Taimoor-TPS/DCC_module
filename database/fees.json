@@ -1,0 +1,23 @@
+[
+  [
+    "ATM access fee",
+    "Flat fee",
+    "SAR 23.00",
+    "Effective",
+    "FEE-0001"
+  ],
+  [
+    "DCC commission",
+    "Percentage",
+    "0.40%",
+    "Effective",
+    "FEE-0002"
+  ],
+  [
+    "Corridor fee",
+    "Hybrid",
+    "0.25% + SAR 2.00",
+    "Pending",
+    "FEE-0003"
+  ]
+]

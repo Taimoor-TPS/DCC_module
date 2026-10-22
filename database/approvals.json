@@ -1,0 +1,425 @@
+[
+  {
+    "id": "APR-00134",
+    "module": "Rule Engine",
+    "entityType": "DCC Rule",
+    "entityId": "POL-AED-01",
+    "entityName": "AED · AED card Offer",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-21T15:21:29.765Z",
+    "status": "Pending",
+    "comment": "",
+    "checker": "",
+    "before": null,
+    "after": {
+      "currency": "AED",
+      "name": "AED card Offer",
+      "effectiveFrom": "2026-10-21",
+      "effectiveTo": "",
+      "enabled": true,
+      "cards": {
+        "bins": {
+          "mode": "all",
+          "list": [],
+          "ranges": []
+        },
+        "schemes": [],
+        "issuerCountries": []
+      },
+      "segments": [
+        {
+          "id": "SEG-MVI95VAHYA",
+          "name": "Default pricing",
+          "isDefault": true,
+          "priority": 0,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ANY"
+            ],
+            "terminals": {
+              "mode": "all",
+              "groups": [],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": 499,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0001",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            },
+            {
+              "from": 500,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001",
+                  "FEE-0002"
+                ],
+                "vatId": ""
+              }
+            }
+          ]
+        },
+        {
+          "id": "SEG-MVI9AFN3JD",
+          "name": "ATM Malls",
+          "isDefault": false,
+          "priority": 10,
+          "effectiveFrom": "",
+          "effectiveTo": "",
+          "scope": {
+            "bins": {
+              "mode": "all",
+              "list": [],
+              "ranges": []
+            },
+            "schemes": [],
+            "issuerCountries": [],
+            "channels": [
+              "ATM"
+            ],
+            "terminals": {
+              "mode": "groups",
+              "groups": [
+                "ATM-GRP-RYD-02"
+              ],
+              "atms": []
+            },
+            "mccGroups": []
+          },
+          "tiers": [
+            {
+              "from": 0,
+              "to": 499,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0001",
+                "feeIds": [],
+                "vatId": "VAT-0001",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001"
+                ],
+                "vatId": "VAT-0001"
+              }
+            },
+            {
+              "from": 500,
+              "to": 999,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001",
+                  "FEE-0002"
+                ],
+                "vatId": ""
+              }
+            },
+            {
+              "from": 1000,
+              "to": null,
+              "offerDcc": true,
+              "dcc": {
+                "markupId": "MKP-0002",
+                "feeIds": [],
+                "vatId": "",
+                "vatOn": "markup+fee",
+                "zeroOk": false
+              },
+              "local": {
+                "feeIds": [
+                  "FEE-0001",
+                  "FEE-0002"
+                ],
+                "vatId": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "correlationId": "COR-5E95D2",
+    "tableHint": "",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00133",
+    "module": "Rate Source",
+    "entityType": "Rate Source",
+    "entityId": "ENT-50534181",
+    "entityName": "Regulatory",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-21T14:38:25.341Z",
+    "status": "Pending",
+    "comment": "",
+    "checker": "",
+    "before": null,
+    "after": {
+      "name": "Regulatory",
+      "connector": "Regulatory",
+      "callType": "Excel",
+      "url": "",
+      "path": "D:\\TPS\\Vibe Coding\\IRIS DCC\\DCC Prototype",
+      "fxRate": "FX Rate",
+      "currency": "Currency",
+      "refresh": "100",
+      "ttl": "100",
+      "retry": "100",
+      "tolerance": "100"
+    },
+    "correlationId": "COR-9F9D73",
+    "tableHint": "",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00133",
+    "module": "ATM Groups",
+    "entityType": "ATM Group",
+    "entityId": "ATM-GRP-RYD-02",
+    "entityName": "Riyadh Mall",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-21T14:27:26.635Z",
+    "status": "Approved",
+    "comment": "ok",
+    "checker": "dcc.checker",
+    "before": null,
+    "after": {
+      "code": "ATM-GRP-RYD-02",
+      "name": "Riyadh Mall",
+      "region": "Central",
+      "dcc": true,
+      "status": "Effective",
+      "atms": [
+        "ATM-0001",
+        "ATM-0002",
+        "ATM-0003",
+        "ATM-0004",
+        "ATM-0005",
+        "ATM-0007"
+      ],
+      "ts": "21 Oct 2026, 19:27",
+      "by": "dcc.maker",
+      "upd": "dcc.maker"
+    },
+    "correlationId": "COR-6CADB8",
+    "tableHint": "",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00139",
+    "module": "ATM Groups",
+    "entityType": "ATM Group",
+    "entityId": "ATM-GRP-TEST-01",
+    "entityName": "Certification Lab",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-20T12:45:10.363Z",
+    "status": "Pending",
+    "comment": "",
+    "checker": "",
+    "before": null,
+    "after": null,
+    "correlationId": "COR-733A22",
+    "tableHint": "",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00138",
+    "module": "Negative Lists",
+    "entityType": "Negative List Entry",
+    "entityId": "NEG-31036342",
+    "entityName": "Bahrain · Bank Offer",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-20T12:45:10.363Z",
+    "status": "Pending",
+    "comment": "",
+    "checker": "",
+    "before": null,
+    "after": null,
+    "correlationId": "COR-CA74E6",
+    "tableHint": "negCcy",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00137",
+    "module": "Negative Lists",
+    "entityType": "Negative List Entry",
+    "entityId": "NEG-31036347",
+    "entityName": "444222 · VISA",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-20T12:45:10.363Z",
+    "status": "Pending",
+    "comment": "",
+    "checker": "",
+    "before": null,
+    "after": null,
+    "correlationId": "COR-24FCC8",
+    "tableHint": "negBin",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00136",
+    "module": "BIN Management",
+    "entityType": "BIN Range",
+    "entityId": "621234",
+    "entityName": "621234",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-20T12:45:10.363Z",
+    "status": "Approved",
+    "comment": "ok",
+    "checker": "dcc.checker",
+    "before": null,
+    "after": null,
+    "correlationId": "COR-4639D0",
+    "tableHint": "",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00135",
+    "module": "VAT",
+    "entityType": "Tax Rule",
+    "entityId": "VAT-0002",
+    "entityName": "VAT · 5%",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-20T12:45:10.363Z",
+    "status": "Pending",
+    "comment": "",
+    "checker": "",
+    "before": null,
+    "after": null,
+    "correlationId": "COR-7A88A3",
+    "tableHint": "",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00134",
+    "module": "Fees",
+    "entityType": "Fee",
+    "entityId": "FEE-0003",
+    "entityName": "Corridor fee · Hybrid",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-20T12:45:10.363Z",
+    "status": "Pending",
+    "comment": "",
+    "checker": "",
+    "before": null,
+    "after": null,
+    "correlationId": "COR-96FB99",
+    "tableHint": "",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "APR-00133",
+    "module": "Markup",
+    "entityType": "Markup Rule",
+    "entityId": "MKP-0005",
+    "entityName": "Percentage · 3.10%",
+    "action": "CREATE",
+    "maker": "dcc.maker",
+    "makerName": "DCC Maker",
+    "submitted": "2026-10-20T12:45:10.362Z",
+    "status": "Pending",
+    "comment": "",
+    "checker": "",
+    "before": null,
+    "after": null,
+    "correlationId": "COR-8609CD",
+    "tableHint": "",
+    "peer": false,
+    "userKey": "",
+    "proposal": null
+  },
+  {
+    "id": "MKP-2026-0031",
+    "module": "Markup",
+    "maker": "dcc.maker",
+    "submitted": "31 Aug 10:44",
+    "change": "Currency • USD • 3.50%",
+    "status": "Pending"
+  },
+  {
+    "id": "NEG-CCY-004",
+    "module": "Negative Lists",
+    "maker": "dcc.maker",
+    "submitted": "31 Aug 10:28",
+    "change": "Add XXX • Bank Offer",
+    "status": "Pending"
+  }
+]

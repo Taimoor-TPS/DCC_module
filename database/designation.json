@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Administrator",
+    "ts": "13 Oct 2026, 09:15",
+    "by": "iris.admin",
+    "upd": "iris.admin"
+  },
+  {
+    "name": "Maker",
+    "ts": "13 Oct 2026, 09:15",
+    "by": "iris.admin",
+    "upd": "iris.admin"
+  },
+  {
+    "name": "Checker",
+    "ts": "13 Oct 2026, 09:15",
+    "by": "iris.admin",
+    "upd": "iris.admin"
+  },
+  {
+    "name": "Viewer",
+    "ts": "13 Oct 2026, 09:15",
+    "by": "iris.admin",
+    "upd": "iris.admin"
+  },
+  {
+    "name": "Auditor",
+    "ts": "13 Oct 2026, 09:15",
+    "by": "iris.admin",
+    "upd": "iris.admin"
+  }
+]

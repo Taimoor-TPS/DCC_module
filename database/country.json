@@ -1,0 +1,680 @@
+[
+  {
+    "name": "Saudi Arabia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "iris.admin",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "United Arab Emirates",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Bahrain",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Kuwait",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Oman",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Qatar",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Jordan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Egypt",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Lebanon",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Iraq",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Turkey",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Pakistan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "India",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Bangladesh",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Sri Lanka",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Nepal",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Indonesia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Malaysia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Singapore",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Thailand",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Philippines",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Vietnam",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "China",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Hong Kong",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Japan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "South Korea",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Taiwan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Australia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "New Zealand",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "United Kingdom",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Ireland",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "France",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Germany",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Netherlands",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Belgium",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Luxembourg",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Switzerland",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Austria",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Italy",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Spain",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Portugal",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Greece",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Cyprus",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Malta",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Denmark",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Sweden",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Norway",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Finland",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Poland",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Czech Republic",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Hungary",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Romania",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Russia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Ukraine",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "United States",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Canada",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Mexico",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Brazil",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Argentina",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Chile",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Colombia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "South Africa",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Nigeria",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Kenya",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Morocco",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Tunisia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Algeria",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Ethiopia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Sudan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Ghana",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Tanzania",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Uganda",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Mauritius",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Maldives",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Afghanistan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Iran",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Syria",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Yemen",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Libya",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Myanmar",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Venezuela",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Cuba",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "North Korea",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Somalia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Kazakhstan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Uzbekistan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Azerbaijan",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Georgia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Armenia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Serbia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Croatia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Bulgaria",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Slovakia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Slovenia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Iceland",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Brunei",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Cambodia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Peru",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Panama",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Dominican Republic",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Jamaica",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Senegal",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Cameroon",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Zambia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Zimbabwe",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Botswana",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Namibia",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Rwanda",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Mozambique",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Angola",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Djibouti",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Eritrea",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  },
+  {
+    "name": "Palestine",
+    "ts": "20 Oct 2026, 17:46",
+    "by": "dcc.maker",
+    "upd": "dcc.maker"
+  }
+]

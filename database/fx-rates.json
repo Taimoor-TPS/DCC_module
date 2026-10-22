@@ -1,0 +1,1228 @@
+[
+  {
+    "ccy": "USD",
+    "rate": "0.2740",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.2740",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ],
+      [
+        "0.2740",
+        "Bank Treasury",
+        "13 Oct 2026, 11:42"
+      ],
+      [
+        "0.2736",
+        "Bank Treasury",
+        "13 Oct 2026, 11:27"
+      ],
+      [
+        "0.2718",
+        "Reuters",
+        "13 Oct 2026, 10:15"
+      ],
+      [
+        "0.2679",
+        "Bloomberg",
+        "13 Oct 2026, 09:40"
+      ]
+    ]
+  },
+  {
+    "ccy": "EUR",
+    "rate": "0.2538",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.2538",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ],
+      [
+        "0.2538",
+        "Bloomberg",
+        "13 Oct 2026, 11:40"
+      ],
+      [
+        "0.2541",
+        "Bank Treasury",
+        "13 Oct 2026, 11:25"
+      ],
+      [
+        "0.2522",
+        "Reuters",
+        "13 Oct 2026, 10:10"
+      ]
+    ]
+  },
+  {
+    "ccy": "GBP",
+    "rate": "0.2151",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.2151",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ],
+      [
+        "0.2151",
+        "Reuters",
+        "13 Oct 2026, 11:38"
+      ],
+      [
+        "0.2148",
+        "Bank Treasury",
+        "13 Oct 2026, 11:20"
+      ],
+      [
+        "0.2160",
+        "Bloomberg",
+        "13 Oct 2026, 10:05"
+      ]
+    ]
+  },
+  {
+    "ccy": "AED",
+    "rate": "0.9793",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.9793",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ],
+      [
+        "0.9793",
+        "Bank Treasury",
+        "13 Oct 2026, 11:42"
+      ],
+      [
+        "0.9791",
+        "Bank Treasury",
+        "13 Oct 2026, 11:12"
+      ],
+      [
+        "0.9788",
+        "Reuters",
+        "13 Oct 2026, 09:55"
+      ]
+    ]
+  },
+  {
+    "ccy": "JPY",
+    "rate": "40.5200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "40.5200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ],
+      [
+        "0.0246",
+        "Bloomberg",
+        "13 Oct 2026, 11:30"
+      ],
+      [
+        "0.0245",
+        "Reuters",
+        "13 Oct 2026, 10:45"
+      ],
+      [
+        "0.0248",
+        "Bank Treasury",
+        "13 Oct 2026, 09:30"
+      ]
+    ]
+  },
+  {
+    "ccy": "CHF",
+    "rate": "0.2412",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.2412",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ],
+      [
+        "0.2412",
+        "Reuters",
+        "13 Oct 2026, 11:28"
+      ],
+      [
+        "0.2409",
+        "Bank Treasury",
+        "13 Oct 2026, 11:00"
+      ],
+      [
+        "0.2416",
+        "Bloomberg",
+        "13 Oct 2026, 09:20"
+      ]
+    ]
+  },
+  {
+    "ccy": "BHD",
+    "rate": "0.1005",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.1005",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "KWD",
+    "rate": "0.0820",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.0820",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "OMR",
+    "rate": "0.1026",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.1026",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "QAR",
+    "rate": "0.9707",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.9707",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "JOD",
+    "rate": "0.1890",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.1890",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "EGP",
+    "rate": "12.9500",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "12.9500",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "LBP",
+    "rate": "23870.0000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "23870.0000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "IQD",
+    "rate": "349.3000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "349.3000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "TRY",
+    "rate": "9.1200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "9.1200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "PKR",
+    "rate": "74.2000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "74.2000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "INR",
+    "rate": "22.3500",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "22.3500",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "BDT",
+    "rate": "31.2000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "31.2000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "LKR",
+    "rate": "80.1000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "80.1000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "NPR",
+    "rate": "35.8000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "35.8000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "IDR",
+    "rate": "4210.0000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "4210.0000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "MYR",
+    "rate": "1.2520",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1.2520",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "SGD",
+    "rate": "0.3585",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.3585",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "THB",
+    "rate": "9.6500",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "9.6500",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "PHP",
+    "rate": "15.1200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "15.1200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "VND",
+    "rate": "6780.0000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "6780.0000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "CNY",
+    "rate": "1.9370",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1.9370",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "HKD",
+    "rate": "2.0820",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "2.0820",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "KRW",
+    "rate": "362.4000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "362.4000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "TWD",
+    "rate": "8.6700",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "8.6700",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "AUD",
+    "rate": "0.4035",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.4035",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "NZD",
+    "rate": "0.4462",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.4462",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "DKK",
+    "rate": "1.8350",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1.8350",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "SEK",
+    "rate": "2.8450",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "2.8450",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "NOK",
+    "rate": "2.9120",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "2.9120",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "PLN",
+    "rate": "1.0950",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1.0950",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "CZK",
+    "rate": "6.2100",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "6.2100",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "HUF",
+    "rate": "98.6000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "98.6000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "RON",
+    "rate": "1.2380",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1.2380",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "RUB",
+    "rate": "24.8500",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "24.8500",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "UAH",
+    "rate": "11.0200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "11.0200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "CAD",
+    "rate": "0.3684",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.3684",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "MXN",
+    "rate": "5.1200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "5.1200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "BRL",
+    "rate": "1.4820",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1.4820",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "ARS",
+    "rate": "265.3000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "265.3000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "CLP",
+    "rate": "254.8000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "254.8000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "COP",
+    "rate": "1112.0000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1112.0000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "ZAR",
+    "rate": "4.8600",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "4.8600",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "NGN",
+    "rate": "412.6000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "412.6000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "KES",
+    "rate": "34.4800",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "34.4800",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "MAD",
+    "rate": "2.6800",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "2.6800",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "TND",
+    "rate": "0.8285",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.8285",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "DZD",
+    "rate": "35.9200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "35.9200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "ETB",
+    "rate": "32.4000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "32.4000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "SDG",
+    "rate": "160.2000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "160.2000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "GHS",
+    "rate": "4.1200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "4.1200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "TZS",
+    "rate": "712.5000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "712.5000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "UGX",
+    "rate": "988.4000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "988.4000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "MUR",
+    "rate": "12.3800",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "12.3800",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "MVR",
+    "rate": "4.1200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "4.1200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "AFN",
+    "rate": "18.7200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "18.7200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "IRR",
+    "rate": "11230.0000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "11230.0000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "SYP",
+    "rate": "3468.0000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "3468.0000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "YER",
+    "rate": "66.7500",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "66.7500",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "LYD",
+    "rate": "1.3020",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1.3020",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "MMK",
+    "rate": "559.8000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "559.8000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "KZT",
+    "rate": "139.2000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "139.2000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "UZS",
+    "rate": "3412.0000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "3412.0000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "AZN",
+    "rate": "0.4533",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.4533",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "GEL",
+    "rate": "0.7312",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.7312",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "RSD",
+    "rate": "28.7500",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "28.7500",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "BGN",
+    "rate": "0.4812",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.4812",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "ISK",
+    "rate": "36.8500",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "36.8500",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "BND",
+    "rate": "0.3585",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.3585",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "PEN",
+    "rate": "1.0060",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "1.0060",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "PAB",
+    "rate": "0.2740",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "0.2740",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "DOP",
+    "rate": "16.1200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "16.1200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "JMD",
+    "rate": "42.8500",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "42.8500",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "XOF",
+    "rate": "161.4000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "161.4000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "XAF",
+    "rate": "161.4000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "161.4000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "ZMW",
+    "rate": "7.1200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "7.1200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "BWP",
+    "rate": "3.6400",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "3.6400",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "NAD",
+    "rate": "4.8600",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "4.8600",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "RWF",
+    "rate": "372.5000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "372.5000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "MZN",
+    "rate": "17.0400",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "17.0400",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "AOA",
+    "rate": "244.6000",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "244.6000",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  },
+  {
+    "ccy": "DJF",
+    "rate": "47.4200",
+    "source": "Excel import",
+    "updated": "21 Oct 2026, 19:01",
+    "history": [
+      [
+        "47.4200",
+        "Excel import",
+        "21 Oct 2026, 19:01"
+      ]
+    ]
+  }
+]
